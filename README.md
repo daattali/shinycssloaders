@@ -36,7 +36,7 @@ devtools::install_github('andrewsali/shinycssloaders')
 To see how this works in action, you can check my example on [shinyapps.io](https://frontside.shinyapps.io/example/) or run the example application from github directly:
 
 ```
-shiny::runGitHub('andrewsali/shinycssloaders/example')
+shiny::runGitHub('andrewsali/shinycssloaders',subdir="example")
 ```
 ## Changing the spinner colour
 
