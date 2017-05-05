@@ -1,6 +1,8 @@
 # shinycssloaders
 Add CSS loader animations (spinners) to Shiny Outputs (e.g. plots, tables) in an automated fashion. Loading animations leverage on [Shiny JS events](https://shiny.rstudio.com/articles/js-events.html) and will show whilst the output value is not yet available or is 'out-of-date' (i.e. has been invalidated and the client hasn't received the new value). The spinners won't show if the output is not rendered (e.g. a `validate` or `req` is preventing it from being shown).
 
+The CSS animations are bundled from [https://projects.lukehaas.me/css-loaders/](https://projects.lukehaas.me/css-loaders/), where you can see how they appear.
+
 You can use it for any type of shiny output, by wrapping the UI element with the `withSpinner` tag:
 
 ```
@@ -38,12 +40,12 @@ You can specify a spinner colour for each output or set a variable globally.
 Just add `color` attribute to `withSpinner`:
 
 ```
-plotOutput("my_plot") %>% withSpinner(color="rgb(100,100,100)")
+plotOutput("my_plot") %>% withSpinner(color="#0dc5c1")
 ```
 
 ### Globally
 
-You can use `options(spinner.color="rgb(100,100,100)")` to set the global colour.
+You can use `options(spinner.color="#0dc5c1")` to set the global colour.
 
 ### Background color
 
