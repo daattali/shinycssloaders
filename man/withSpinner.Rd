@@ -15,7 +15,7 @@ withSpinner(ui_element, type = getOption("spinner.type"),
 
 \item{color}{The color of the spinner to be applied in HTML in hex format}
 
-\item{size}{The size of the spinner, defined in relative terms ('em') by text-size}
+\item{size}{The size of the spinner, defined in relative terms ('em') by text-size. Default value is 12, you can increase / decrease as necessary. For type=6 it seems you should multiply by a factor of 4.}
 
 \item{color.background}{For certain spinners, you will need to specify the background colour of the spinner}
 }
