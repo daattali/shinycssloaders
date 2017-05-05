@@ -1,11 +1,12 @@
 # shinycssloaders
-Add CSS loader animations (spinners) to Shiny Outputs (e.g. plots, tables) in an automated fashion. Loading animations leverage on [Shiny JS events](https://shiny.rstudio.com/articles/js-events.html) and will show whilst the output value is not yet available or is 'out-of-date' (i.e. has been invalidated and the client hasn't received the new value). The spinners won't show if the output is not rendered (e.g. a `validate` or `req` is preventing it from being shown).
+Add loader animations (spinners) to Shiny Outputs (e.g. plots, tables) in an automated fashion. Loading animations leverage on [Shiny JS events](https://shiny.rstudio.com/articles/js-events.html) and will show whilst the output value is not yet available or is 'out-of-date' (i.e. has been invalidated and the client hasn't received the new value). The spinners won't show if the output is not rendered (e.g. a `validate` or `req` is preventing it from being shown).
 
 The advantages of using this package are:
 
 * Automatic spinner showing / hiding. Just add one extra R function call (see below) and your output will have the spinner showing at just the right times
 * Customizeable spinner colour (for each output or globally)
 * Customizeable spinner size (for each output or globally)
+* Choose from 8 different well-designed spinner types 
 
 The CSS animations are bundled from [https://projects.lukehaas.me/css-loaders/](https://projects.lukehaas.me/css-loaders/), where you can see how they appear.
 
