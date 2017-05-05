@@ -3,6 +3,7 @@ library(shinycssloaders)
 
 options(spinner.color = "#0dc5c1")
 options(spinner.color.background="#F5F5F5")
+options(spinner.size=1)
         
 ui <- fluidPage(
   wellPanel(
@@ -22,7 +23,7 @@ ui <- fluidPage(
                column(width=6,
                       wellPanel(
                         tags$b("With spinner:"),
-                        withSpinner(plotOutput(paste0("plot",.type)),type=.type,size=ifelse(.type != 6, 12, 48))
+                        withSpinner(plotOutput(paste0("plot",.type)),type=.type)
                       )
                ),
                column(width=6,

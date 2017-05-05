@@ -3,12 +3,10 @@
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
 #' @param type The type of spinner to use, valid values are integers between 1-8. They correspond to the enumeration in \url{https://projects.lukehaas.me/css-loaders/}
 #' @param color The color of the spinner to be applied in HTML in hex format
-#' @param size The size of the spinner, defined in relative terms ('em') by text-size. Default value is 12, you can increase / decrease as necessary. For type=6 it seems you should multiply by a factor of 4.
-#' @param color.background For certain spinners, you will need to specify the background colour of the spinner
+#' @param size The size of the spinner, relative to it's default size.
+#' @param color.background For certain spinners (type 2-3), you will need to specify the background colour of the spinner
 withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOption("spinner.color"),size=getOption("spinner.size"),color.background=getOption("spinner.color.background")) {
   stopifnot(type %in% 1:8)
-  
-  size <- paste0(size,"px")
   
   if (grepl("rgb",color,fixed=TRUE)) {
     stop("Color should be given in hex format")
@@ -26,7 +24,7 @@ withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOptio
     )
   }
   
-  css_color <- shiny::tagList()
+  css_size <- css_color <- shiny::tagList()
   
   if (!is.null(color)) {
     color.alpha <- sprintf("rgba(%s,0)",paste(grDevices::col2rgb(color),collapse=","))
@@ -95,9 +93,11 @@ withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOptio
     }
   }
   
-  if (!is.null(size)) {
+  if (is.numeric(size)) {
+    # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
+    size <- round(c(11,11,10,20,25,90,10,10)[type] * size * 0.75)
     css_size <- add_style(
-      sprintf("#%s {font-size: %s}",id,size)
+      glue::glue("#{id} {{font-size: {size}px}}",id,size)
     )
   }
   
