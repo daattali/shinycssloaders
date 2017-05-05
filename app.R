@@ -1,10 +1,9 @@
 library(shiny)
 library(shinycssloaders)
 
-options(spinner.color = "#0dc5c1")
+# for spinners 2-3 match the background color of wellPanel
 options(spinner.color.background="#F5F5F5")
-options(spinner.size=1)
-        
+
 ui <- fluidPage(
   wellPanel(
     tags$b("This example shows the loading spinner whilst the plot is loading and hides the spinner when the plot is not shown."), 

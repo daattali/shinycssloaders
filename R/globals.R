@@ -4,4 +4,6 @@
   options(spinner.type = 1)
   # use default size
   options(spinner.size = 1)
+  # set default colour
+  options(spinner.color="#0275D8")
 }

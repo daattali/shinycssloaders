@@ -17,7 +17,7 @@ withSpinner(ui_element, type = getOption("spinner.type"),
 
 \item{size}{The size of the spinner, relative to it's default size.}
 
-\item{color.background}{For certain spinners, you will need to specify the background colour of the spinner}
+\item{color.background}{For certain spinners (type 2-3), you will need to specify the background colour of the spinner}
 }
 \description{
 Add a spinner (loader) that shows when an output is recalculating
