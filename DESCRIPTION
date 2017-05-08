@@ -7,9 +7,6 @@ Author: Andras Sali <andras.sali@alphacruncher.hu>
 Maintainer: Andras Sali <andras.sali@alphacruncher.hu>
 Description: Create a lightweight Shiny wrapper for the css-loaders created by Luke Hass (https://github.com/lukehaas/css-loaders). Wrapping a Shiny output will automatically show a loader when the output is (re)calculating.
 License: GPL-3
-Imports:
-    digest,
-    glue,
-    grDevices,
-    shiny
+URL: https://github.com/andrewsali/shinycssloaders
+Imports: digest, glue, grDevices, shiny
 RoxygenNote: 5.0.1
