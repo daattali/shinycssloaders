@@ -5,14 +5,16 @@
 #' @param color The color of the spinner to be applied in HTML in hex format
 #' @param size The size of the spinner, relative to it's default size.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background colour of the spinner
+#' @examples
+#' \dontrun{withSpinner(plotOutput("my_plot"))}
 withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOption("spinner.color"),size=getOption("spinner.size"),color.background=getOption("spinner.color.background")) {
   stopifnot(type %in% 1:8)
   
   if (grepl("rgb",color,fixed=TRUE)) {
     stop("Color should be given in hex format")
   }
-  # each spinner will have a unique id, to allow seperate sizing
-  id <- paste0("spinner-",shiny:::createUniqueId(4))
+  # each spinner will have a unique id, to allow seperate sizing - based on hashing the UI element code
+  id <- paste0("spinner-",digest::digest(ui_element))
   
   add_style <- function(x) {
     shiny::tags$head(
@@ -34,17 +36,18 @@ withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOptio
         glue::glue("#{id}, #{id}:before, #{id}:after {{background: {color}}} #{id} {{color: {color}}}")
       )
     }
-    if (type == 2) {
-      stopifnot(!is.null(color.background))
+    
+    if (type %in% c(2,3) && is.null(color.background)) {
+      stop("For spinner types 2 & 3 you need to specify manually a background color. This should match the background color of the container.")
+    }
       
+    if (type == 2) {
       css_color <- add_style(
         glue::glue("#{id} {{color: {color}}} #{id}:before, #{id}:after {{background: {color.background};}}")
       )
     }
     
     if (type == 3) {
-      stopifnot(!is.null(color.background))
-      
       css_color <- add_style(
         glue::glue(
           "#{id} {{

@@ -22,4 +22,7 @@ withSpinner(ui_element, type = getOption("spinner.type"),
 \description{
 Add a spinner (loader) that shows when an output is recalculating
 }
+\examples{
+\dontrun{withSpinner(plotOutput("my_plot"))}
+}
 
