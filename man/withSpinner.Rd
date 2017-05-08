@@ -21,7 +21,7 @@ withSpinner(ui_element, type = getOption("spinner.type", default = 1),
 
 \item{color.background}{For certain spinners (type 2-3), you will need to specify the background colour of the spinner}
 
-\item{custom.css}{If custom css is to be applied, we don't enforce the color / size options to the given spinne rid}
+\item{custom.css}{If custom css is to be applied, we don't enforce the color / size options to the given spinner id}
 }
 \description{
 Add a spinner (loader) that shows when an output is recalculating
