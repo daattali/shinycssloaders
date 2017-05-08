@@ -5,9 +5,10 @@
 #' @param color The color of the spinner to be applied in HTML in hex format
 #' @param size The size of the spinner, relative to it's default size.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background colour of the spinner
+#' @param custom.css If custom css is to be applied, we don't enforce the color / size options to the given spinner id
 #' @examples
 #' \dontrun{withSpinner(plotOutput("my_plot"))}
-withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOption("spinner.color"),size=getOption("spinner.size"),color.background=getOption("spinner.color.background")) {
+withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),color=getOption("spinner.color",default="#0275D8"),size=getOption("spinner.size",default=1),color.background=getOption("spinner.color.background"),custom.css=FALSE) {
   stopifnot(type %in% 1:8)
   
   if (grepl("rgb",color,fixed=TRUE)) {
@@ -28,7 +29,7 @@ withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOptio
   
   css_size <- css_color <- shiny::tagList()
   
-  if (!is.null(color)) {
+  if (!custom.css) {
     color.alpha <- sprintf("rgba(%s,0)",paste(grDevices::col2rgb(color),collapse=","))
     
     if (type==1) {
@@ -40,7 +41,7 @@ withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOptio
     if (type %in% c(2,3) && is.null(color.background)) {
       stop("For spinner types 2 & 3 you need to specify manually a background color. This should match the background color of the container.")
     }
-      
+    
     if (type == 2) {
       css_color <- add_style(
         glue::glue("#{id} {{color: {color}}} #{id}:before, #{id}:after {{background: {color.background};}}")
@@ -94,9 +95,7 @@ withSpinner <- function(ui_element,type=getOption("spinner.type"),color=getOptio
       ")
       )
     }
-  }
-  
-  if (is.numeric(size)) {
+    
     # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
     size <- round(c(11,11,10,20,25,90,10,10)[type] * size * 0.75)
     css_size <- add_style(
