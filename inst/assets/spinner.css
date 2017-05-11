@@ -1,14 +1,14 @@
 .shiny-spinner-output-container {
   position: relative;
-  /* to avoid showing a vertical scrollbar
-  http://stackoverflow.com/questions/38251204/horizontal-animation-causes-vertical-scrollbar-in-css */
-  overflow:hidden;
 }
 
 .load-container {
   position: absolute;
-  left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  /* to avoid showing a vertical scrollbar
+  http://stackoverflow.com/questions/38251204/horizontal-animation-causes-vertical-scrollbar-in-css */
+  overflow:hidden; 
+  width: 100%;
 }

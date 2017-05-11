@@ -6,9 +6,10 @@
 #' @param size The size of the spinner, relative to it's default size.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background colour of the spinner
 #' @param custom.css If custom css is to be applied, we don't enforce the color / size options to the given spinner id
+#' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to 400px for outputs with undefined height.
 #' @examples
 #' \dontrun{withSpinner(plotOutput("my_plot"))}
-withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),color=getOption("spinner.color",default="#0275D8"),size=getOption("spinner.size",default=1),color.background=getOption("spinner.color.background"),custom.css=FALSE) {
+withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),color=getOption("spinner.color",default="#0275D8"),size=getOption("spinner.size",default=1),color.background=getOption("spinner.color.background"),custom.css=FALSE,proxy.height=if (grepl("height:\\s*\\d",ui_element)) NULL else "400px") {
   stopifnot(type %in% 1:8)
   
   if (grepl("rgb",color,fixed=TRUE)) {
@@ -103,6 +104,12 @@ withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),colo
     )
   }
   
+  proxy_element <- shiny::tagList()
+  if (!is.null(proxy.height)) {
+    proxy_element <- shiny::div(style=glue::glue("height:{ifelse(is.null(proxy.height),'100%',proxy.height)}"),
+                                class="shiny-spinner-placeholder")
+  }
+  
   shiny::tagList(
     shiny::singleton(
       shiny::tags$head(shiny::tags$link(rel="stylesheet",href="assets/spinner.css"))
@@ -122,6 +129,7 @@ withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),colo
                shiny::div(class=sprintf("load-container load%s",type),
                           shiny::div(id=id,class="loader","Loading...")
                ),
+               proxy_element,
                ui_element
     )
   )
