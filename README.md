@@ -24,7 +24,7 @@ withSpinner(plotOutput("my_plot"))
 ...
 ```
 
-For outputs with uknown heights (e.g. tables), a 'proxy' container will be inserted, as the spinner cannot be centered with respect to a height that is uknown to the client (e.g. you might return a really large / small table, who knows?). By default the proxy container will be of height '400px', however if your output is expected to be substantially larger / smaller, you can adjust this with `proxy.height` option.
+> For outputs with uknown heights (e.g. tables), a 'proxy' container will be inserted, as the spinner cannot be centered with respect to a height that is uknown to the client (e.g. you might return a really large / small table, who knows?). By default the proxy container will be of height '400px', however if your output is expected to be substantially larger / smaller, you can adjust this with `proxy.height` option.
 
 ## Installation
 
