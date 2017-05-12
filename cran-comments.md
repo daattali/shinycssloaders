@@ -1,6 +1,6 @@
-## Re-submission comments
+## Re-submission comments (version upgrade from 0.1.0 to 0.2.0)
 
-Change package title to "Add CSS Loading Animations to 'shiny' Outputs" to be consistent with Title-case requirements. Put URL in <..> instead of (...).
+Fix bugs / add requested features that have appeared since initial CRAN submission. 
 
 ## Test environments
 * local Ubuntu 16.10 with R 3.3.3
@@ -9,10 +9,4 @@ Change package title to "Add CSS Loading Animations to 'shiny' Outputs" to be co
 ## R CMD check results
 
 There were no ERRORs or WARNINGs. 
-
-There was 1 NOTE:
-
-> Maintainer: 'Andras Sali <andras.sali@alphacruncher.hu>'
-
-> New submission
 
