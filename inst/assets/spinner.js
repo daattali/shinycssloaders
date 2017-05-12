@@ -1,7 +1,7 @@
 /* When recalculating starts, show the spinner container & hide the output */
 $(document).on('shiny:recalculating', function(event) {
     $(".recalculating").siblings(".load-container, .shiny-spinner-placeholder").show();
-    $(".recalculating").siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'hidden');
+    $(".recalculating").siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
     // if there is a proxy div, hide the previous output
     $(".recalculating").siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
 });
