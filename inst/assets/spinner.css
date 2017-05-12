@@ -12,3 +12,11 @@
   overflow:hidden; 
   width: 100%;
 }
+
+.shiny-spinner-hidden {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: -1;
+  visibility:hidden;
+}
