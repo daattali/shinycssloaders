@@ -7,6 +7,7 @@
 ## Bug-fixes
 
 * Fix vertical scroll-bar appearing for Type 3 spinners
+* Fix error message still showing when recalculating for htmlwidgets
  
 # shinycssloaders 0.1.0
 
