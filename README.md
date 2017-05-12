@@ -28,7 +28,7 @@ withSpinner(plotOutput("my_plot"))
 
 ## Installation
 
-The package is now available on CRAN, however for the latest (and hopefully greatest!) version you can use the `devtools` package to install it from github directly:
+The package is now available on CRAN (for outputs with variable heights, use the github version instead), however for the latest (and hopefully greatest!) version you can use the `devtools` package to install it from github directly:
 
 ```
 devtools::install_github('andrewsali/shinycssloaders')
