@@ -28,7 +28,7 @@ For outputs with uknown heights (e.g. tables), a 'proxy' container will be inser
 
 ## Installation
 
-The package is not yet on CRAN, you can use the `devtools` package to install it from github directly:
+The package is now available on CRAN, however for the latest (and hopefully greatest!) version you can use the `devtools` package to install it from github directly:
 
 ```
 devtools::install_github('andrewsali/shinycssloaders')
@@ -40,6 +40,14 @@ To see how this works in action, you can check my example on [shinyapps.io](http
 ```
 shiny::runGitHub('andrewsali/shinycssloaders',subdir="example")
 ```
+
+To see how the spinner works for outputs with undefined height, you can check out [this example](https://frontside.shinyapps.io/table/) or run it from github directly:
+
+```
+shiny::runGitHub('andrewsali/shinycssloaders',subdir="example/table")
+```
+
+
 ## Changing the spinner colour
 
 You can specify a spinner colour for each output or set a variable globally. 
