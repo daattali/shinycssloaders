@@ -5,6 +5,8 @@
 
 Add loader animations (spinners) to Shiny Outputs (e.g. plots, tables) in an automated fashion. Loading animations leverage on [Shiny JS events](https://shiny.rstudio.com/articles/js-events.html) and will show whilst the output value is not yet available or is 'out-of-date' (i.e. has been invalidated and the client hasn't received the new value). The spinners won't show if the output is not rendered (e.g. a `validate` or `req` is preventing it from being shown).
 
+![](https://cloud.githubusercontent.com/assets/15079591/26738969/69141f08-47d0-11e7-848a-9d1705b613f0.gif)
+
 The advantages of using this package are:
 
 * Automatic spinner showing / hiding. Just add one extra R function call (see below) and your output will have the spinner showing at just the right times
