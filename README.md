@@ -41,7 +41,7 @@ devtools::install_github('andrewsali/shinycssloaders')
 ```
 ## Demo
 
-To see how this works in action, you can check my example on [shinyapps.io](https://frontside.shinyapps.io/example/) or run the example application from github directly:
+To see how this works in action, you can check my example on [shinyapps.io](https://frontside.shinyapps.io/example/) or - in case my free shinyapps monthly allowance is over - run the example application from github directly:
 
 ```
 shiny::runGitHub('andrewsali/shinycssloaders',subdir="example")
