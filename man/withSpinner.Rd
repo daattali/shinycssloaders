@@ -32,4 +32,3 @@ Add a spinner (loader) that shows when an output is recalculating
 \examples{
 \dontrun{withSpinner(plotOutput("my_plot"))}
 }
-

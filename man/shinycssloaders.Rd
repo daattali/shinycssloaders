@@ -14,4 +14,3 @@ also customize the color / size of the animation.
 \details{
 For further reference on how to use the package, please refer to \url{https://github.com/andrewsali/shinycssloaders}
 }
-
