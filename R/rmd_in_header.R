@@ -1,9 +1,7 @@
 #' Generate an html file to be included as `in_header` for Rmarkdown documents
 #' @param header_file The path to the html header file to be created
-#' @param type
-#' @param color
-#' @param size
-#' @param proxy.height
+#' @inheritParams withSpinner
+#' @export
 rmd_in_header <- function(header_file="cssloaders_in_header.html", type=getOption("spinner.type",default=1),color=getOption("spinner.color",default="#0275D8"),size=getOption("spinner.size",default=1),color.background=getOption("spinner.color.background")) {
   file.remove(header_file)
   
