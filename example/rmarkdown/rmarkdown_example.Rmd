@@ -1,0 +1,32 @@
+---
+title: "shinycssloaders test"
+author: "Andras Sali"
+date: "12/16/2017"
+output: 
+  html_document:
+    includes:
+      in_header: cssloaders_in_header.html
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+sliderInput("sleep_time","Sleep time:",1,10,5)
+
+plotOutput("pressure") %>% shinycssloaders::withSpinner(type=1)
+
+output$pressure <- renderPlot({
+  Sys.sleep(input$sleep_time)
+  plot(1:5,1:5)
+})
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
