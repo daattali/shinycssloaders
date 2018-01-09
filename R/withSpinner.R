@@ -125,10 +125,12 @@ withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),colo
     ),
     css_color,
     css_size,
+    
     shiny::div(class="shiny-spinner-output-container",
                shiny::div(class=sprintf("load-container load%s shiny-spinner-hidden",type),
                           shiny::div(id=id,class="loader","Loading...")
                ),
+               shiny::div(class = "shiny-spinner-init"),
                proxy_element,
                ui_element
     )

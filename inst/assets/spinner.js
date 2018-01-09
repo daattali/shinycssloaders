@@ -2,17 +2,29 @@
 var output_states = [];
 
 function show_spinner(id) {
-    $("#"+id).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
-    $("#"+id).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
-    // if there is a proxy div, hide the previous output
-    $("#"+id).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
+    
+    var root = $("#"+id).closest(".shiny-spinner-output-container");
+    
+    root.find(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
+    
+    root.find(".load-container").siblings(":not(.shiny-spinner-init)").css('visibility', 'hidden');
+    root.has(".shiny-spinner-placeholder").find(":not(.load-container, .loader, .shiny-spinner-placeholder, .shiny-spinner-init)").addClass('shiny-spinner-hidden');
+
+    setTimeout(function() {
+        root.find(".shiny-spinner-init").addClass('shiny-spinner-hidden');
+    }, 100);
+    
 }
 
 function hide_spinner(id) {
-    $("#"+id).siblings(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
-    $("#"+id).siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'visible');
+    
+    var root = $("#"+id).closest(".shiny-spinner-output-container");
+    
+    root.find(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
+    root.find(".load-container").siblings().css('visibility', 'visible');
+    root.find(".shiny-spinner-init").remove();
     // if there is a proxy div, show the previous output in case it was hidden
-    $("#"+id).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output').removeClass('shiny-spinner-hidden');
+    root.find(":not(.load-container, .loader, .shiny-spinner-placeholder, .shiny-spinner-init)").removeClass('shiny-spinner-hidden');
 }
 
 function update_spinner(id) {
