@@ -5,6 +5,8 @@ function show_spinner(id) {
     
     var root = $("#"+id).closest(".shiny-spinner-output-container");
     
+    root.append("<div style='clear: both;'></div>");
+    
     root.find(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
     
     root.find(".load-container").siblings(":not(.shiny-spinner-init)").css('visibility', 'hidden');
@@ -44,17 +46,24 @@ $(document).on('shiny:bound', function(event){
     output_states[event.target.id] = 0;
   }
   update_spinner(event.target.id);
+  console.log("bound");
 });
 
 /* When recalculating starts, show the spinner container & hide the output */
 $(document).on('shiny:outputinvalidated', function(event) {
   output_states[event.target.id] = 0;
-  update_spinner(event.target.id);
+  
+  setTimeout(function() {
+    update_spinner(event.target.id);  
+    console.log("invalidate");
+  }, 500);
+  
 });
 
 /* When new value or error comes in, hide spinner container (if any) & show the output */
 $(document).on('shiny:value shiny:error', function(event) {
   output_states[event.target.id] = 1;
   update_spinner(event.target.id);
+  console.log("value/error");
 });
 }());
