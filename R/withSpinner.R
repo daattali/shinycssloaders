@@ -10,7 +10,7 @@
 #' @examples
 #' \dontrun{withSpinner(plotOutput("my_plot"))}
 withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),color=getOption("spinner.color",default="#0275D8"),size=getOption("spinner.size",default=1),color.background=getOption("spinner.color.background"),custom.css=FALSE,proxy.height=if (grepl("height:\\s*\\d",ui_element)) NULL else "400px") {
-  stopifnot(type %in% 1:8)
+  stopifnot(type %in% 0:8)
   
   if (grepl("rgb",color,fixed=TRUE)) {
     stop("Color should be given in hex format")
@@ -118,7 +118,7 @@ withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),colo
       shiny::tags$script(src="assets/spinner.js")
     ),
     shiny::singleton(
-      shiny::tags$head(shiny::tags$link(rel="stylesheet",href=sprintf("css-loaders/css/fallback.css",type)))
+      shiny::tags$head(shiny::tags$link(rel="stylesheet",href="css-loaders/css/fallback.css"))
     ),
     shiny::singleton(
       shiny::tags$head(shiny::tags$link(rel="stylesheet",href=sprintf("css-loaders/css/load%s.css",type)))
@@ -127,7 +127,7 @@ withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),colo
     css_size,
     shiny::div(class="shiny-spinner-output-container",
                shiny::div(class=sprintf("load-container load%s shiny-spinner-hidden",type),
-                          shiny::div(id=id,class="loader","Loading...")
+                          shiny::div(id=id,class="loader", (if (type == 0) "" else "Loading..."))
                ),
                proxy_element,
                ui_element
