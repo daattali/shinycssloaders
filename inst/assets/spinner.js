@@ -2,10 +2,14 @@
 var output_states = [];
 
 function escapeSelector(s) {
+  console.info("s")
+    console.info(s)
     return s.replace(/([!"#$%&'()*+,-./:;<=>?@\[\\\]^`{|}~])/g, "\\$1");
 }
 
 function show_spinner(id) {
+    console.info("id")
+    console.info(id)
     var selector = "#"+escapeSelector(id);
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
     $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
@@ -14,6 +18,8 @@ function show_spinner(id) {
 }
 
 function hide_spinner(id) {
+  console.info("id")
+    console.info(id)
     var selector = "#"+escapeSelector(id);
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
     $(selector).siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'visible');
