@@ -2,29 +2,27 @@
 var output_states = [];
 
 function escapeSelector(s) {
-  console.info("s")
-    console.info(s)
     return s.replace(/([!"#$%&'()*+,-./:;<=>?@\[\\\]^`{|}~])/g, "\\$1");
 }
 
 function show_spinner(id) {
-    console.info("id")
-    console.info(id)
-    var selector = "#"+escapeSelector(id);
-    $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
-    $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
-    // if there is a proxy div, hide the previous output
-    $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
+    if(id !== undefined){
+      var selector = "#"+escapeSelector(id);
+      $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
+      $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
+      // if there is a proxy div, hide the previous output
+      $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
+    }
 }
 
 function hide_spinner(id) {
-  console.info("id")
-    console.info(id)
+  if(id !== undefined){
     var selector = "#"+escapeSelector(id);
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
     $(selector).siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'visible');
     // if there is a proxy div, show the previous output in case it was hidden
     $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output').removeClass('shiny-spinner-hidden');
+  }
 }
 
 function update_spinner(id) {
