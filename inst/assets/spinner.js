@@ -32,7 +32,7 @@ function update_spinner(id) {
   }
 }
 
-$(document).on('shiny:bound', function(event){ 
+$(document).on('shiny:bound', '.shiny-bound-output', function(event){
   /* if not bound before, then set the value to 0 */
   if (!(event.target.id in output_states)) {
     output_states[event.target.id] = 0;
@@ -41,13 +41,13 @@ $(document).on('shiny:bound', function(event){
 });
 
 /* When recalculating starts, show the spinner container & hide the output */
-$(document).on('shiny:outputinvalidated', function(event) {
+$(document).on('shiny:outputinvalidated', '.shiny-bound-output', function(event) {
   output_states[event.target.id] = 0;
   update_spinner(event.target.id);
 });
 
 /* When new value or error comes in, hide spinner container (if any) & show the output */
-$(document).on('shiny:value shiny:error', function(event) {
+$(document).on('shiny:value shiny:error', '.shiny-bound-output', function(event) {
   output_states[event.target.id] = 1;
   update_spinner(event.target.id);
 });
