@@ -4,7 +4,7 @@ Title: Add CSS Loading Animations to 'shiny' Outputs
 Version: 0.3
 Authors@R: c(
     person("Andras","Sali",email="andras.sali@alphacruncher.hu",role=c("aut"),comment="Original creator of shinycssloaders package"),
-    person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code")
+    person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code"),
     person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Creator of Shiny-wrapper code"),
     )
 Description: Automatically show loader animations while a Shiny output is (re)calculating. This is mostly a wrapper around the css-loaders created by Luke Hass <https://github.com/lukehaas/css-loaders>.
