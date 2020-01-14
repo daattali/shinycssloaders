@@ -1,3 +1,13 @@
+# shinycssloaders 0.3
+
+2020-01-14
+
+- Remove debug message from JS console (#26)
+- Ensure spinner doesn't show forever when used on dynamic outputs 
+- Fix bug that caused errors with outputs with special ID characters and caused errors when using shiny bookmarks (#16)
+- Fix type 1 and type 7 spinners on IE11 (#1)
+
+
 # shinycssloaders 0.2.0
 
 ## New features

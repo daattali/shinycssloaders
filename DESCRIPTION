@@ -1,7 +1,7 @@
 Package: shinycssloaders
 Type: Package
 Title: Add CSS Loading Animations to 'shiny' Outputs
-Version: 0.2.0.9000
+Version: 0.3
 Authors@R: c(
     person("Andras","Sali",email="andras.sali@alphacruncher.hu",role=c("aut"),comment="Original creator of shinycssloaders package"),
     person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code")
