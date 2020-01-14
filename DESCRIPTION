@@ -1,11 +1,21 @@
 Package: shinycssloaders
 Type: Package
 Title: Add CSS Loading Animations to 'shiny' Outputs
-Version: 0.2.0
-Date: 2017-05-03
-Authors@R: c(person("Andras","Sali",email="andras.sali@alphacruncher.hu",role=c("aut","cre"),comment="Creator of Shiny-wrapper code"),person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code"))
-Description: Create a lightweight Shiny wrapper for the css-loaders created by Luke Hass <https://github.com/lukehaas/css-loaders>. Wrapping a Shiny output will automatically show a loader when the output is (re)calculating.
+Version: 0.2.0.9000
+Authors@R: c(
+    person("Andras","Sali",email="andras.sali@alphacruncher.hu",role=c("aut"),comment="Original creator of shinycssloaders package"),
+    person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code")
+    person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Creator of Shiny-wrapper code"),
+    )
+Description: Automatically show loader animations while a Shiny output is (re)calculating. This is mostly a wrapper around the css-loaders created by Luke Hass <https://github.com/lukehaas/css-loaders>.
 License: GPL-3
 URL: https://github.com/andrewsali/shinycssloaders
-Imports: digest, glue, grDevices, shiny
+BugReports: https://github.com/andrewsali/shinycssloaders/issues
+Depends:
+    R
+Imports: 
+    digest,
+    glue,
+    grDevices,
+    shiny
 RoxygenNote: 6.0.1
