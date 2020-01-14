@@ -5,14 +5,14 @@ Version: 0.3
 Authors@R: c(
     person("Andras","Sali",email="andras.sali@alphacruncher.hu",role=c("aut"),comment="Original creator of shinycssloaders package"),
     person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code"),
-    person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Creator of Shiny-wrapper code"),
+    person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Creator of Shiny-wrapper code")
     )
 Description: Automatically show loader animations while a Shiny output is (re)calculating. This is mostly a wrapper around the css-loaders created by Luke Hass <https://github.com/lukehaas/css-loaders>.
 License: GPL-3
 URL: https://github.com/andrewsali/shinycssloaders
 BugReports: https://github.com/andrewsali/shinycssloaders/issues
 Depends:
-    R
+    R (>= 3.1)
 Imports: 
     digest,
     glue,
