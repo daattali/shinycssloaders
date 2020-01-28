@@ -1,3 +1,9 @@
+# shinycssloaders 0.4
+
+TODO date
+
+- Fix bug where loaders weren't working in uiOutput (#39)
+
 # shinycssloaders 0.3
 
 2020-01-14

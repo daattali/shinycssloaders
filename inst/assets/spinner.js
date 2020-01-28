@@ -32,23 +32,36 @@ function update_spinner(id) {
   }
 }
 
-$(document).on('shiny:bound', function(event){ 
-  /* if not bound before, then set the value to 0 */
-  if (!(event.target.id in output_states)) {
-    output_states[event.target.id] = 0;
+$(document).on('shiny:bound', function(event) { 
+  var id = event.target.id;
+  if (id === undefined) {
+    return;
   }
-  update_spinner(event.target.id);
+  
+  /* if not bound before, then set the value to 0 */
+  if (!(id in output_states)) {
+    output_states[id] = 0;
+  }
+  update_spinner(id);
 });
 
 /* When recalculating starts, show the spinner container & hide the output */
 $(document).on('shiny:outputinvalidated', function(event) {
-  output_states[event.target.id] = 0;
-  update_spinner(event.target.id);
+  var id = event.target.id;
+  if (id === undefined) {
+    return;
+  }
+  output_states[id] = 0;
+  update_spinner(id);
 });
 
 /* When new value or error comes in, hide spinner container (if any) & show the output */
 $(document).on('shiny:value shiny:error', function(event) {
-  output_states[event.target.id] = 1;
-  update_spinner(event.target.id);
+  var id = event.target.id;
+  if (id === undefined) {
+    return;
+  }
+  output_states[id] = 1;
+  update_spinner(id);
 });
 }());
