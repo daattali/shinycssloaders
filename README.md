@@ -10,7 +10,7 @@ Add loader animations (spinners) to Shiny Outputs (e.g. plots, tables). Loading 
 The advantages of using this package are:
 
 * Automatic spinner showing / hiding. Just add one extra R function call (see below) and your output will have the spinner showing at just the right times
-* Customizeable spinner colour (for each output or globally)
+* Customizeable spinner color (for each output or globally)
 * Customizeable spinner size (for each output or globally)
 * Choose from 8 different well-designed spinner types 
 
@@ -54,9 +54,9 @@ shiny::runGitHub('andrewsali/shinycssloaders', subdir = "inst/examples/table")
 ```
 
 
-## Changing the spinner colour
+## Changing the spinner color
 
-You can specify a spinner colour for each output or set a variable globally. 
+You can specify a spinner color for each output or set a variable globally. 
 
 ### Locally for each output
 
@@ -68,7 +68,7 @@ plotOutput("my_plot") %>% withSpinner(color="#0dc5c1")
 
 ### Globally
 
-You can use `options(spinner.color="#0dc5c1")` to set the global colour.
+You can use `options(spinner.color="#0dc5c1")` to set the global color.
 
 ### Background color
 

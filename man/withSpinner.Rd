@@ -16,13 +16,13 @@ withSpinner(ui_element, type = getOption("spinner.type", default = 1),
 
 \item{type}{The type of spinner to use, valid values are integers between 1-8. They correspond to the enumeration in \url{https://projects.lukehaas.me/css-loaders/}}
 
-\item{color}{The color of the spinner to be applied in HTML in hex format}
+\item{color}{The color of the spinner in hex format}
 
-\item{size}{The size of the spinner, relative to it's default size.}
+\item{size}{The size of the spinner, relative to its default size.}
 
-\item{color.background}{For certain spinners (type 2-3), you will need to specify the background colour of the spinner}
+\item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner}
 
-\item{custom.css}{If custom css is to be applied, we don't enforce the color / size options to the given spinner id}
+\item{custom.css}{Whether or not you have custom css applied to the spinner, in which case we don't enforce the color / size options to the given spinner}
 
 \item{proxy.height}{If the output doesn't specify the output height, you can set a proxy height. It defaults to 400px for outputs with undefined height.}
 }
