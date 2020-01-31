@@ -3,6 +3,7 @@
 TODO date
 
 - Fix bug where loaders weren't working in uiOutput (#39)
+- Allow spinner type 0, which means no loading icon is shown (#18)
 
 # shinycssloaders 0.3
 
