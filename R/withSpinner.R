@@ -17,7 +17,7 @@ withSpinner <- function(ui_element,
                         custom.css = FALSE,
                         proxy.height = if (grepl("height:\\s*\\d", ui_element)) NULL else "400px")
 {
-  stopifnot(type %in% 1:8)
+  stopifnot(type %in% 0:8)
   
   if (grepl("rgb", color, fixed = TRUE)) {
     stop("Color should be given in hex format")
@@ -117,7 +117,7 @@ withSpinner <- function(ui_element,
       shiny::tags$script(src="assets/spinner.js")
     ),
     shiny::singleton(
-      shiny::tags$head(shiny::tags$link(rel="stylesheet",href=sprintf("css-loaders/css/fallback.css",type)))
+      shiny::tags$head(shiny::tags$link(rel="stylesheet",href="css-loaders/css/fallback.css"))
     ),
     shiny::singleton(
       shiny::tags$head(shiny::tags$link(rel="stylesheet",href=sprintf("css-loaders/css/load%s.css",type)))
@@ -128,7 +128,7 @@ withSpinner <- function(ui_element,
       class="shiny-spinner-output-container",
       shiny::div(
         class=sprintf("load-container load%s shiny-spinner-hidden",type),
-        shiny::div(id=id,class="loader","Loading...")
+        shiny::div(id=id,class="loader", (if (type == 0) "" else "Loading..."))
       ),
       proxy_element,
       ui_element
