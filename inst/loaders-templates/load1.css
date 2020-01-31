@@ -1,0 +1,6 @@
+#{{id}}, #{{id}}:before, #{{id}}:after {
+  background: {{color}};
+}
+#{{id}} {
+  color: {{color}};
+}

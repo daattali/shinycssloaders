@@ -1,0 +1,13 @@
+#{{id}} {
+  background: -moz-linear-gradient(left, {{color}} 10%, {{color.alpha0}} 42%);
+  background: -webkit-linear-gradient(left, {{color}} 10%, {{color.alpha0}} 42%);
+  background: -o-linear-gradient(left, {{color}} 10%, {{color.alpha0}} 42%);
+  background: -ms-linear-gradient(left, {{color}} 10%, {{color.alpha0}} 42%);
+  background: linear-gradient(to right, {{color}} 10%, {{color.alpha0}} 42%);
+} 
+#{{id}}:before {
+   background: {{color}};
+}  
+#{{id}}:after {
+  background: {{color.background}};
+}

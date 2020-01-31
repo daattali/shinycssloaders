@@ -26,81 +26,28 @@ withSpinner <- function(ui_element,
   # each spinner will have a unique id, to allow seperate sizing - based on hashing the UI element code
   id <- paste0("spinner-", digest::digest(ui_element))
 
-  css_size <- shiny::tagList()
-  css_color <- shiny::tagList()
-  
-  if (!custom.css) {
-    color.alpha <- sprintf("rgba(%s,0)",paste(grDevices::col2rgb(color),collapse=","))
-    
-    if (type==1) {
-      css_color <- add_style(
-        glue::glue("#{id}, #{id}:before, #{id}:after {{background: {color}}} #{id} {{color: {color}}}")
-      )
+  css_size_color <- shiny::tagList()
+
+  if (!custom.css && type != 0) {
+    if (type %in% c(2, 3) && is.null(color.background)) {
+      stop("For spinner types 2 & 3 you need to specify manually a background color.")
     }
     
-    if (type %in% c(2,3) && is.null(color.background)) {
-      stop("For spinner types 2 & 3 you need to specify manually a background color. This should match the background color of the container.")
-    }
+    color.rgb <- paste(grDevices::col2rgb(color), collapse = ",")
+    color.alpha0 <- sprintf("rgba(%s, 0)", color.rgb)
+    color.alpha2 <- sprintf("rgba(%s, 0.2)", color.rgb)
     
-    if (type == 2) {
-      css_color <- add_style(
-        glue::glue("#{id} {{color: {color}}} #{id}:before, #{id}:after {{background: {color.background};}}")
-      )
+    css_file <- system.file(glue::glue("loaders-templates/load{type}.css"), package="shinycssloaders")
+    base_css <- ""
+    if (file.exists(css_file)) {
+      base_css <- paste(readLines(css_file), collapse = " ")
+      base_css <- glue::glue(base_css, .open = "{{", .close = "}}")
     }
-    
-    if (type == 3) {
-      css_color <- add_style(
-        glue::glue(
-          "#{id} {{
-  background: -moz-linear-gradient(left, {color} 10%, {color.alpha} 42%);
-  background: -webkit-linear-gradient(left, {color} 10%, {color.alpha} 42%);
-  background: -o-linear-gradient(left, {color} 10%, {color.alpha} 42%);
-  background: -ms-linear-gradient(left, {color} 10%, {color.alpha} 42%);
-  background: linear-gradient(to right, {color} 10%, {color.alpha} 42%);
-}} 
-#{id}:before {{
-   background: {color}
-}}  
-#{id}:after {{
-  background: {color.background};
-}}
-")
-      )
-    }
-    
-    if (type %in% c(4,6,7)) {
-      css_color <- add_style(
-        glue::glue("#{id} {{color: {color}}}")
-      )
-    }
-    
-    if (type==5) {
-      base_css <- paste(readLines(system.file("css-loaders/css/load5.css",package="shinycssloaders")),collapse=" ")
-      base_css <- gsub(".load5 .loader",paste0("#",id),base_css)
-      base_css <- gsub("load5",paste0("load5-",id),base_css,fixed=TRUE)
-      base_css <- gsub("255, 255, 255",paste(grDevices::col2rgb(color),collapse=','),base_css,fixed=TRUE)
-      base_css <- gsub("#ffffff",color,base_css,fixed=TRUE)
-      css_color <- add_style(base_css)
-    }
-    
-    if (type == 8) {
-      css_color <- add_style(
-        glue::glue("
-#{id} {{
-      border-top: 1.1em solid rgba({paste(grDevices::col2rgb(color),collapse=',')}, 0.2);
-      border-right: 1.1em solid rgba({paste(grDevices::col2rgb(color),collapse=',')}, 0.2);
-      border-bottom: 1.1em solid rgba({paste(grDevices::col2rgb(color),collapse=',')}, 0.2);
-      border-left: 1.1em solid {color};
-}}
-      ")
-      )
-    }
-    
+
     # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
-    size <- round(c(11,11,10,20,25,90,10,10)[type] * size * 0.75)
-    css_size <- add_style(
-      glue::glue("#{id} {{font-size: {size}px}}",id,size)
-    )
+    size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
+    base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size}px; }}"))
+    css_size_color <- add_style(base_css)
   }
   
   proxy_element <- shiny::tagList()
@@ -111,19 +58,13 @@ withSpinner <- function(ui_element,
   
   shiny::tagList(
     shiny::singleton(
-      shiny::tags$head(shiny::tags$link(rel="stylesheet",href="assets/spinner.css"))
+      shiny::tags$head(
+        shiny::tags$link(rel="stylesheet", href="assets/spinner.css"),
+        shiny::tags$script(src="assets/spinner.js"),
+        shiny::tags$link(rel="stylesheet", href="assets/css-loaders.css")
+      )
     ),
-    shiny::singleton(
-      shiny::tags$script(src="assets/spinner.js")
-    ),
-    shiny::singleton(
-      shiny::tags$head(shiny::tags$link(rel="stylesheet",href="css-loaders/css/fallback.css"))
-    ),
-    shiny::singleton(
-      shiny::tags$head(shiny::tags$link(rel="stylesheet",href=sprintf("css-loaders/css/load%s.css",type)))
-    ),
-    css_color,
-    css_size,
+    css_size_color,
     shiny::div(
       class="shiny-spinner-output-container",
       shiny::div(

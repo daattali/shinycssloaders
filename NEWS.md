@@ -4,6 +4,9 @@ TODO date
 
 - Fix bug where loaders weren't working in uiOutput (#39)
 - Allow spinner type 0, which means no loading icon is shown (#18)
+- Internal refactoring: Use one CSS file for all styles, and use CSS files to load custom CSS of each style (#37)
+- Added a sample Shiny app "showcase" that lets you experiment with all loader types and parameters
+- File cleanup: Remove all files and dirs from inst/css-loaders and only keep the CSS (#38)
 
 # shinycssloaders 0.3
 

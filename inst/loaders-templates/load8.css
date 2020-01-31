@@ -1,0 +1,6 @@
+#{{id}} {
+  border-top: 1.1em solid {{color.alpha2}};
+  border-right: 1.1em solid {{color.alpha2}};
+  border-bottom: 1.1em solid {{color.alpha2}};
+  border-left: 1.1em solid {{color}};
+}
