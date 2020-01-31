@@ -2,33 +2,32 @@
 #' @export
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
 #' @param type The type of spinner to use, valid values are integers between 1-8. They correspond to the enumeration in \url{https://projects.lukehaas.me/css-loaders/}
-#' @param color The color of the spinner to be applied in HTML in hex format
-#' @param size The size of the spinner, relative to it's default size.
-#' @param color.background For certain spinners (type 2-3), you will need to specify the background colour of the spinner
-#' @param custom.css If custom css is to be applied, we don't enforce the color / size options to the given spinner id
+#' @param color The color of the spinner in hex format
+#' @param size The size of the spinner, relative to its default size.
+#' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner
+#' @param custom.css Whether or not you have custom css applied to the spinner, in which case we don't enforce the color / size options to the given spinner
 #' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to 400px for outputs with undefined height.
 #' @examples
 #' \dontrun{withSpinner(plotOutput("my_plot"))}
-withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),color=getOption("spinner.color",default="#0275D8"),size=getOption("spinner.size",default=1),color.background=getOption("spinner.color.background"),custom.css=FALSE,proxy.height=if (grepl("height:\\s*\\d",ui_element)) NULL else "400px") {
+withSpinner <- function(ui_element,
+                        type = getOption("spinner.type", default = 1),
+                        color = getOption("spinner.color", default = "#0275D8"),
+                        size = getOption("spinner.size", default = 1),
+                        color.background = getOption("spinner.color.background"),
+                        custom.css = FALSE,
+                        proxy.height = if (grepl("height:\\s*\\d", ui_element)) NULL else "400px")
+{
   stopifnot(type %in% 0:8)
   
-  if (grepl("rgb",color,fixed=TRUE)) {
+  if (grepl("rgb", color, fixed = TRUE)) {
     stop("Color should be given in hex format")
   }
+  
   # each spinner will have a unique id, to allow seperate sizing - based on hashing the UI element code
-  id <- paste0("spinner-",digest::digest(ui_element))
-  
-  add_style <- function(x) {
-    shiny::tags$head(
-      shiny::tags$style(
-        shiny::HTML(
-          x
-        )
-      )
-    )
-  }
-  
-  css_size <- css_color <- shiny::tagList()
+  id <- paste0("spinner-", digest::digest(ui_element))
+
+  css_size <- shiny::tagList()
+  css_color <- shiny::tagList()
   
   if (!custom.css) {
     color.alpha <- sprintf("rgba(%s,0)",paste(grDevices::col2rgb(color),collapse=","))
@@ -125,12 +124,24 @@ withSpinner <- function(ui_element,type=getOption("spinner.type",default=1),colo
     ),
     css_color,
     css_size,
-    shiny::div(class="shiny-spinner-output-container",
-               shiny::div(class=sprintf("load-container load%s shiny-spinner-hidden",type),
-                          shiny::div(id=id,class="loader", (if (type == 0) "" else "Loading..."))
-               ),
-               proxy_element,
-               ui_element
+    shiny::div(
+      class="shiny-spinner-output-container",
+      shiny::div(
+        class=sprintf("load-container load%s shiny-spinner-hidden",type),
+        shiny::div(id=id,class="loader", (if (type == 0) "" else "Loading..."))
+      ),
+      proxy_element,
+      ui_element
+    )
+  )
+}
+
+add_style <- function(x) {
+  shiny::tags$head(
+    shiny::tags$style(
+      shiny::HTML(
+        x
+      )
     )
   )
 }
