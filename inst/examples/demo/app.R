@@ -1,4 +1,5 @@
 library(shiny)
+library(shinycssloaders)
 
 ui <- fluidPage(
   selectInput("type", "Spinner type", 1:8),
