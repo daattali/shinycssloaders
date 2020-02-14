@@ -34,7 +34,7 @@ function update_spinner(id) {
 
 $(document).on('shiny:bound', function(event) { 
   var id = event.target.id;
-  if (id === undefined) {
+  if (id === undefined || id == "") {
     return;
   }
   
