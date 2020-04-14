@@ -1,7 +1,7 @@
 # shinycssloaders 
 
 [![CRAN](http://www.r-pkg.org/badges/version/shinycssloaders)](https://cran.r-project.org/package=shinycssloaders)
-[![](https://cranlogs.r-pkg.org/badges/shinycssloaders)](https://CRAN.R-project.org/package=shinycssloaders)
+[![Travis build status](https://travis-ci.org/daattali/shinycssloaders.svg?branch=master)](https://travis-ci.org/daattali/shinycssloaders)
 
 Add loader animations (spinners) to Shiny Outputs (e.g. plots, tables). Loading animations leverage on [Shiny JS events](https://shiny.rstudio.com/articles/js-events.html) and will show whilst the output value is not yet available or is 'out-of-date' (i.e. has been invalidated and the client hasn't received the new value). The spinners won't show if the output is not rendered (e.g. a `validate` or `req` is preventing it from being shown).
 
