@@ -5,7 +5,7 @@
 #' is recalculating / recalculated. You can choose from 8 different types of animations and you can
 #' also customize the color / size of the animation.
 #' 
-#' For further reference on how to use the package, please refer to \url{https://github.com/andrewsali/shinycssloaders}
+#' For further reference on how to use the package, please refer to \url{https://github.com/daattali/shinycssloaders}
 #' 
 #' @name shinycssloaders
 #' @docType package
