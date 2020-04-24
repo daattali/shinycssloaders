@@ -59,9 +59,9 @@ withSpinner <- function(ui_element,
   shiny::tagList(
     shiny::singleton(
       shiny::tags$head(
-        shiny::tags$link(rel="stylesheet", href="assets/spinner.css"),
-        shiny::tags$script(src="assets/spinner.js"),
-        shiny::tags$link(rel="stylesheet", href="assets/css-loaders.css")
+        shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/spinner.css"),
+        shiny::tags$script(src="shinycssloaders-assets/spinner.js"),
+        shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/css-loaders.css")
       )
     ),
     css_size_color,

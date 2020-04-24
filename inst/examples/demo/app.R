@@ -29,7 +29,7 @@ server <- function(input, output, session) {
   observeEvent(input$update, ignoreNULL = FALSE, {
     plotnum(plotnum() + 1)
     output[[paste0("example", plotnum())]] <- renderPlot({
-      Sys.sleep(0.7)
+      Sys.sleep(1)
       plot(runif(10), main = "Random Plot")
     })
   })

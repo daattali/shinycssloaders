@@ -1,10 +1,11 @@
 # shinycssloaders 0.4
 
-TODO date
+TODO
 
 - Fix bug where loaders weren't working in uiOutput (#39)
 - Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)  
 - Allow spinner type 0, which means no loading icon is shown (#18)
+- Don't expose 'assets' as a resourch path because it blocks shiny apps from having a www/assets/ folder (#48)
 - Internal refactoring: Use one CSS file for all styles, and use CSS files to load custom CSS of each style (#37)
 - Added a sample Shiny app "demo" that lets you experiment with all loader types and parameters
 - File cleanup: Remove all files and dirs from inst/css-loaders and only keep the CSS (#38)
@@ -17,7 +18,7 @@ TODO date
 - Ensure spinner doesn't show forever when used on dynamic outputs 
 - Fix bug that caused errors with outputs with special ID characters and caused errors when using shiny bookmarks (#16)
 - Fix type 1 and type 7 spinners on IE11 (#1)
-
+- Dean Attali took over as maintainer of the package
 
 # shinycssloaders 0.2.0
 
