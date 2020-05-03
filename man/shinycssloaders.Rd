@@ -3,7 +3,6 @@
 \docType{package}
 \name{shinycssloaders}
 \alias{shinycssloaders}
-\alias{shinycssloaders-package}
 \title{shinycssloaders}
 \description{
 Add automatic loading animations to your Shiny outputs (e.g. plots, tables) by adding a single function call 
@@ -12,5 +11,5 @@ is recalculating / recalculated. You can choose from 8 different types of animat
 also customize the color / size of the animation.
 }
 \details{
-For further reference on how to use the package, please refer to \url{https://github.com/andrewsali/shinycssloaders}
+For further reference on how to use the package, please refer to \url{https://github.com/daattali/shinycssloaders}
 }

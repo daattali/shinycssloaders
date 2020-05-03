@@ -4,12 +4,16 @@
 \alias{withSpinner}
 \title{Add a spinner (loader) that shows when an output is recalculating}
 \usage{
-withSpinner(ui_element, type = getOption("spinner.type", default = 1),
+withSpinner(
+  ui_element,
+  type = getOption("spinner.type", default = 1),
   color = getOption("spinner.color", default = "#0275D8"),
   size = getOption("spinner.size", default = 1),
   color.background = getOption("spinner.color.background"),
-  custom.css = FALSE, proxy.height = if (grepl("height:\\\\s*\\\\d",
-  ui_element)) NULL else "400px")
+  custom.css = FALSE,
+  proxy.height,
+  id
+)
 }
 \arguments{
 \item{ui_element}{A UI element that should be wrapped with a spinner when the corresponding output is being calculated.}
@@ -24,7 +28,7 @@ withSpinner(ui_element, type = getOption("spinner.type", default = 1),
 
 \item{custom.css}{Whether or not you have custom css applied to the spinner, in which case we don't enforce the color / size options to the given spinner}
 
-\item{proxy.height}{If the output doesn't specify the output height, you can set a proxy height. It defaults to 400px for outputs with undefined height.}
+\item{proxy.height}{If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.}
 }
 \description{
 Add a spinner (loader) that shows when an output is recalculating

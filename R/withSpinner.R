@@ -6,7 +6,7 @@
 #' @param size The size of the spinner, relative to its default size.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner
 #' @param custom.css Whether or not you have custom css applied to the spinner, in which case we don't enforce the color / size options to the given spinner
-#' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to 400px for outputs with undefined height.
+#' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.
 #' @examples
 #' \dontrun{withSpinner(plotOutput("my_plot"))}
 withSpinner <- function(ui_element,
@@ -15,12 +15,21 @@ withSpinner <- function(ui_element,
                         size = getOption("spinner.size", default = 1),
                         color.background = getOption("spinner.color.background"),
                         custom.css = FALSE,
-                        proxy.height = if (grepl("height:\\s*\\d", ui_element)) NULL else "400px")
+                        proxy.height,
+                        id)
 {
   stopifnot(type %in% 0:8)
   
   if (grepl("rgb", color, fixed = TRUE)) {
     stop("Color should be given in hex format")
+  }
+  
+  if (missing(proxy.height)) {
+    if (grepl("height:\\s*\\d", ui_element)) {
+      proxy.height <- NULL 
+    } else {
+      proxy.height <- "400px"
+    }
   }
   
   # each spinner will have a unique id, to allow seperate sizing - based on hashing the UI element code
