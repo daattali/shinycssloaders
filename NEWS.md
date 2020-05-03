@@ -6,6 +6,7 @@ TODO
 - Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)
 - Add `id` parameter to `withSpinner()` (#19)
 - Add support for `proxy.height` to be specified as a number instead of a string (`300` vs `"300px"`)
+- Fixed bug where spinner wasn't showing up for certain output IDs such as "map" (#49)
 - Allow spinner type 0, which means no loading icon is shown (#18)
 - Clarify the `custom.css` parameter which was causing confusion (#21)
 - Don't expose 'assets' as a resourch path because it blocks shiny apps from having a www/assets/ folder (#48)

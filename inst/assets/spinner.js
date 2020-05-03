@@ -1,5 +1,5 @@
 (function() {
-var output_states = [];
+var output_states = {};
 
 function escapeSelector(s) {
     return s.replace(/([!"#$%&'()*+,-./:;<=>?@\[\\\]^`{|}~])/g, "\\$1");
