@@ -3,7 +3,8 @@
 TODO
 
 - Fix bug where loaders weren't working in uiOutput (#39)
-- Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)  
+- Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)
+- Add `id` parameter to `withSpinner()` (#19)
 - Allow spinner type 0, which means no loading icon is shown (#18)
 - Don't expose 'assets' as a resourch path because it blocks shiny apps from having a www/assets/ folder (#48)
 - Internal refactoring: Use one CSS file for all styles, and use CSS files to load custom CSS of each style (#37)

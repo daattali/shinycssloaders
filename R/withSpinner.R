@@ -30,8 +30,10 @@ withSpinner <- function(ui_element,
     }
   }
   
-  # each spinner will have a unique id, to allow seperate sizing - based on hashing the UI element code
-  id <- paste0("spinner-", digest::digest(ui_element))
+  # each spinner will have a unique id to allow seperate sizing
+  if (is.null(id)) {
+    id <- paste0("spinner-", digest::digest(ui_element))
+  }
   
   css_size_color <- shiny::tagList()
   
