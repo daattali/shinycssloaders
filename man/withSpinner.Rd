@@ -11,8 +11,8 @@ withSpinner(
   size = getOption("spinner.size", default = 1),
   color.background = getOption("spinner.color.background"),
   custom.css = FALSE,
-  proxy.height,
-  id
+  proxy.height = NULL,
+  id = NULL
 )
 }
 \arguments{
