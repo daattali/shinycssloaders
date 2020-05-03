@@ -7,6 +7,7 @@ TODO
 - Add `id` parameter to `withSpinner()` (#19)
 - Add support for `proxy.height` to be specified as a number instead of a string (`300` vs `"300px"`)
 - Allow spinner type 0, which means no loading icon is shown (#18)
+- Clarify the `custom.css` parameter which was causing confusion (#21)
 - Don't expose 'assets' as a resourch path because it blocks shiny apps from having a www/assets/ folder (#48)
 - Internal refactoring: Use one CSS file for all styles, and use CSS files to load custom CSS of each style (#37)
 - Added a sample Shiny app "demo" that lets you experiment with all loader types and parameters

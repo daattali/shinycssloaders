@@ -26,7 +26,7 @@ withSpinner(
 
 \item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner}
 
-\item{custom.css}{Whether or not you have custom css applied to the spinner, in which case we don't enforce the color / size options to the given spinner}
+\item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.}
 
 \item{proxy.height}{If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.}
 }
