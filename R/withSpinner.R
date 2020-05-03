@@ -7,6 +7,7 @@
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner
 #' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
 #' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.
+#' @param id The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.
 #' @examples
 #' \dontrun{withSpinner(plotOutput("my_plot"))}
 withSpinner <- function(ui_element,

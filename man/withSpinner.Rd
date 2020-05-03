@@ -29,6 +29,8 @@ withSpinner(
 \item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.}
 
 \item{proxy.height}{If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.}
+
+\item{id}{The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.}
 }
 \description{
 Add a spinner (loader) that shows when an output is recalculating

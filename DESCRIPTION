@@ -1,11 +1,11 @@
 Package: shinycssloaders
 Type: Package
-Title: Add CSS Loading Animations to 'shiny' Outputs
-Version: 0.3.0.9003
+Title: Add Loading Animations to a 'shiny' Output While It's Recalculating
+Version: 0.3.0.9004
 Authors@R: c(
     person("Andras","Sali",email="andras.sali@alphacruncher.hu",role=c("aut"),comment="Original creator of shinycssloaders package"),
     person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code"),
-    person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Creator of Shiny-wrapper code")
+    person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Maintainer of shinycssloaders since 2019")
     )
 Description: Automatically show loader animations while a Shiny output is (re)calculating. This is mostly a wrapper around the css-loaders created by Luke Hass <https://github.com/lukehaas/css-loaders>.
 License: GPL-3
@@ -18,4 +18,6 @@ Imports:
     glue,
     grDevices,
     shiny
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
+Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
