@@ -28,6 +28,10 @@ withSpinner <- function(ui_element,
     if (!grepl("height:\\s*\\d", ui_element)) {
       proxy.height <- "400px"
     }
+  } else {
+    if (is.numeric(proxy.height)) {
+      proxy.height <- paste0(proxy.height, "px")
+    }
   }
   
   # each spinner will have a unique id to allow seperate sizing
