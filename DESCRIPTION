@@ -7,7 +7,7 @@ Authors@R: c(
     person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code"),
     person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Maintainer of shinycssloaders since 2019")
     )
-Description: Automatically show loader animations while a Shiny output is (re)calculating. This is mostly a wrapper around the css-loaders created by Luke Hass <https://github.com/lukehaas/css-loaders>.
+Description: Automatically show loader animations while a Shiny output is (re)calculating. The CSS is provided by Luke Hass <https://github.com/lukehaas/css-loaders>.
 License: GPL-3
 URL: https://github.com/daattali/shinycssloaders
 BugReports: https://github.com/daattali/shinycssloaders/issues

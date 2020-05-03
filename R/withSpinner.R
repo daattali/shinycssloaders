@@ -1,7 +1,7 @@
 #' Add a spinner (loader) that shows when an output is recalculating
 #' @export
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
-#' @param type The type of spinner to use, valid values are integers between 1-8. They correspond to the enumeration in \url{https://projects.lukehaas.me/css-loaders/}
+#' @param type The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
 #' @param color The color of the spinner in hex format
 #' @param size The size of the spinner, relative to its default size.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner
