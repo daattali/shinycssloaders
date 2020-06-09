@@ -36,6 +36,8 @@ fluidPage(
              alt="Fork me on GitHub")
   ),
 
+  shinydisconnect::disconnectMessage2(),
+  
   div(
     id = "header",
     div(id = "pagetitle",

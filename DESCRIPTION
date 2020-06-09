@@ -18,6 +18,8 @@ Imports:
     glue,
     grDevices,
     shiny
+Remotes:
+    daattali/shinydisconnect
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
