@@ -18,7 +18,8 @@ withSpinner(
 \arguments{
 \item{ui_element}{A UI element that should be wrapped with a spinner when the corresponding output is being calculated.}
 
-\item{type}{The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.}
+\item{type}{The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out
+\url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.}
 
 \item{color}{The color of the spinner in hex format}
 
@@ -33,7 +34,8 @@ withSpinner(
 \item{id}{The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.}
 }
 \description{
-Add a spinner (loader) that shows when an output is recalculating
+You can use the \code{\link{withCustomSpinner}} function if you want to use a custom image
+instead of one of the built-in loader animations.
 }
 \examples{
 \dontrun{withSpinner(plotOutput("my_plot"))}

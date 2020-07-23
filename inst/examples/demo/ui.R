@@ -59,7 +59,10 @@ fluidPage(
   fluidRow(
     column(
       3,
-      selectInput("type", "Spinner type", c("0 (no spinner)" = "0", 1:8), 1),
+      selectInput("type", 
+                  div("Spinner type",
+                      helpText("Only built-in loader images are available in this demo, but you can also use custom images.")),
+                  c("0 (no spinner)" = "0", 1:8), 1),
       colourpicker::colourInput("col", "Color", "#0275D8", showColour = "background"),
       conditionalPanel(
         "input.type == '2' || input.type == '3'",

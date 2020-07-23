@@ -64,3 +64,10 @@ body {
     font-size: 1.1em;
   }
 }
+
+.help-block {
+  font-weight: normal;
+  font-size: 14px;
+  margin: 0;
+}
+}

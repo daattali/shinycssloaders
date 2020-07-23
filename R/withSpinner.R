@@ -1,7 +1,11 @@
 #' Add a spinner (loader) that shows when an output is recalculating
+#' 
+#' You can use the \code{\link{withCustomSpinner}} function if you want to use a custom image
+#' instead of one of the built-in loader animations.
 #' @export
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
-#' @param type The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
+#' @param type The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out 
+#' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
 #' @param color The color of the spinner in hex format
 #' @param size The size of the spinner, relative to its default size.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner
@@ -9,7 +13,23 @@
 #' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.
 #' @param id The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.
 #' @examples
-#' \dontrun{withSpinner(plotOutput("my_plot"))}
+#' if (interactive()) {
+#'   library(shiny)
+#'
+#'   shinyApp(
+#'     ui = fluidPage(
+#'       actionButton("go", "Go"),
+#'       withSpinner(tableOutput("table"))
+#'     ),
+#'     server = function(input, output) {
+#'       output$table <- renderTable({
+#'         input$go
+#'         Sys.sleep(1.5)
+#'         mtcars
+#'       })
+#'     }
+#'   )
+#' }
 withSpinner <- function(ui_element,
                         type = getOption("spinner.type", default = 1),
                         color = getOption("spinner.color", default = "#0275D8"),
@@ -30,17 +50,7 @@ withSpinner <- function(ui_element,
          "The actual CSS needs to added to the app's UI.")
   }
   
-  if (is.null(proxy.height)) {
-    if (!grepl("height:\\s*\\d", ui_element)) {
-      proxy.height <- "400px"
-    }
-  } else {
-    if (is.numeric(proxy.height)) {
-      proxy.height <- paste0(proxy.height, "px")
-    }
-  }
-  
-  # each spinner will have a unique id to allow seperate sizing
+  # each spinner will have a unique id to allow separate sizing
   if (is.null(id)) {
     id <- paste0("spinner-", digest::digest(ui_element))
   }
@@ -69,11 +79,7 @@ withSpinner <- function(ui_element,
     css_size_color <- add_style(base_css)
   }
   
-  proxy_element <- shiny::tagList()
-  if (!is.null(proxy.height)) {
-    proxy_element <- shiny::div(style=glue::glue("height:{proxy.height}"),
-                                class="shiny-spinner-placeholder")
-  }
+  proxy_element <- get_proxy_element(ui_element, proxy.height)
 
   shiny::tagList(
     shiny::singleton(
@@ -94,6 +100,63 @@ withSpinner <- function(ui_element,
       ui_element
     )
   )
+}
+
+#' Add a custom spinner image when an output is recalculating
+#' 
+#' Similar to \code{\link{withSpinner}}, but a custom image can be provided.
+#' @export
+#' @inheritParams withSpinner
+#' @param image The path or URL of the image to use.
+#' @param height The height for the spinner, in pixels. If not provided, then the original
+#' size of the image is used.
+#' @param width The width for the spinner, in pixels. If not provided, then the original
+#' size of the image is used.
+withCustomSpinner <- function(ui_element, image, 
+                              height = NULL, width = NULL, 
+                              proxy.height = NULL, id = NULL) {
+  if (is.null(id)) {
+    id <- paste0("spinner-", digest::digest(ui_element))
+  }
+  
+  proxy_element <- get_proxy_element(ui_element, proxy.height)
+  
+  shiny::tagList(
+    shiny::singleton(
+      shiny::tags$head(
+        shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/spinner.css"),
+        shiny::tags$script(src="shinycssloaders-assets/spinner.js")
+      )
+    ),
+    shiny::div(
+      class = "shiny-spinner-output-container shiny-spinner-custom",
+      shiny::div(
+        class = "load-container shiny-spinner-hidden",
+        shiny::tags$img(id = id, src = image, alt = "Loading...", width = width, height = height),
+      ),
+      proxy_element,
+      ui_element
+    )
+  )
+}
+
+get_proxy_element <- function(ui_element, proxy.height) {
+  if (is.null(proxy.height)) {
+    if (!grepl("height:\\s*\\d", ui_element)) {
+      proxy.height <- "400px"
+    }
+  } else {
+    if (is.numeric(proxy.height)) {
+      proxy.height <- paste0(proxy.height, "px")
+    }
+  }
+  
+  if (is.null(proxy.height)) {
+    proxy_element <- shiny::tagList()
+  } else {
+    proxy_element <- shiny::div(style=glue::glue("height:{proxy.height}"),
+                                class="shiny-spinner-placeholder")
+  }
 }
 
 add_style <- function(x) {

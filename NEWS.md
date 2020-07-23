@@ -1,7 +1,8 @@
-# shinycssloaders 0.4
+# shinycssloaders 1.0.0
 
 TODO
 
+- Add support for custom images with `withCustomSpinner()` (#46)
 - Fix bug where loaders weren't working in uiOutput (#39)
 - Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)
 - Add `id` parameter to `withSpinner()` (#19)
