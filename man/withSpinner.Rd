@@ -12,7 +12,8 @@ withSpinner(
   color.background = getOption("spinner.color.background"),
   custom.css = FALSE,
   proxy.height = NULL,
-  id = NULL
+  id = NULL,
+  hide.ui = TRUE
 )
 }
 \arguments{
@@ -29,14 +30,34 @@ withSpinner(
 
 \item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.}
 
-\item{proxy.height}{If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.}
+\item{proxy.height}{If the output UI doesn't specify the output height, you can set a proxy height. It defaults to "400px"
+for outputs with undefined height. Ignored if \code{hide.ui} is set to \code{FALSE}.}
 
 \item{id}{The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.}
+
+\item{hide.ui}{By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
+Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of the previous output UI.}
 }
 \description{
 You can use the \code{\link{withCustomSpinner}} function if you want to use a custom image
 instead of one of the built-in loader animations.
 }
 \examples{
-\dontrun{withSpinner(plotOutput("my_plot"))}
+if (interactive()) {
+  library(shiny)
+
+  shinyApp(
+    ui = fluidPage(
+      actionButton("go", "Go"),
+      withSpinner(tableOutput("table"))
+    ),
+    server = function(input, output) {
+      output$table <- renderTable({
+        input$go
+        Sys.sleep(1.5)
+        mtcars
+      })
+    }
+  )
+}
 }

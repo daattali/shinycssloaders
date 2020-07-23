@@ -6,19 +6,26 @@ function escapeSelector(s) {
 }
 
 function show_spinner(id) {
-    var selector = "#"+escapeSelector(id);
+    var selector = "#" + escapeSelector(id);
+    var parent = $(selector).closest(".shiny-spinner-output-container");
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
-    $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
-    // if there is a proxy div, hide the previous output
-    $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
+    
+    if (parent.hasClass("shiny-spinner-hideui")) {
+      $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
+      // if there is a proxy div, hide the previous output
+      $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');      
+    }
 }
 
 function hide_spinner(id) {
-    var selector = "#"+escapeSelector(id);
+    var selector = "#" + escapeSelector(id);
+    var parent = $(selector).closest(".shiny-spinner-output-container");
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
-    $(selector).siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'visible');
-    // if there is a proxy div, show the previous output in case it was hidden
-    $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output').removeClass('shiny-spinner-hidden');
+    if (parent.hasClass("shiny-spinner-hideui")) {
+      $(selector).siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'visible');
+      // if there is a proxy div, show the previous output in case it was hidden
+      $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output').removeClass('shiny-spinner-hidden');
+    }
 }
 
 function update_spinner(id) {

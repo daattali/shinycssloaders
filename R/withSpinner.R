@@ -10,8 +10,11 @@
 #' @param size The size of the spinner, relative to its default size.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner
 #' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
-#' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to "400px" for outputs with undefined height.
+#' @param proxy.height If the output UI doesn't specify the output height, you can set a proxy height. It defaults to "400px"
+#' for outputs with undefined height. Ignored if `hide.ui` is set to `FALSE`.
 #' @param id The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.
+#' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
+#' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -37,7 +40,8 @@ withSpinner <- function(ui_element,
                         color.background = getOption("spinner.color.background"),
                         custom.css = FALSE,
                         proxy.height = NULL,
-                        id = NULL)
+                        id = NULL,
+                        hide.ui = TRUE)
 {
   stopifnot(type %in% 0:8)
   
@@ -91,12 +95,12 @@ withSpinner <- function(ui_element,
     ),
     css_size_color,
     shiny::div(
-      class="shiny-spinner-output-container",
+      class=paste("shiny-spinner-output-container", if (hide.ui) "shiny-spinner-hideui" else ""),
       shiny::div(
         class=sprintf("load-container load%s shiny-spinner-hidden",type),
         shiny::div(id=id,class="loader", (if (type == 0) "" else "Loading..."))
       ),
-      proxy_element,
+      if (hide.ui) proxy_element,
       ui_element
     )
   )
