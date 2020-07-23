@@ -22,7 +22,7 @@ fluidPage(
     tags$meta(property = "og:description", content = share$description),
     
     # Twitter summary cards
-    tags$meta(name = "twitter:card", content = "summary"),
+    tags$meta(name = "twitter:card", content = "summary_large_image"),
     tags$meta(name = "twitter:site", content = paste0("@", share$twitter_user)),
     tags$meta(name = "twitter:creator", content = paste0("@", share$twitter_user)),
     tags$meta(name = "twitter:title", content = share$title),
@@ -70,10 +70,10 @@ fluidPage(
       ),
       numericInput("time", "Seconds to show spinner", 1.5),
       sliderInput("size", "Size", min = 0.5, max = 5, step = 0.5, value = 1),
-      actionButton("update", "Update", class = "btn-primary"),
+      actionButton("update", "Update", class = "btn-primary btn-lg"),
     ),
     column(
-      9,
+      6,
       uiOutput("show_example")
     )
   )
