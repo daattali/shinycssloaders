@@ -1,7 +1,7 @@
 library(shiny)
 
 share <- list(
-  title = "shinycssloaders package",
+  title = "{shinycssloaders} package",
   url = "https://daattali.com/shiny/shinycssloaders-demo/",
   image = "https://daattali.com/shiny/img/shinycssloaders.png",
   description = "Add loading animations to a Shiny output while it's recalculating",
