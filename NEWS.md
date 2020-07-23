@@ -2,7 +2,7 @@
 
 TODO
 
-- Add support for custom images with `withCustomSpinner()` (#46)
+- Add support for custom images with `image` parameter (#46)
 - Add support for making the spinner show up on top of the output instead of replacing it, with a `hide.ui` parameter (#22)
 - Fix bug where loaders weren't working in uiOutput (#39)
 - Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)
