@@ -9,6 +9,7 @@ share <- list(
 )
 
 fluidPage(
+  shinyjs::useShinyjs(),
   title = paste0("shinycssloaders package ", as.character(packageVersion("shinycssloaders"))),
   tags$head(
     includeCSS(file.path('www', 'style.css')),
@@ -50,6 +51,7 @@ fluidPage(
   fluidRow(
     column(
       3,
+      id = "params",
       selectInput("type", "Spinner type",
                   c("<Custom image>" = "custom", "0 (no spinner)" = "0", 1:8), 1),
       conditionalPanel(

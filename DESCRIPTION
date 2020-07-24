@@ -21,8 +21,10 @@ Imports:
     digest,
     glue,
     grDevices,
-    shiny,
-    shinydisconnect
+    shiny
+Suggests:
+    shinydisconnect,
+    shinyjs
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
