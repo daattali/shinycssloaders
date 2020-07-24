@@ -5,7 +5,7 @@
 #' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can also use
 #' your own custom image using the `image` parameter.
 #' @param color The color of the spinner in hex format. Ignored if `image` is used.
-#' @param size The size of the spinner, relative to its default size. Ignored if `image` is used.
+#' @param size The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large). Ignored if `image` is used.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner. Ignored if `image` is used.
 #' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner. Ignored if `image` is used.
 #' @param proxy.height If the output UI doesn't specify the output height, you can set a proxy height. It defaults to "400px"

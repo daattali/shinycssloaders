@@ -1,79 +1,96 @@
-# shinycssloaders 
+# {shinycssloaders} - Add loading animations to a Shiny output while it's recalculating 
 
 [![CRAN](http://www.r-pkg.org/badges/version/shinycssloaders)](https://cran.r-project.org/package=shinycssloaders)
 [![Travis build status](https://travis-ci.org/daattali/shinycssloaders.svg?branch=master)](https://travis-ci.org/daattali/shinycssloaders)
 
-Add loader animations (spinners) to Shiny Outputs (e.g. plots, tables). Loading animations leverage on [Shiny JS events](https://shiny.rstudio.com/articles/js-events.html) and will show whilst the output value is not yet available or is 'out-of-date' (i.e. has been invalidated and the client hasn't received the new value). The spinners won't show if the output is not rendered (e.g. a `validate` or `req` is preventing it from being shown).
+When a Shiny output (such as a plot, table, map, etc.) is recalculating, it remains visible but gets greyed out. Using {shinycssloaders}, you can add a loading animation ("spinner") to outputs instead. By wrapping a Shiny output in `withSpinner()`, a spinner will automatically appear while the output is recalculating.
 
-![](https://cloud.githubusercontent.com/assets/15079591/26738969/69141f08-47d0-11e7-848a-9d1705b613f0.gif)
+You can choose from one of 8 built-in animation types, and customize the colour/size. You can also use your own image instead of the built-in animations. See the [demo Shiny app](https://daattali.com/shiny/shinycssloaders-demo) online for examples.
 
-The advantages of using this package are:
+# Table of contents
 
-* Automatic spinner showing / hiding. Just add one extra R function call (see below) and your output will have the spinner showing at just the right times
-* Customizeable spinner color (for each output or globally)
-* Customizeable spinner size (for each output or globally)
-* Choose from 8 different well-designed spinner types 
+- [Example](#example)
+- [How to use](#usage)
+- [Installation](#install)
+- [Features](#features)
 
-The CSS animations are bundled from [https://projects.lukehaas.me/css-loaders/](https://projects.lukehaas.me/css-loaders/), where you can see how they appear.
+<h2 id="example">Example</h2>
 
-You can use it for any type of shiny output, by wrapping the UI element with the `withSpinner` tag:
+For interactive examples and to see some of the features, [check out the demo app](https://daattali.com/shiny/shinycssloaders-demo/).
 
-```
-# load the library
-library(shinycssloaders)
+Below is a simple example of what {shinycssloaders} looks like:
 
-...
+![demo GIF](inst/img/demo.GIF)
 
-withSpinner(plotOutput("my_plot")) 
-# if you have `%>%` loaded, you can do plotOutput("my_plot") %>% withSpinner()
+<h2 id="usage">How to use</h2>
 
-...
-```
+Simply wrap a Shiny output in a call to `withSpinner()`. If you have `%>%` loaded, you can use it, for example `plotOutput("myplot") %>% withSpinner()`.
 
-> For outputs with uknown heights (e.g. tables), a 'proxy' container will be inserted, as the spinner cannot be centered with respect to a height that is uknown to the client (e.g. you might return a really large / small table, who knows?). By default the proxy container will be of height '400px', however if your output is expected to be substantially larger / smaller, you can adjust this with `proxy.height` option.
-
-## Installation
-
-The package is now available on CRAN, however for the latest (and hopefully greatest!) version you can use the `devtools` package to install it from github directly:
+Basic usage:
 
 ```
-devtools::install_github('daattali/shinycssloaders')
-```
-## Demo
+library(shiny)
 
-To see how this works in action, you can check my example on [shinyapps.io](https://frontside.shinyapps.io/example/) or - in case my free shinyapps monthly allowance is over - run the example application from github directly:
-
-```
-shiny::runGitHub('daattali/shinycssloaders', subdir = "inst/examples/basic")
-```
-
-To see how the spinner works for outputs with undefined height, you can check out [this example](https://frontside.shinyapps.io/table/) or run it from github directly:
-
-```
-shiny::runGitHub('daattali/shinycssloaders', subdir = "inst/examples/table")
-```
-
-
-## Changing the spinner color
-
-You can specify a spinner color for each output or set a variable globally. 
-
-### Locally for each output
-
-Just add `color` attribute to `withSpinner`:
-
-```
-plotOutput("my_plot") %>% withSpinner(color="#0dc5c1")
+ui <- fluidPage(
+    actionButton("go", "Go"),
+    shinycssloaders::withSpinner(
+        plotOutput("plot")
+    )
+)
+server <- function(input, output) {
+    output$plot <- renderPlot({
+        input$go
+        Sys.sleep(1.5)
+        plot(runif(10))
+    })
+}
+shinyApp(ui, server)
 ```
 
-### Globally
+<h2 id="install">Installation</h2>
 
-You can use `options(spinner.color="#0dc5c1")` to set the global color.
+To install the stable CRAN version:
 
-### Background color
+```
+install.packages("shinycssloaders")
+```
 
-Spinner types 2-3 require you to specify a background color as well, which should match the background color of the container hosting the output. The other spinners work automatically without having to specify a background color.
+To install the latest development version from GitHub:
 
-## Changing the spinner size
+```
+install.packages("remotes")
+remotes::install_github("daattali/shinycssloaders")
+```
 
-The spinners scale in a relative fashion by specifying the `size` argument of withSpinner (default value is 1, so if you need to double the spinner for example, set size to 2). You can also set the size globally using `options(spinner.size=my_size)`. 
+<h2 id="features">Features</h2>
+
+### 8 customizable built-in spinners
+
+You can use the `type` parameter to choose one of the 8 built-in animations, the `color` parameter to change the spinner's colour, and `size` to make the spinner smaller or larger (2 will make the spinner twice as large). For example, `withSpinner(plotOutput("myplot"), type = 5, color = "#0dc5c1", size = 2)`. 
+
+### Setting spinner parameters globally
+
+If you want all the spinners in your app to have a certain type/size/colour, instead of specifying them in each call to `withSpinner()`, you can set them globally using the `spinner.type`, `spinner.color`, `spinner.size` R options. For example, setting `options(spinner.color="#0dc5c1")` will cause all your spinners to use that colour.
+
+### Using a custom image
+
+If you don't want to use any of the built-in spinners, you can also provide your own image (either a still image or a GIF) to use instead, using the `image` parameter.
+
+### Showing a spinner on top of the output
+
+By default, the out-dated output gets hidden while the spinner is showing. You can change this behaviour to have the spinner appear on top of the old output using the `hide.ui = FALSE` parameter.
+
+### Background colour
+
+Spinner types 2 and 3 require you to specify a background colour as well.
+
+### Specifying the spinner height
+
+The spinner attempts to automatically figure out the height of the output it replaces, and vertically center itself. For some outputs (such as tables), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this.
+
+
+## Credits
+
+The 8 built-in animations are taken from [https://projects.lukehaas.me/css-loaders/](https://projects.lukehaas.me/css-loaders/).
+
+The package was originally created by [Andrew Sali](https://github.com/andrewsali).

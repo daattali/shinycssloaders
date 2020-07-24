@@ -28,7 +28,7 @@ your own custom image using the \code{image} parameter.}
 
 \item{color}{The color of the spinner in hex format. Ignored if \code{image} is used.}
 
-\item{size}{The size of the spinner, relative to its default size. Ignored if \code{image} is used.}
+\item{size}{The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large). Ignored if \code{image} is used.}
 
 \item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner. Ignored if \code{image} is used.}
 
