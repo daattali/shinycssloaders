@@ -96,11 +96,16 @@ withSpinner <- function(
     shiny::singleton(
       shiny::tags$head(
         shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/spinner.css"),
-        shiny::tags$script(src="shinycssloaders-assets/spinner.js"),
-        if (is.null(image))
-          shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/css-loaders.css")
+        shiny::tags$script(src="shinycssloaders-assets/spinner.js")
       )
     ),
+    if (is.null(image))
+      shiny::singleton(
+        shiny::tags$head(
+          shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/css-loaders.css")
+        )
+      ),
+    
     if (is.null(image)) css_size_color,
 
     shiny::div(
