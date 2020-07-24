@@ -7,8 +7,12 @@ Authors@R: c(
     person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code"),
     person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),comment="Maintainer of shinycssloaders since 2019")
     )
-Description: Automatically show loader animations while a Shiny output is (re)calculating. The CSS is provided by Luke Hass <https://github.com/lukehaas/css-loaders>.
-License: GPL-3
+Description: When a 'Shiny' output (such as a plot, table, map, etc.) is recalculating, it remains 
+    visible but gets greyed out. Using 'shinycssloaders', you can add a loading animation ("spinner")
+    to outputs instead. By wrapping a 'Shiny' output in 'withSpinner()', a spinner will automatically
+    appear while the output is recalculating. See the demo online at
+    <https://daattali.com/shiny/shinycssloaders-demo/>.
+License: MIT + file LICENSE
 URL: https://github.com/daattali/shinycssloaders
 BugReports: https://github.com/daattali/shinycssloaders/issues
 Depends:
@@ -17,9 +21,8 @@ Imports:
     digest,
     glue,
     grDevices,
-    shiny
-Remotes:
-    daattali/shinydisconnect
+    shiny,
+    shinydisconnect
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8

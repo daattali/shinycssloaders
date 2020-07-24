@@ -1,9 +1,8 @@
-# shinycssloaders 1.0.0
-
-TODO
+# shinycssloaders 1.0.0 (Date TBD)
 
 - Add support for custom images with `image` parameter (#46)
 - Add support for making the spinner show up on top of the output instead of replacing it, with a `hide.ui` parameter (#22)
+- Changed the license from GPL-3 to MIT
 - Fix bug where loaders weren't working in uiOutput (#39)
 - Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)
 - Add `id` parameter to `withSpinner()` (#19)
@@ -17,9 +16,7 @@ TODO
 - File cleanup: Remove all files and dirs from inst/css-loaders and only keep the CSS (#38)
 - Removed the default value of `proxy.height` parameter to simplify the function documentation
 
-# shinycssloaders 0.3
-
-2020-01-14
+# shinycssloaders 0.3 (2020-01-14)
 
 - Remove debug message from JS console (#26)
 - Ensure spinner doesn't show forever when used on dynamic outputs 
