@@ -76,18 +76,17 @@ If you want all the spinners in your app to have a certain type/size/colour, ins
 
 If you don't want to use any of the built-in spinners, you can also provide your own image (either a still image or a GIF) to use instead, using the `image` parameter.
 
+### Specifying the spinner height
+
+The spinner attempts to automatically figure out the height of the output it replaces, and to vertically center itself. For some outputs (such as tables), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this.
+
 ### Showing a spinner on top of the output
 
 By default, the out-dated output gets hidden while the spinner is showing. You can change this behaviour to have the spinner appear on top of the old output using the `hide.ui = FALSE` parameter.
 
 ### Background colour
 
-Spinner types 2 and 3 require you to specify a background colour. It's recommended to use the colour that matches background colour of the output's container, so that the spinner will "blend in". 
-
-### Specifying the spinner height
-
-The spinner attempts to automatically figure out the height of the output it replaces, and vertically center itself. For some outputs (such as tables), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this.
-
+Spinner types 2 and 3 require you to specify a background colour. It's recommended to use a colour that matches the background colour of the output's container, so that the spinner will "blend in". 
 
 ## Credits
 
