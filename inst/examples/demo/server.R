@@ -26,7 +26,7 @@ server <- function(input, output, session) {
     output[[paste0("example", plotnum())]] <- renderPlot({
       bg <- par(bg = "#fafafa")
       shinyjs::disable("params")
-      on.exit(shinyjs::enable("params2"))
+      on.exit(shinyjs::enable("params"))
       Sys.sleep(isolate(input$time))
       plot(runif(10), main = "Random Plot")
       bg <- par(bg = bg)
