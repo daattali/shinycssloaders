@@ -20,7 +20,7 @@ For interactive examples and to see some of the features, [check out the demo ap
 
 Below is a simple example of what {shinycssloaders} looks like:
 
-![demo GIF](inst/img/demo.GIF)
+![demo GIF](inst/img/demo.gif)
 
 <h2 id="usage">How to use</h2>
 
