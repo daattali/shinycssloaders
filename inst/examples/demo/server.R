@@ -7,7 +7,7 @@ server <- function(input, output, session) {
       type = as.numeric(input$type),
       color = input$col,
       size = input$size,
-      color.background = input$background
+      color.background = "#fafafa"
     )
   })
   

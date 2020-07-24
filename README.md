@@ -82,7 +82,7 @@ By default, the out-dated output gets hidden while the spinner is showing. You c
 
 ### Background colour
 
-Spinner types 2 and 3 require you to specify a background colour as well.
+Spinner types 2 and 3 require you to specify a background colour. It's recommended to use the colour that matches background colour of the output's container, so that the spinner will "blend in". 
 
 ### Specifying the spinner height
 

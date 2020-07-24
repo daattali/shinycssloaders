@@ -64,10 +64,6 @@ fluidPage(
                       helpText("Only built-in loader images are available in this demo, but you can also use custom images.")),
                   c("0 (no spinner)" = "0", 1:8), 1),
       colourpicker::colourInput("col", "Color", "#0275D8", showColour = "background"),
-      conditionalPanel(
-        "input.type == '2' || input.type == '3'",
-        colourpicker::colourInput("background", "Background Color", "white", showColour = "background")
-      ),
       numericInput("time", "Seconds to show spinner", 1.5),
       sliderInput("size", "Size", min = 0.5, max = 5, step = 0.5, value = 1),
       actionButton("update", "Update", class = "btn-primary btn-lg"),
