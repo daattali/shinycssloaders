@@ -44,16 +44,7 @@ fluidPage(
         "shinycssloaders package"
     ),
     div(id = "subtitle",
-        "Add loading animations to a Shiny output while it's recalculating"),
-    div(id = "subsubtitle",
-        "Maintained by",
-        tags$a(href = "https://deanattali.com/", "Dean Attali"),
-        HTML("&bull;"),
-        "Available",
-        tags$a(href = "https://github.com/daattali/shinycssloaders", "on GitHub"),
-        HTML("&bull;"),
-        tags$a(href = "https://daattali.com/shiny/", "More apps"), "by Dean"
-    )
+        "Add loading animations to a Shiny output while it's recalculating")
   ),
   
   fluidRow(
