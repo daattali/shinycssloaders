@@ -10,7 +10,7 @@ share <- list(
 
 fluidPage(
   shinyjs::useShinyjs(),
-  title = paste0("shinycssloaders package ", as.character(packageVersion("shinycssloaders"))),
+  title = paste0("{shinycssloaders} package ", as.character(packageVersion("shinycssloaders"))),
   tags$head(
     includeCSS(file.path('www', 'style.css')),
     # Favicon
@@ -30,22 +30,25 @@ fluidPage(
     tags$meta(name = "twitter:description", content = share$description),
     tags$meta(name = "twitter:image", content = share$image)
   ),
-  tags$a(
-    href="https://github.com/daattali/shinycssloaders",
-    tags$img(style="position: absolute; top: 0; right: 0; border: 0;",
-             src="github-green-right.png",
-             alt="Fork me on GitHub")
-  ),
   
   shinydisconnect::disconnectMessage2(),
   
   div(
     id = "header",
     div(id = "pagetitle",
-        "shinycssloaders package"
+        "{shinycssloaders} package"
     ),
     div(id = "subtitle",
-        "Add loading animations to a Shiny output while it's recalculating")
+        "Add loading animations to a Shiny output while it's recalculating"),
+    div(id = "subsubtitle",	
+        "Maintained by",	
+        tags$a(href = "https://deanattali.com/", "Dean Attali"),	
+        HTML("&bull;"),	
+        "Code",	
+        tags$a(href = "https://github.com/daattali/shinycssloaders", "on GitHub"),	
+        HTML("&bull;"),	
+        tags$a(href = "https://github.com/sponsors/daattali", "Support my work"), "❤"	
+    )
   ),
   
   fluidRow(
