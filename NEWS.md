@@ -1,14 +1,14 @@
-# shinycssloaders 1.0.0 (Date TBD)
+# shinycssloaders 1.0.0 (2020-07-28)
 
 - Add support for custom images with `image` parameter (#46)
 - Add support for making the spinner show up on top of the output instead of replacing it, with a `hide.ui` parameter (#22)
+- Add `id` parameter to `withSpinner()` to allow you to target a specific spinner with CSS (#19)
+- Allow spinner type 0, which means no loading icon is shown (#18)
 - Changed the license from GPL-3 to MIT
 - Fix bug where loaders weren't working in uiOutput (#39)
 - Fix bug where `withSpinner()` was causing `shiny::appendTab()` to break (#45)
-- Add `id` parameter to `withSpinner()` (#19)
 - Add support for `proxy.height` to be specified as a number instead of a string (`300` vs `"300px"`)
 - Fixed bug where spinner wasn't showing up for certain output IDs such as "map" (#49)
-- Allow spinner type 0, which means no loading icon is shown (#18)
 - Clarify the `custom.css` parameter which was causing confusion (#21)
 - Don't expose 'assets' as a resourch path because it blocks shiny apps from having a www/assets/ folder (#48)
 - Internal refactoring: Use one CSS file for all styles, and use CSS files to load custom CSS of each style (#37)
