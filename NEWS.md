@@ -12,9 +12,9 @@
 - Clarify the `custom.css` parameter which was causing confusion (#21)
 - Don't expose 'assets' as a resourch path because it blocks shiny apps from having a www/assets/ folder (#48)
 - Internal refactoring: Use one CSS file for all styles, and use CSS files to load custom CSS of each style (#37)
+- Complete revamp of all the documentation
 - Added a sample Shiny app "demo" that lets you experiment with all loader types and parameters
 - File cleanup: Remove all files and dirs from inst/css-loaders and only keep the CSS (#38)
-- Removed the default value of `proxy.height` parameter to simplify the function documentation
 
 # shinycssloaders 0.3 (2020-01-14)
 
