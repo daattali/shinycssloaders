@@ -13,6 +13,7 @@ You can choose from one of 8 built-in animation types, and customize the colour/
 - [How to use](#usage)
 - [Installation](#install)
 - [Features](#features)
+- [Sponsors 🏆](#sponsors)
 
 <h2 id="example">Example</h2>
 
@@ -87,6 +88,17 @@ By default, the out-dated output gets hidden while the spinner is showing. You c
 ### Background colour
 
 Spinner types 2 and 3 require you to specify a background colour. It's recommended to use a colour that matches the background colour of the output's container, so that the spinner will "blend in". 
+
+<h2 id="sponsors">
+
+Sponsors 🏆
+
+</h2>
+
+> There are no sponsors yet
+
+[Become the first sponsor for
+{shinycssloaders}\!](https://github.com/sponsors/daattali)
 
 ## Credits
 
