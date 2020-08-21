@@ -98,7 +98,7 @@ Sponsors 🏆
 > There are no sponsors yet
 
 [Become the first sponsor for
-{shinycssloaders}\!](https://github.com/sponsors/daattali)
+{shinycssloaders}\!](https://github.com/sponsors/daattali/sponsorships?tier_id=39856)
 
 ## Credits
 
