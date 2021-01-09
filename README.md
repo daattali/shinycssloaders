@@ -1,7 +1,7 @@
 # {shinycssloaders} - Add loading animations to a Shiny output while it's recalculating 
 
+[![R Build Status](https://github.com/daattali/shinycssloaders/workflows/R-CMD-check/badge.svg)](https://github.com/daattali/shinycssloaders/actions)
 [![CRAN](http://www.r-pkg.org/badges/version/shinycssloaders)](https://cran.r-project.org/package=shinycssloaders)
-[![Travis build status](https://travis-ci.org/daattali/shinycssloaders.svg?branch=master)](https://travis-ci.org/daattali/shinycssloaders)
 
 When a Shiny output (such as a plot, table, map, etc.) is recalculating, it remains visible but gets greyed out. Using {shinycssloaders}, you can add a loading animation ("spinner") to outputs instead of greying them out. By wrapping a Shiny output in `withSpinner()`, a spinner will automatically appear while the output is recalculating.
 
