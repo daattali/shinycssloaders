@@ -18,6 +18,9 @@
 #' size of the image is used. Ignored if not using `image`.
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
+#' @param custom.class A CSS class to apply to the container
+#' @param custom.html A shiny tag object containing the HTML to show for a custom loader
+#' 
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -46,7 +49,9 @@ withSpinner <- function(
   proxy.height = NULL,
   id = NULL,
   image = NULL, image.width = NULL, image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE,
+  custom.class = NULL,
+  custom.html = NULL
 ) {
   stopifnot(type %in% 0:8)
   
@@ -84,7 +89,8 @@ withSpinner <- function(
       }
       
       # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
-      size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
+      if(!custom.css)
+        size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
       base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size}px; }}"))
       css_size_color <- add_style(base_css)
     }
@@ -118,10 +124,17 @@ withSpinner <- function(
         class = paste(
           "load-container",
           "shiny-spinner-hidden",
-          if (is.null(image)) paste0("load",type)
+          if (is.null(image)) {
+            if(is.null(custom.class)) paste0("load",type)
+            else custom.class
+          }
         ),
         if (is.null(image))
-          shiny::div(id = id, class = "loader", (if (type == 0) "" else "Loading..."))
+          shiny::div(id = id, class = "loader", (
+            if (!is.null(custom.html)) custom.html
+            else if (type == 0) ""
+            else "Loading..."
+          ))
         else
           shiny::tags$img(id = id, src = image, alt = "Loading...", width = image.width, height = image.height)
       ),

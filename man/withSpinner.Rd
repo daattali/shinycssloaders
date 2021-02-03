@@ -16,7 +16,9 @@ withSpinner(
   image = NULL,
   image.width = NULL,
   image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE,
+  custom.class = NULL,
+  custom.html = NULL
 )
 }
 \arguments{
@@ -49,6 +51,10 @@ size of the image is used. Ignored if not using \code{image}.}
 
 \item{hide.ui}{By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of the previous output UI.}
+
+\item{custom.class}{A CSS class to apply to the container}
+
+\item{custom.html}{A shiny tag object containing the HTML to show for a custom loader}
 }
 \description{
 Add a spinner that shows when an output is recalculating
