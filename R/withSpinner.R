@@ -18,6 +18,9 @@
 #' size of the image is used. Ignored if not using `image`.
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
+#' @param keep.height By default, the spinner height is determined based on output UI (if defined) or by `proxy.height` field.
+#' Setting `keep.height = TRUE` will set the spinner height based on displayed contents when redrawing (first draw will use default proxy height strategy). Ignored if`hide.ui` is set to `FALSE`
+#' @param show.delay Milliseconds delay required to show spinner, useful to avoid "blinking" spinner in cases where output redraw is too quick. Defaults to 0. 
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -46,7 +49,7 @@ withSpinner <- function(
   proxy.height = NULL,
   id = NULL,
   image = NULL, image.width = NULL, image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE, keep.height = FALSE, show.delay = 0
 ) {
   stopifnot(type %in% 0:8)
   
@@ -112,7 +115,11 @@ withSpinner <- function(
       class = paste(
         "shiny-spinner-output-container",
         if (hide.ui) "shiny-spinner-hideui" else "",
+        if (keep.height) "shiny-spinner-keepheight" else "",
         if (is.null(image)) "" else "shiny-spinner-custom"
+      ),
+      `data-showdelay` = paste(
+        if (is.numeric(show.delay)) show.delay else "0"
       ),
       shiny::div(
         class = paste(

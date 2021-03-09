@@ -1,3 +1,7 @@
+# shinycssloaders 1.0.1 (2021-03-09)
+- Add support for making spinner retain previous output size
+- Add support to delay display
+
 # shinycssloaders 1.0.0 (2020-07-28)
 
 - Add support for custom images with `image` parameter (#46)

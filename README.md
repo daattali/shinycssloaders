@@ -79,7 +79,7 @@ If you don't want to use any of the built-in spinners, you can also provide your
 
 ### Specifying the spinner height
 
-The spinner attempts to automatically figure out the height of the output it replaces, and to vertically center itself. For some outputs (such as tables), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this.
+The spinner attempts to automatically figure out the height of the output it replaces, and to vertically center itself. For some outputs (such as tables), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this. For dynamic height outputs, the property `keep.sheight can be set, making the spinner keep the contents size on re-draw (first draw height is determined as usual)
 
 ### Showing a spinner on top of the output
 
