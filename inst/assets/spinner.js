@@ -9,12 +9,12 @@ function escapeSelector(s) {
 function show_spinner(id) {
     var selector = "#" + escapeSelector(id);
     var parent = $(selector).closest(".shiny-spinner-output-container");
-    var currentHeight = parent.height();
-    
+
     if (parent && parent.length && timeoutHandles[parent] === null) {
       var delay = parent.data() && parent.data().showdelay ? parent.data().showdelay : 0;
       timeoutHandles[parent] = setTimeout(function(){
           timeoutHandles[parent] = null;
+          var currentHeight = parent.height();
           
           $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
       
