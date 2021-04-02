@@ -46,7 +46,8 @@ withSpinner <- function(
   proxy.height = NULL,
   id = NULL,
   image = NULL, image.width = NULL, image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE,
+  show.delay = 0
 ) {
   stopifnot(type %in% 0:8)
   
@@ -113,6 +114,9 @@ withSpinner <- function(
         "shiny-spinner-output-container",
         if (hide.ui) "shiny-spinner-hideui" else "",
         if (is.null(image)) "" else "shiny-spinner-custom"
+      ),
+      `data-showdelay` = paste(
+        if (is.numeric(show.delay)) show.delay else "0"
       ),
       shiny::div(
         class = paste(

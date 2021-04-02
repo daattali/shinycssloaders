@@ -81,7 +81,9 @@ fluidPage(
         sliderInput("size", "Size", min = 0.5, max = 5, step = 0.5, value = 1)
       ),
       numericInput("time", "Seconds to show spinner", 1.5),
+      numericInput("delaytime", "Milliseconds to delay show spinner", 100),
       actionButton("update", "Update", class = "btn-primary btn-lg"),
+      actionButton("refresh", "Refresh Data", class = "btn-primary btn-lg"),
     ),
     column(
       6,
