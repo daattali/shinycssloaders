@@ -18,7 +18,12 @@
   top:0;
   left:0;
   z-index: -1;
-  visibility:hidden;
+}
+.shiny-spinner-hidden.load-container {
+  display: none;
+}
+shiny-spinner-placeholder.shiny-spinner-placeholder {
+  visibility: hidden;
 }
 
 .shiny-spinner-custom {

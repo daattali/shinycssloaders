@@ -1,3 +1,7 @@
+# Unreleased version
+
+- Fix page sometimes wobbling because of hidden spinner (#54)
+
 # shinycssloaders 1.0.0 (2020-07-28)
 
 - Add support for custom images with `image` parameter (#46)
