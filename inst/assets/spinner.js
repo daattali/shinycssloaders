@@ -1,6 +1,6 @@
 (function() {
 var output_states = {};
-var timeoutHandles = {};
+var timeout_handles = {};
 
 function escapeSelector(s) {
     return s.replace(/([!"#$%&'()*+,-./:;<=>?@\[\\\]^`{|}~])/g, "\\$1");
@@ -10,10 +10,10 @@ function show_spinner(id) {
     var selector = "#" + escapeSelector(id);
     var parent = $(selector).closest(".shiny-spinner-output-container");
     
-    if (parent && parent.length && (timeoutHandles[parent] === null || timeoutHandles[parent] === undefined)) {
+    if (parent && parent.length && (timeout_handles[parent] === null || timeout_handles[parent] === undefined)) {
         var delay = parent.data() && parent.data().showdelay ? parent.data().showdelay : 0;
-        timeoutHandles[parent] = setTimeout(function(){
-          timeoutHandles[parent] = null;
+        timeout_handles[parent] = setTimeout(function(){
+          timeout_handles[parent] = null;
           
           $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
     
@@ -31,9 +31,9 @@ function hide_spinner(id) {
     var selector = "#" + escapeSelector(id);
     var parent = $(selector).closest(".shiny-spinner-output-container");
     
-    if (parent && parent.length &&  timeoutHandles[parent] !== null) {
-      clearTimeout(timeoutHandles[parent]);
-      timeoutHandles[parent] = null;
+    if (parent && parent.length &&  timeout_handles[parent] !== null) {
+      clearTimeout(timeout_handles[parent]);
+      timeout_handles[parent] = null;
     }
     
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
