@@ -10,7 +10,7 @@ function show_spinner(id) {
     var selector = "#" + escapeSelector(id);
     var parent = $(selector).closest(".shiny-spinner-output-container");
     
-    if (parent && parent.length && timeoutHandles[parent] === null) {
+    if (parent && parent.length && (timeoutHandles[parent] === null || timeoutHandles[parent] === undefined)) {
         var delay = parent.data() && parent.data().showdelay ? parent.data().showdelay : 0;
         timeoutHandles[parent] = setTimeout(function(){
           timeoutHandles[parent] = null;
@@ -23,7 +23,7 @@ function show_spinner(id) {
             $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');      
           }
           
-        }, delay)
+        }, delay);
     }
 }
 
