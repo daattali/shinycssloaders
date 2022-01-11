@@ -1,4 +1,6 @@
-# shinycssloaders 1.0.1 (2021-03-09)
+# Unreleased version
+
+- Fix page sometimes wobbling because of hidden spinner (#54)
 - Add support to delay display
 
 # shinycssloaders 1.0.0 (2020-07-28)
