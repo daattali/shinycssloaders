@@ -48,10 +48,19 @@ withSpinner <- function(
   image = NULL, image.width = NULL, image.height = NULL,
   hide.ui = TRUE
 ) {
+  if(!inherits(ui_element, "shiny.tag")){
+    err_msg <- paste0("ui_element should be a ui element of class shiny.tag not ",
+                      substitute(ui_element))
+    if(length(err_msg) > 1) err_msg <- err_msg[1]
+    stop(err_msg) 
+  }
+  if(any(!type %in% 0:8)){
+    err_msg <- paste0("type should be one of 0:8 not ", substitute(type))
+    if(length(err_msg) > 1) err_msg <- err_msg[1]
+    stop(err_msg)
+  }
   
-  stopifnot("ui_element should be a ui element of class shiny.tag"
-            = inherits(ui_element, "shiny.tag"))
-  stopifnot("type should be one of 0:8" = type %in% 0:8)
+  
   
   if (grepl("rgb", color, fixed = TRUE)) {
     stop("Color should be given in hex format")
