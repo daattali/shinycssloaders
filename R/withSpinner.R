@@ -72,7 +72,7 @@ withSpinner <- function(
   
   if (!custom.css) {
     if (type == 1 && !is.null(caption)) {
-      message("Captions are not supported for spinner type 1")
+      warning("Captions are not supported for spinner type 1")
       caption <- NULL
     }
     caption_css <- glue::glue("#{id}_caption {{ color: {caption.color}; }}")
