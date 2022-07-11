@@ -4,7 +4,7 @@
 #' @param type The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out 
 #' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can also use
 #' your own custom image using the `image` parameter.
-#' @param color The color of the spinner in hex format. Ignored if `image` is used.
+#' @param color The color of the spinner in hex format. Ignored if `image` is used (other than serving as the default for `caption.color`).
 #' @param size The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large). Ignored if `image` is used.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner. Ignored if `image` is used.
 #' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner. Ignored if `image` is used.
@@ -18,6 +18,8 @@
 #' size of the image is used. Ignored if not using `image`.
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
+#' @param caption Caption to display below the spinner or image. Ignored if `type` is set to 1 for css reasons.
+#' @param caption.color The color of the caption (defaults to the spinner color). Ignored if `custom.css` is set to `TRUE`.
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -46,7 +48,9 @@ withSpinner <- function(
   proxy.height = NULL,
   id = NULL,
   image = NULL, image.width = NULL, image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE,
+  caption = NULL,
+  caption.color = color
 ) {
   stopifnot(type %in% 0:8)
   
@@ -64,10 +68,15 @@ withSpinner <- function(
     id <- paste0("spinner-", digest::digest(ui_element))
   }
   
-  if (is.null(image)) {
-    css_size_color <- shiny::tagList()
-    
-    if (!custom.css && type != 0) {
+  css_size_color <- shiny::tagList()
+  
+  if (!custom.css) {
+    if (type == 1 && !is.null(caption)) {
+      message("Captions are not supported for spinner type 1")
+      caption <- NULL
+    }
+    caption_css <- glue::glue("#{id}_caption {{ color: {caption.color}; }}")
+    if (is.null(image) && type != 0) {
       if (type %in% c(2, 3) && is.null(color.background)) {
         stop("For spinner types 2 & 3 you need to specify manually a background color.")
       }
@@ -85,8 +94,14 @@ withSpinner <- function(
       
       # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
       size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
-      base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size}px; }}"))
+      base_css <- paste(
+        base_css,
+        glue::glue("#{id} {{ font-size: {size}px; }}"),
+        caption_css
+      )
       css_size_color <- add_style(base_css)
+    } else {
+      css_size_color <- add_style(caption_css)
     }
   }
   
@@ -106,7 +121,7 @@ withSpinner <- function(
         )
       ),
     
-    if (is.null(image)) css_size_color,
+    css_size_color,
 
     shiny::div(
       class = paste(
@@ -123,7 +138,9 @@ withSpinner <- function(
         if (is.null(image))
           shiny::div(id = id, class = "loader", (if (type == 0) "" else "Loading..."))
         else
-          shiny::tags$img(id = id, src = image, alt = "Loading...", width = image.width, height = image.height)
+          shiny::tags$img(id = id, src = image, alt = "Loading...", width = image.width, height = image.height),
+        if (!is.null(caption) && type != 1)
+          shiny::div(id = paste0(id, "_caption"), class = "shiny-spinner-custom", caption)
       ),
       proxy_element,
       ui_element

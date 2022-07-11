@@ -16,7 +16,9 @@ withSpinner(
   image = NULL,
   image.width = NULL,
   image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE,
+  caption = NULL,
+  caption.color = color
 )
 }
 \arguments{
@@ -26,7 +28,7 @@ withSpinner(
 \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can also use
 your own custom image using the \code{image} parameter.}
 
-\item{color}{The color of the spinner in hex format. Ignored if \code{image} is used.}
+\item{color}{The color of the spinner in hex format. Ignored if \code{image} is used (other than serving as the default for \code{caption.color}).}
 
 \item{size}{The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large). Ignored if \code{image} is used.}
 
@@ -49,6 +51,10 @@ size of the image is used. Ignored if not using \code{image}.}
 
 \item{hide.ui}{By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of the previous output UI.}
+
+\item{caption}{Caption to display below the spinner or image. Ignored if \code{type} is set to 1 for css reasons.}
+
+\item{caption.color}{The color of the caption (defaults to the spinner color). Ignored if \code{custom.css} is set to \code{TRUE}.}
 }
 \description{
 Add a spinner that shows when an output is recalculating
