@@ -31,7 +31,7 @@ fluidPage(
     tags$meta(name = "twitter:image", content = share$image)
   ),
   
-  # shinydisconnect::disconnectMessage2(),
+  shinydisconnect::disconnectMessage2(),
   
   div(
     id = "header",
