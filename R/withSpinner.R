@@ -48,12 +48,16 @@ withSpinner <- function(
   image = NULL, image.width = NULL, image.height = NULL,
   hide.ui = TRUE
 ) {
-  stopifnot(type %in% 0:8)
   
+  if (!inherits(ui_element, "shiny.tag")) {
+    stop("`ui_element` must be a Shiny tag", call. = FALSE)
+  }
+  if (!type %in% 0:8) {
+    stop("`type` must be an integer from 0 to 8", call. = FALSE)
+  }
   if (grepl("rgb", color, fixed = TRUE)) {
     stop("Color should be given in hex format")
   }
-  
   if (is.character(custom.css)) {
     stop("It looks like you provided a string to 'custom.css', but it needs to be either `TRUE` or `FALSE`. ",
          "The actual CSS needs to added to the app's UI.")

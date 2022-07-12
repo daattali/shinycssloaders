@@ -1,6 +1,7 @@
 # Unreleased version
 
 - Fix page sometimes wobbling because of hidden spinner (#54)
+- Add more informative error messages (#69)
 
 # shinycssloaders 1.0.0 (2020-07-28)
 
