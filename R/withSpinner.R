@@ -49,7 +49,7 @@ withSpinner <- function(
   hide.ui = TRUE
 ) {
   
-  if (!inherits(ui_element, "shiny.tag")) {
+  if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
     stop("`ui_element` must be a Shiny tag", call. = FALSE)
   }
   if (!type %in% 0:8) {
