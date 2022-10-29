@@ -1,5 +1,4 @@
 Package: shinycssloaders
-Type: Package
 Title: Add Loading Animations to a 'shiny' Output While It's Recalculating
 Version: 1.0.0.9000
 Authors@R: c(
