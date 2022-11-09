@@ -96,20 +96,30 @@ withSpinner <- function(
   
   proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
   
+  deps <- list(
+    htmltools::htmlDependency(
+      name = "shinycssloaders-binding",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      script = "spinner.js",
+      stylesheet = "spinner.css"
+    )
+  )
+  
+  if (is.null(image)) {
+    deps <- append(deps, list(htmltools::htmlDependency(
+      name = "cssloaders",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      stylesheet = "css-loaders.css"
+    )))
+  }
+
   shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/spinner.css"),
-        shiny::tags$script(src="shinycssloaders-assets/spinner.js")
-      )
-    ),
-    if (is.null(image))
-      shiny::singleton(
-        shiny::tags$head(
-          shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/css-loaders.css")
-        )
-      ),
-    
+    deps,
+
     if (is.null(image)) css_size_color,
 
     shiny::div(
