@@ -16,7 +16,8 @@ withSpinner(
   image = NULL,
   image.width = NULL,
   image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE,
+  fill_container = FALSE
 )
 }
 \arguments{
@@ -49,6 +50,9 @@ size of the image is used. Ignored if not using \code{image}.}
 
 \item{hide.ui}{By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of the previous output UI.}
+
+\item{fill_container}{By default, the spinner UI container height is fixed to the proxy.height
+Setting \code{fill_container = TRUE} will allow the spinner UI container to grow and shrink with their parent container}
 }
 \description{
 Add a spinner that shows when an output is recalculating

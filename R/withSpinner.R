@@ -18,6 +18,8 @@
 #' size of the image is used. Ignored if not using `image`.
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
+#' @param fill_container By default, the spinner UI container height is fixed to the proxy.height
+#' Setting `fill_container = TRUE` will allow the spinner UI container to grow and shrink with their parent container
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -46,7 +48,8 @@ withSpinner <- function(
   proxy.height = NULL,
   id = NULL,
   image = NULL, image.width = NULL, image.height = NULL,
-  hide.ui = TRUE
+  hide.ui = TRUE,
+  fill_container = FALSE
 ) {
   
   if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
@@ -126,7 +129,8 @@ withSpinner <- function(
       class = paste(
         "shiny-spinner-output-container",
         if (hide.ui) "shiny-spinner-hideui" else "",
-        if (is.null(image)) "" else "shiny-spinner-custom"
+        if (is.null(image)) "" else "shiny-spinner-custom",
+        if(fill_container) "html-fill-item html-fill-container" else ""
       ),
       shiny::div(
         class = paste(

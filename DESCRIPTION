@@ -21,11 +21,11 @@ Imports:
     digest,
     glue,
     grDevices,
-    htmltools (>= 0.3.5),
+    htmltools (>= 0.5.4),
     shiny
 Suggests:
     shinydisconnect,
     shinyjs
-RoxygenNote: 7.1.0
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
