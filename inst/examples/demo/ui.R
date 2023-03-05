@@ -82,8 +82,7 @@ fluidPage(
       ),
       numericInput("time", "Seconds to show spinner", 1.5),
       numericInput("delaytime", "Milliseconds to delay show spinner", 100),
-      actionButton("update", "Update", class = "btn-primary btn-lg"),
-      actionButton("refresh", "Refresh Data", class = "btn-primary btn-lg"),
+      actionButton("update", "Update", class = "btn-primary btn-lg")
     ),
     column(
       6,
