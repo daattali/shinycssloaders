@@ -4,7 +4,7 @@
 #' @param type The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out 
 #' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can also use
 #' your own custom image using the `image` parameter.
-#' @param color The color of the spinner in hex format. Ignored if `image` is used (other than serving as the default for `caption.color`).
+#' @param color The color of the spinner in hex format. Ignored if `image` is used.
 #' @param size The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large). Ignored if `image` is used.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner. Ignored if `image` is used.
 #' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner. Ignored if `image` is used.
@@ -19,7 +19,6 @@
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
 #' @param caption Caption to display below the spinner or image. Ignored if `type` is set to 1 for css reasons.
-#' @param caption.color The color of the caption (defaults to the spinner color). Ignored if `custom.css` is set to `TRUE`.
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -49,15 +48,18 @@ withSpinner <- function(
   id = NULL,
   image = NULL, image.width = NULL, image.height = NULL,
   hide.ui = TRUE,
-  caption = NULL,
-  caption.color = color
+  caption = NULL
 ) {
-  stopifnot(type %in% 0:8)
   
+  if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
+    stop("`ui_element` must be a Shiny tag", call. = FALSE)
+  }
+  if (!type %in% 0:8) {
+    stop("`type` must be an integer from 0 to 8", call. = FALSE)
+  }
   if (grepl("rgb", color, fixed = TRUE)) {
     stop("Color should be given in hex format")
   }
-  
   if (is.character(custom.css)) {
     stop("It looks like you provided a string to 'custom.css', but it needs to be either `TRUE` or `FALSE`. ",
          "The actual CSS needs to added to the app's UI.")
@@ -75,7 +77,7 @@ withSpinner <- function(
       warning("Captions are not supported for spinner type 1")
       caption <- NULL
     }
-    caption_css <- glue::glue("#{id}_caption {{ color: {caption.color}; }}")
+    caption_css <- glue::glue("#{id}_caption {{ color: {color}; }}")
     if (is.null(image) && type != 0) {
       if (type %in% c(2, 3) && is.null(color.background)) {
         stop("For spinner types 2 & 3 you need to specify manually a background color.")
@@ -107,20 +109,30 @@ withSpinner <- function(
   
   proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
   
+  deps <- list(
+    htmltools::htmlDependency(
+      name = "shinycssloaders-binding",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      script = "spinner.js",
+      stylesheet = "spinner.css"
+    )
+  )
+  
+  if (is.null(image)) {
+    deps <- append(deps, list(htmltools::htmlDependency(
+      name = "cssloaders",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      stylesheet = "css-loaders.css"
+    )))
+  }
+
   shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/spinner.css"),
-        shiny::tags$script(src="shinycssloaders-assets/spinner.js")
-      )
-    ),
-    if (is.null(image))
-      shiny::singleton(
-        shiny::tags$head(
-          shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/css-loaders.css")
-        )
-      ),
-    
+    deps,
+
     css_size_color,
 
     shiny::div(
