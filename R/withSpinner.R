@@ -52,12 +52,16 @@ withSpinner <- function(
   caption = NULL,
   caption.color = color
 ) {
-  stopifnot(type %in% 0:8)
   
+  if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
+    stop("`ui_element` must be a Shiny tag", call. = FALSE)
+  }
+  if (!type %in% 0:8) {
+    stop("`type` must be an integer from 0 to 8", call. = FALSE)
+  }
   if (grepl("rgb", color, fixed = TRUE)) {
     stop("Color should be given in hex format")
   }
-  
   if (is.character(custom.css)) {
     stop("It looks like you provided a string to 'custom.css', but it needs to be either `TRUE` or `FALSE`. ",
          "The actual CSS needs to added to the app's UI.")
@@ -107,20 +111,30 @@ withSpinner <- function(
   
   proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
   
+  deps <- list(
+    htmltools::htmlDependency(
+      name = "shinycssloaders-binding",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      script = "spinner.js",
+      stylesheet = "spinner.css"
+    )
+  )
+  
+  if (is.null(image)) {
+    deps <- append(deps, list(htmltools::htmlDependency(
+      name = "cssloaders",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      stylesheet = "css-loaders.css"
+    )))
+  }
+
   shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/spinner.css"),
-        shiny::tags$script(src="shinycssloaders-assets/spinner.js")
-      )
-    ),
-    if (is.null(image))
-      shiny::singleton(
-        shiny::tags$head(
-          shiny::tags$link(rel="stylesheet", href="shinycssloaders-assets/css-loaders.css")
-        )
-      ),
-    
+    deps,
+
     css_size_color,
 
     shiny::div(
