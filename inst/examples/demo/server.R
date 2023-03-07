@@ -22,10 +22,6 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$update, ignoreNULL = FALSE, {
-    if (input$time > 5) {
-      shinyjs::alert("In order to not block my server for too long, please use a time of no more than 5 seconds")
-      return()
-    }
     plotnum(plotnum() + 1)
     output[[paste0("example", plotnum())]] <- renderPlot({
       bg <- par(bg = "#fafafa")

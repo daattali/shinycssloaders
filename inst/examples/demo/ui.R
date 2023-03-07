@@ -80,7 +80,7 @@ fluidPage(
         colourpicker::colourInput("col", "Color", "#0275D8", showColour = "background"),
         sliderInput("size", "Size", min = 0.5, max = 5, step = 0.5, value = 1)
       ),
-      numericInput("time", "Seconds to show spinner", 1.5),
+      sliderInput("time", "Seconds to show spinner", 0, 3, 1, 0.5),
       actionButton("update", "Update", class = "btn-primary btn-lg"),
     ),
     column(
