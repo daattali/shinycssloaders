@@ -2,7 +2,7 @@
 % Please edit documentation in R/withSpinner.R
 \name{withSpinner}
 \alias{withSpinner}
-\title{Add a spinner that shows when an output is recalculating}
+\title{Add a spinner that shows while an output is recalculating}
 \usage{
 withSpinner(
   ui_element,
@@ -22,15 +22,19 @@ withSpinner(
 \arguments{
 \item{ui_element}{A UI element that should be wrapped with a spinner when the corresponding output is being calculated.}
 
-\item{type}{The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out
-\url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can also use
-your own custom image using the \code{image} parameter.}
+\item{type}{The type of spinner to use. Valid values are integers between 0-8 (0 means no spinner). Check out
+\url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can use \code{options(spinner.type=type)}
+to set a default type for all spinners in a Shiny app. You can also use
+your own custom image using the \code{image} parameter. "spinner.type"}
 
-\item{color}{The color of the spinner in hex format. Ignored if \code{image} is used.}
+\item{color}{The color of the spinner in hex format. You can use \code{options(spinner.color=color)} to set a default color for
+all spinners in a Shiny app. Ignored if \code{image} is used.}
 
-\item{size}{The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large). Ignored if \code{image} is used.}
+\item{size}{The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large).
+You can use \code{options(spinner.size=size)} to set a default size for all spinners in a Shiny app. Ignored if \code{image} is used.}
 
-\item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner. Ignored if \code{image} is used.}
+\item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner.
+You can use \code{options(spinner.color.background=color)} to set a default background color for all spinners in a Shiny app. Ignored if \code{image} is used.}
 
 \item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner. Ignored if \code{image} is used.}
 
@@ -51,7 +55,7 @@ size of the image is used. Ignored if not using \code{image}.}
 Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of the previous output UI.}
 }
 \description{
-Add a spinner that shows when an output is recalculating
+Add a spinner that shows while an output is recalculating
 }
 \examples{
 if (interactive()) {
