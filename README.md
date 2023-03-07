@@ -3,7 +3,7 @@
 [![R-CMD-check](https://github.com/daattali/shinycssloaders/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/daattali/shinycssloaders/actions/workflows/R-CMD-check.yaml)
 [![CRAN](http://www.r-pkg.org/badges/version/shinycssloaders)](https://cran.r-project.org/package=shinycssloaders)
 
-When a Shiny output (such as a plot, table, map, etc.) is recalculating, it remains visible but gets greyed out. Using {shinycssloaders}, you can add a loading animation ("spinner") to outputs instead of greying them out. By wrapping a Shiny output in `withSpinner()`, a spinner will automatically appear while the output is recalculating. 
+When a Shiny output (such as a plot, table, map, etc.) is recalculating, it remains visible but gets greyed out. Using {shinycssloaders}, you can add a loading animation ("spinner") to outputs instead of greying them out. By wrapping a Shiny output in `withSpinner()`, a spinner will automatically appear while the output is recalculating. You can also manually trigger a spinner using `showSpinner()`.
 
 You can choose from one of 8 built-in animation types, and customize the colour/size. You can also use your own image instead of the built-in animations. See the [demo Shiny app](https://daattali.com/shiny/shinycssloaders-demo) online for examples.
 
@@ -77,6 +77,10 @@ If you don't want to use any of the built-in spinners, you can also provide your
 
 The spinner attempts to automatically figure out the height of the output it replaces, and to vertically center itself. For some outputs (such as tables), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this.
 
+### Manually triggering the spinner
+
+Any Shiny output that uses `withSpinner()` will automatically show a spinner while it's recalculating. You can also manually show/hide an output's spinner using `showSpinner()`/`hideSpinner()`. 
+
 ### Setting spinner parameters globally
 
 If you want all the spinners in your app to have a certain type/size/colour, instead of specifying them in each call to `withSpinner()`, you can set them globally using the `spinner.type`, `spinner.color`, `spinner.size` R options. For example, setting `options(spinner.color="#0dc5c1")` will cause all your spinners to use that colour.
@@ -84,10 +88,6 @@ If you want all the spinners in your app to have a certain type/size/colour, ins
 ### Showing a spinner on top of the output
 
 By default, the out-dated output gets hidden while the spinner is showing. You can change this behaviour to have the spinner appear on top of the old output using the `hide.ui = FALSE` parameter.
-
-### Background colour
-
-Spinner types 2 and 3 require you to specify a background colour. It's recommended to use a colour that matches the background colour of the output's container, so that the spinner will "blend in". 
 
 <h2 id="sponsors">
 

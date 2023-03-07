@@ -1,6 +1,6 @@
 Package: shinycssloaders
 Title: Add Loading Animations to a 'shiny' Output While It's Recalculating
-Version: 1.0.0.9001
+Version: 1.0.0.9002
 Authors@R: c(
     person("Andras","Sali",email="andras.sali@alphacruncher.hu",role=c("aut"),comment="Original creator of shinycssloaders package"),
     person("Luke","Hass",role=c("ctb","cph"),comment="Author of included CSS loader code"),
@@ -10,8 +10,8 @@ Authors@R: c(
 Description: When a 'Shiny' output (such as a plot, table, map, etc.) is recalculating, it remains 
     visible but gets greyed out. Using 'shinycssloaders', you can add a loading animation ("spinner")
     to outputs instead. By wrapping a 'Shiny' output in 'withSpinner()', a spinner will automatically
-    appear while the output is recalculating. See the demo online at
-    <https://daattali.com/shiny/shinycssloaders-demo/>.
+    appear while the output is recalculating. You can also manually show and hide the spinner.
+    See the demo online at <https://daattali.com/shiny/shinycssloaders-demo/>.
 License: MIT + file LICENSE
 URL: https://github.com/daattali/shinycssloaders
 BugReports: https://github.com/daattali/shinycssloaders/issues
@@ -26,6 +26,6 @@ Imports:
 Suggests:
     shinydisconnect,
     shinyjs
-RoxygenNote: 7.1.0
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8

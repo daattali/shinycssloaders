@@ -62,6 +62,12 @@ $(document).on('shiny:outputinvalidated', function(event) {
   update_spinner(id);
 });
 
+/* Allow the user to manually show the spinner */
+Shiny.addCustomMessageHandler('shinycssloaders.show_spinner', function(params) {
+  output_states[params.id] = 0;
+  update_spinner(params.id);
+});
+
 /* When new value or error comes in, hide spinner container (if any) & show the output */
 $(document).on('shiny:value shiny:error', function(event) {
   var id = event.target.id;
@@ -71,4 +77,11 @@ $(document).on('shiny:value shiny:error', function(event) {
   output_states[id] = 1;
   update_spinner(id);
 });
+
+/* Allow the user to manually hide the spinner */
+Shiny.addCustomMessageHandler('shinycssloaders.hide_spinner', function(params) {
+  output_states[params.id] = 1;
+  update_spinner(params.id);
+});
+
 }());

@@ -55,7 +55,8 @@ size of the image is used. Ignored if not using \code{image}.}
 Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of the previous output UI.}
 }
 \description{
-Add a spinner that shows while an output is recalculating
+Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner
+using \code{\link[=showSpinner]{showSpinner()}} and \code{\link[=hideSpinner]{hideSpinner()}}.
 }
 \examples{
 if (interactive()) {
@@ -75,4 +76,7 @@ if (interactive()) {
     }
   )
 }
+}
+\seealso{
+\code{\link[=showSpinner]{showSpinner()}}, \code{\link[=hideSpinner]{hideSpinner()}}
 }

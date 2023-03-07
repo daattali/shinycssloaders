@@ -1,6 +1,8 @@
 # Unreleased version
 
+- Add `showSpinner()` and `hideSpinner()` that allow you to manually trigger the spinner (#56)
 - Fix page sometimes wobbling because of hidden spinner (#54)
+- Fix bug where shiny tagList would throw an error (#73)
 - Add more informative error messages (#69)
 - Replace `addResourcePath()` with `htmlDependency()` which is more robust (#75)
 
