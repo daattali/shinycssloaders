@@ -1,19 +1,22 @@
 #' Add a spinner that shows while an output is recalculating
 #'
 #' Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner
-#' using [showSpinner()] and [hideSpinner()].
+#' using [showSpinner()] and [hideSpinner()].\cr\cr
+#' Most parameters can be set globally in order to use a default setting for all spinners in your Shiny app.
+#' This can be done by setting an R option with the parameter's name prepended by `"spinner."`. For example, to set all spinners
+#' to type=5 and color=#0dc5c1 by default, use `options(spinner.type = 5, spinner.color = "#0dc5c1")`. The following parameters
+#' cannot be set globally: `ui_element`, `id`.
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
 #' @param type The type of spinner to use. Valid values are integers between 0-8 (0 means no spinner). Check out
-#' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can use `options(spinner.type=type)`
-#' to set a default type for all spinners in a Shiny app. You can also use
-#' your own custom image using the `image` parameter. "spinner.type"
-#' @param color The color of the spinner in hex format. You can use `options(spinner.color=color)` to set a default color for
-#' all spinners in a Shiny app. Ignored if `image` is used.
+#' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
+#' You can also use your own custom image using the `image` parameter.
+#' @param color The color of the spinner in hex format. Ignored if `image` is used.
 #' @param size The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large).
-#' You can use `options(spinner.size=size)` to set a default size for all spinners in a Shiny app. Ignored if `image` is used.
+#' Ignored if `image` is used.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner.
-#' You can use `options(spinner.color.background=color)` to set a default background color for all spinners in a Shiny app. Ignored if `image` is used.
-#' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner. Ignored if `image` is used.
+#' Ignored if `image` is used.
+#' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
+#' Ignored if `image` is used.
 #' @param proxy.height If the output UI doesn't specify the output height, you can set a proxy height. It defaults to "400px"
 #' for outputs with undefined height. Ignored if `hide.ui` is set to `FALSE`.
 #' @param id The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.
@@ -50,11 +53,13 @@ withSpinner <- function(
   color = getOption("spinner.color", default = "#0275D8"),
   size = getOption("spinner.size", default = 1),
   color.background = getOption("spinner.color.background"),
-  custom.css = FALSE,
-  proxy.height = NULL,
+  custom.css = getOption("spinner.custom.css", default = FALSE),
+  proxy.height = getOption("spinner.proxy.height"),
   id = NULL,
-  image = NULL, image.width = NULL, image.height = NULL,
-  hide.ui = TRUE
+  image = getOption("spinner.image"),
+  image.width = getOption("spinner.image.width"),
+  image.height = getOption("spinner.image.height"),
+  hide.ui = getOption("spinner.hide.ui", default = TRUE)
 ) {
 
   if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {

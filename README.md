@@ -83,7 +83,7 @@ Any Shiny output that uses `withSpinner()` will automatically show a spinner whi
 
 ### Setting spinner parameters globally
 
-If you want all the spinners in your app to have a certain type/size/colour, instead of specifying them in each call to `withSpinner()`, you can set them globally using the `spinner.type`, `spinner.color`, `spinner.size` R options. For example, setting `options(spinner.color="#0dc5c1")` will cause all your spinners to use that colour.
+If you want all the spinners in your app to share some of the options, instead of specifying them in each call to `withSpinner()`, you can set them globally using R options. For example, if you want all spinners to be of a certain type and color, you can set `options(spinner.type = 5, spinner.color = "#0dc5c1")`.
 
 ### Showing a spinner on top of the output
 
