@@ -154,7 +154,7 @@ showPageSpinner <- function(expr) {
 
 #' @export
 #' @rdname showHidePage
-hidePageSpinner <- function(id) {
+hidePageSpinner <- function() {
   session <- getSession()
   session$sendCustomMessage("shinycssloaders.hide_page_spinner", list())
   invisible(NULL)

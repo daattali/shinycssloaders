@@ -8,7 +8,7 @@
 \usage{
 showPageSpinner(expr)
 
-hidePageSpinner(id)
+hidePageSpinner()
 }
 \arguments{
 \item{expr}{(optional) An R expression to run while showing the spinner. The
