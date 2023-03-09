@@ -5,6 +5,8 @@
 
 When a Shiny output (such as a plot, table, map, etc.) is recalculating, it remains visible but gets greyed out. Using {shinycssloaders}, you can add a loading animation ("spinner") to outputs instead of greying them out. By wrapping a Shiny output in `withSpinner()`, a spinner will automatically appear while the output is recalculating. You can also manually trigger a spinner using `showSpinner()`.
 
+In addition to showing spinners on outputs, you can also use `pageSpinner()` to show a full-page spinner that covers the entire page.
+
 You can choose from one of 8 built-in animation types, and customize the colour/size. You can also use your own image instead of the built-in animations. See the [demo Shiny app](https://daattali.com/shiny/shinycssloaders-demo) online for examples.
 
 # Table of contents
@@ -29,7 +31,7 @@ Simply wrap a Shiny output in a call to `withSpinner()`. If you have `%>%` loade
 
 Basic usage:
 
-```
+```r
 library(shiny)
 
 ui <- fluidPage(
@@ -42,6 +44,29 @@ server <- function(input, output) {
     output$plot <- renderPlot({
         input$go
         Sys.sleep(1.5)
+        plot(runif(10))
+    })
+}
+shinyApp(ui, server)
+```
+
+Using a full-page spinner:
+
+```r
+library(shiny)
+
+ui <- fluidPage(
+    pageSpinner(),
+    actionButton("go", "Go"),
+    plotOutput("plot")
+)
+server <- function(input, output) {
+    observeEvent(input$go, {
+      showPageSpinner()
+      Sys.sleep(1)
+      hidePageSpinner()
+    })
+    output$plot <- renderPlot({
         plot(runif(10))
     })
 }
@@ -81,9 +106,13 @@ The spinner attempts to automatically figure out the height of the output it rep
 
 Any Shiny output that uses `withSpinner()` will automatically show a spinner while it's recalculating. You can also manually show/hide an output's spinner using `showSpinner()`/`hideSpinner()`. 
 
+### Full-page spinner
+
+You can also use `pageSpinner()` to create a full-page spinner that will cover the entire page rather than a single Shiny output. Full-page spinners can only be triggered manually, using `showPageSpinner()`/`hidePageSpinner()`.
+
 ### Setting spinner parameters globally
 
-If you want all the spinners in your app to share some of the options, instead of specifying them in each call to `withSpinner()`, you can set them globally using R options. For example, if you want all spinners to be of a certain type and color, you can set `options(spinner.type = 5, spinner.color = "#0dc5c1")`.
+If you want all the spinners in your app (except the full-page spinner) to share some of the options, instead of specifying them in each call to `withSpinner()`, you can set them globally using R options. For example, if you want all spinners to be of a certain type and color, you can set `options(spinner.type = 5, spinner.color = "#0dc5c1")`.
 
 ### Showing a spinner on top of the output
 
@@ -97,7 +126,8 @@ Sponsors 🏆
 
 > There are no sponsors yet
 
-[Become the first sponsor for
+{shinycssloaders} is the result of **many** days of work, including many more to come. Show your support and
+[become the first sponsor for
 {shinycssloaders}\!](https://github.com/sponsors/daattali/sponsorships?tier_id=39856)
 
 ## Credits

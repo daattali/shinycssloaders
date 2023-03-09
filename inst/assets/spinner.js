@@ -9,11 +9,11 @@ function show_spinner(id) {
     var selector = "#" + escapeSelector(id);
     var parent = $(selector).closest(".shiny-spinner-output-container");
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
-    
+
     if (parent.hasClass("shiny-spinner-hideui")) {
       $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
       // if there is a proxy div, hide the previous output
-      $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');      
+      $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
     }
 }
 
@@ -39,12 +39,12 @@ function update_spinner(id) {
   }
 }
 
-$(document).on('shiny:bound', function(event) { 
+$(document).on('shiny:bound', function(event) {
   var id = event.target.id;
   if (id === undefined || id == "") {
     return;
   }
-  
+
   /* if not bound before, then set the value to 0 */
   if (!(id in output_states)) {
     output_states[id] = 0;
@@ -82,6 +82,14 @@ $(document).on('shiny:value shiny:error', function(event) {
 Shiny.addCustomMessageHandler('shinycssloaders.hide_spinner', function(params) {
   output_states[params.id] = 1;
   update_spinner(params.id);
+});
+
+/* Show/hide full page spinner */
+Shiny.addCustomMessageHandler('shinycssloaders.show_page_spinner', function(params) {
+  $('#shinycssloaders-global-spinner').show();
+});
+Shiny.addCustomMessageHandler('shinycssloaders.hide_page_spinner', function(params) {
+  $('#shinycssloaders-global-spinner').hide();
 });
 
 }());

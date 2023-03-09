@@ -8,7 +8,7 @@
 #' @param expr (optional) An R expression to run while showing the spinner. The
 #' spinner will automatically get hidden when this expression completes.
 #' @return If `expr` is provided, the result of `expr` is returned. Otherwise, `NULL`.
-#' @seealso [withSpinner()], [hideSpinner()]
+#' @seealso [withSpinner()]
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -79,7 +79,6 @@ showSpinner <- function(id, expr) {
 #' @export
 #' @rdname showHide
 hideSpinner <- function(id) {
-  # make sure it works with modules
   session <- getSession()
 
   idns <- session$ns(id)

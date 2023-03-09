@@ -9,7 +9,7 @@
   transform: translateY(-50%);
   /* to avoid showing a vertical scrollbar
   http://stackoverflow.com/questions/38251204/horizontal-animation-causes-vertical-scrollbar-in-css */
-  overflow:hidden; 
+  overflow:hidden;
   width: 100%;
 }
 
@@ -25,4 +25,18 @@
 
 .shiny-spinner-custom {
   text-align: center;
+}
+
+#shinycssloaders-global-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000000;
+  display: none;
+}
+
+#shinycssloaders-global-spinner .shiny-spinner-output-container {
+  height: 100%;
 }

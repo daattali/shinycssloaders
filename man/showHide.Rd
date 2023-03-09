@@ -73,5 +73,5 @@ if (interactive()) {
 }
 }
 \seealso{
-\code{\link[=withSpinner]{withSpinner()}}, \code{\link[=hideSpinner]{hideSpinner()}}
+\code{\link[=withSpinner]{withSpinner()}}
 }

@@ -2,6 +2,7 @@
 #'
 #' Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner
 #' using [showSpinner()] and [hideSpinner()].\cr\cr
+#' Use [pageSpinner()] to show a spinner on the entire page instead of individual outputs.\cr\cr
 #' Most parameters can be set globally in order to use a default setting for all spinners in your Shiny app.
 #' This can be done by setting an R option with the parameter's name prepended by `"spinner."`. For example, to set all spinners
 #' to type=5 and color=#0dc5c1 by default, use `options(spinner.type = 5, spinner.color = "#0dc5c1")`. The following parameters
@@ -27,7 +28,7 @@
 #' size of the image is used. Ignored if not using `image`.
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
-#' @seealso [showSpinner()], [hideSpinner()]
+#' @seealso [showSpinner()], [hideSpinner()], [pageSpinner()]
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -65,95 +66,20 @@ withSpinner <- function(
   if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
     stop("`ui_element` must be a Shiny tag", call. = FALSE)
   }
-  if (!type %in% 0:8) {
-    stop("`type` must be an integer from 0 to 8", call. = FALSE)
-  }
-  if (grepl("rgb", color, fixed = TRUE)) {
-    stop("Color should be given in hex format")
-  }
-  if (is.character(custom.css)) {
-    stop("It looks like you provided a string to 'custom.css', but it needs to be either `TRUE` or `FALSE`. ",
-         "The actual CSS needs to added to the app's UI.")
-  }
 
-  # each spinner will have a unique id to allow separate sizing
-  if (is.null(id)) {
-    id <- paste0("spinner-", digest::digest(ui_element))
-  }
-
-  if (is.null(image)) {
-    css_size_color <- shiny::tagList()
-
-    if (!custom.css && type != 0) {
-      if (type %in% c(2, 3) && is.null(color.background)) {
-        stop("For spinner types 2 & 3 you need to specify manually a background color.")
-      }
-
-      color.rgb <- paste(grDevices::col2rgb(color), collapse = ",")
-      color.alpha0 <- sprintf("rgba(%s, 0)", color.rgb)
-      color.alpha2 <- sprintf("rgba(%s, 0.2)", color.rgb)
-
-      css_file <- system.file(glue::glue("loaders-templates/load{type}.css"), package="shinycssloaders")
-      base_css <- ""
-      if (file.exists(css_file)) {
-        base_css <- paste(readLines(css_file), collapse = " ")
-        base_css <- glue::glue(base_css, .open = "{{", .close = "}}")
-      }
-
-      # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
-      size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
-      base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size}px; }}"))
-      css_size_color <- add_style(base_css)
-    }
-  }
-
-  proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
-
-  deps <- list(
-    htmltools::htmlDependency(
-      name = "shinycssloaders-binding",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      script = "spinner.js",
-      stylesheet = "spinner.css"
-    )
-  )
-
-  if (is.null(image)) {
-    deps <- append(deps, list(htmltools::htmlDependency(
-      name = "cssloaders",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      stylesheet = "css-loaders.css"
-    )))
-  }
-
-  shiny::tagList(
-    deps,
-
-    if (is.null(image)) css_size_color,
-
-    shiny::div(
-      class = paste(
-        "shiny-spinner-output-container",
-        if (hide.ui) "shiny-spinner-hideui" else "",
-        if (is.null(image)) "" else "shiny-spinner-custom"
-      ),
-      shiny::div(
-        class = paste(
-          "load-container",
-          "shiny-spinner-hidden",
-          if (is.null(image)) paste0("load",type)
-        ),
-        if (is.null(image))
-          shiny::div(id = id, class = "loader", (if (type == 0) "" else "Loading..."))
-        else
-          shiny::tags$img(id = id, src = image, alt = "Loading...", width = image.width, height = image.height)
-      ),
-      proxy_element,
-      ui_element
-    )
+  buildSpinner(
+    spinner_type = "output",
+    ui_element = ui_element,
+    type = type,
+    color = color,
+    size = size,
+    color.background = color.background,
+    custom.css = custom.css,
+    proxy.height = proxy.height,
+    id = id,
+    image = image,
+    image.width = image.width,
+    image.height = image.height,
+    hide.ui = hide.ui
   )
 }
