@@ -6,9 +6,9 @@
 \usage{
 pageSpinner(
   type = 1,
-  background = "#222222",
-  color = "#0275D8",
-  size = 1,
+  background = "#333333EE",
+  color = "#EEEEEE",
+  size = 2,
   color.background = NULL,
   custom.css = FALSE,
   image = NULL,
