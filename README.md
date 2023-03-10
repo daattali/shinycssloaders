@@ -33,6 +33,7 @@ You can choose from one of 8 built-in animation types, and customize the colour/
 </p>
 
 > This package is part of a larger ecosystem of packages with a shared vision: solving common Shiny issues and improving Shiny apps with minimal effort, minimal code changes, and clear documentation. Other packages for your Shiny apps:
+
 | Package | Description | Demo |
 |---|---|---|
 | [shinyjs](https://deanattali.com/shinyjs/) | 💡 Easily improve the user experience of your Shiny apps in seconds | [🔗](https://deanattali.com/shinyjs/overview#demo) |
