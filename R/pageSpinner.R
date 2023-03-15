@@ -53,10 +53,10 @@
 #' @seealso [showPageSpinner()], [hidePageSpinner()], [withSpinner()]
 #' @export
 pageSpinner <- function(
-  type = 1,
-  background = "#333333EE",
-  color = "#EEEEEE",
-  size = 2,
+  type = 8,
+  background = "#FFFFFF",
+  color = "#222222",
+  size = 1,
   color.background = NULL,
   custom.css = FALSE,
   image = NULL,

@@ -5,10 +5,10 @@
 \title{Add a full-page spinner that covers the entire page}
 \usage{
 pageSpinner(
-  type = 1,
-  background = "#333333EE",
-  color = "#EEEEEE",
-  size = 2,
+  type = 8,
+  background = "#FFFFFF",
+  color = "#222222",
+  size = 1,
   color.background = NULL,
   custom.css = FALSE,
   image = NULL,
