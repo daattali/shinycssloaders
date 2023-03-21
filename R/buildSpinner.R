@@ -11,7 +11,8 @@ buildSpinner <- function(
     image,
     image.width,
     image.height,
-    hide.ui = FALSE
+    hide.ui = FALSE,
+    caption = NULL
 ) {
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
@@ -26,6 +27,11 @@ buildSpinner <- function(
   if (is.character(custom.css)) {
     stop("It looks like you provided a string to 'custom.css', but it needs to be either `TRUE` or `FALSE`. ",
          "The actual CSS needs to added to the app's UI.")
+  }
+
+  if (type == 1 && !is.null(caption)) {
+    warning("Captions are not supported for spinner type 1")
+    caption <- NULL
   }
 
   # each spinner will have a unique id to allow separate sizing
@@ -56,6 +62,14 @@ buildSpinner <- function(
     size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
     base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size}px; }}"))
     css_size_color <- add_style(base_css)
+  }
+
+  if (!is.null(caption)) {
+    caption <- shiny::div(
+      id = paste0(id, "_caption"),
+      class = "shiny-spinner-custom",
+      caption
+    )
   }
 
   if (output_spinner) {
@@ -117,7 +131,8 @@ buildSpinner <- function(
       class = parent_cls,
       shiny::div(
         class = child_cls,
-        spinner_el
+        spinner_el,
+        caption
       ),
       proxy_element,
       ui_element

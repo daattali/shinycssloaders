@@ -1,6 +1,9 @@
 #{{id}} {
   color: {{color}};
 }
+#{{id}}_caption {
+  color: {{color}};
+}
 #{{id}}:before, #{{id}}:after {
   background: {{color.background}};
 }

@@ -1,3 +1,6 @@
 #{{id}} {
   color: {{color}};
 }
+#{{id}}_caption {
+  color: {{color}};
+}
