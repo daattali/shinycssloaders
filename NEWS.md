@@ -1,6 +1,10 @@
 # Unreleased version
 
+- Add `showSpinner()` and `hideSpinner()` that allow you to manually trigger the spinner (#56)
+- Add support for full-page spinner that covers the entire page. The spinner needs to be added to the UI with `pageSpinner()` and it can be triggered with `showPageSpinner()` and `hidePageSpinner()`. (#42)
+- Add support for setting global options for most parameters (#78)
 - Fix page sometimes wobbling because of hidden spinner (#54)
+- Fix bug where `shiny::tagList()` would throw an error (#73)
 - Add more informative error messages (#69)
 - Replace `addResourcePath()` with `htmlDependency()` which is more robust (#75)
 - Add `caption` argument to `withSpinner`

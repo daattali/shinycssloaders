@@ -1,13 +1,23 @@
-#' Add a spinner that shows when an output is recalculating
-#' @export
+#' Add a spinner that shows while an output is recalculating
+#'
+#' Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner
+#' using [showSpinner()] and [hideSpinner()].\cr\cr
+#' Use [pageSpinner()] to show a spinner on the entire page instead of individual outputs.\cr\cr
+#' Most parameters can be set globally in order to use a default setting for all spinners in your Shiny app.
+#' This can be done by setting an R option with the parameter's name prepended by `"spinner."`. For example, to set all spinners
+#' to type=5 and color=#0dc5c1 by default, use `options(spinner.type = 5, spinner.color = "#0dc5c1")`. The following parameters
+#' cannot be set globally: `ui_element`, `id`.
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
-#' @param type The type of spinner to use, valid values are integers between 0-8 (0 means no spinner). Check out 
-#' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners. You can also use
-#' your own custom image using the `image` parameter.
+#' @param type The type of spinner to use. Valid values are integers between 0-8 (0 means no spinner). Check out
+#' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
+#' You can also use your own custom image using the `image` parameter.
 #' @param color The color of the spinner in hex format. Ignored if `image` is used.
-#' @param size The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large). Ignored if `image` is used.
-#' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner. Ignored if `image` is used.
-#' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner. Ignored if `image` is used.
+#' @param size The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large).
+#' Ignored if `image` is used.
+#' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner.
+#' Ignored if `image` is used.
+#' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
+#' Ignored if `image` is used.
 #' @param proxy.height If the output UI doesn't specify the output height, you can set a proxy height. It defaults to "400px"
 #' for outputs with undefined height. Ignored if `hide.ui` is set to `FALSE`.
 #' @param id The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.
@@ -19,6 +29,7 @@
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
 #' @param caption Caption to display below the spinner or image. Ignored if `type` is set to 1 for css reasons.
+#' @seealso [showSpinner()], [hideSpinner()], [pageSpinner()]
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -37,158 +48,42 @@
 #'     }
 #'   )
 #' }
+#' @export
 withSpinner <- function(
   ui_element,
   type = getOption("spinner.type", default = 1),
   color = getOption("spinner.color", default = "#0275D8"),
   size = getOption("spinner.size", default = 1),
   color.background = getOption("spinner.color.background"),
-  custom.css = FALSE,
-  proxy.height = NULL,
+  custom.css = getOption("spinner.custom.css", default = FALSE),
+  proxy.height = getOption("spinner.proxy.height"),
   id = NULL,
-  image = NULL, image.width = NULL, image.height = NULL,
-  hide.ui = TRUE,
+  image = getOption("spinner.image"),
+  image.width = getOption("spinner.image.width"),
+  image.height = getOption("spinner.image.height"),
+  hide.ui = getOption("spinner.hide.ui", default = TRUE),
   caption = NULL
 ) {
-  
+
   if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
     stop("`ui_element` must be a Shiny tag", call. = FALSE)
   }
-  if (!type %in% 0:8) {
-    stop("`type` must be an integer from 0 to 8", call. = FALSE)
-  }
-  if (grepl("rgb", color, fixed = TRUE)) {
-    stop("Color should be given in hex format")
-  }
-  if (is.character(custom.css)) {
-    stop("It looks like you provided a string to 'custom.css', but it needs to be either `TRUE` or `FALSE`. ",
-         "The actual CSS needs to added to the app's UI.")
-  }
-  
-  # each spinner will have a unique id to allow separate sizing
-  if (is.null(id)) {
-    id <- paste0("spinner-", digest::digest(ui_element))
-  }
-  
-  css_size_color <- shiny::tagList()
-  
-  if (!custom.css) {
-    if (type == 1 && !is.null(caption)) {
-      warning("Captions are not supported for spinner type 1")
-      caption <- NULL
-    }
-    caption_css <- glue::glue("#{id}_caption {{ color: {color}; }}")
-    if (is.null(image) && type != 0) {
-      if (type %in% c(2, 3) && is.null(color.background)) {
-        stop("For spinner types 2 & 3 you need to specify manually a background color.")
-      }
-      
-      color.rgb <- paste(grDevices::col2rgb(color), collapse = ",")
-      color.alpha0 <- sprintf("rgba(%s, 0)", color.rgb)
-      color.alpha2 <- sprintf("rgba(%s, 0.2)", color.rgb)
-      
-      css_file <- system.file(glue::glue("loaders-templates/load{type}.css"), package="shinycssloaders")
-      base_css <- ""
-      if (file.exists(css_file)) {
-        base_css <- paste(readLines(css_file), collapse = " ")
-        base_css <- glue::glue(base_css, .open = "{{", .close = "}}")
-      }
-      
-      # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
-      size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
-      base_css <- paste(
-        base_css,
-        glue::glue("#{id} {{ font-size: {size}px; }}"),
-        caption_css
-      )
-      css_size_color <- add_style(base_css)
-    } else {
-      css_size_color <- add_style(caption_css)
-    }
-  }
-  
-  proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
-  
-  deps <- list(
-    htmltools::htmlDependency(
-      name = "shinycssloaders-binding",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      script = "spinner.js",
-      stylesheet = "spinner.css"
-    )
+
+  buildSpinner(
+    spinner_type = "output",
+    ui_element = ui_element,
+    type = type,
+    color = color,
+    size = size,
+    color.background = color.background,
+    custom.css = custom.css,
+    proxy.height = proxy.height,
+    id = id,
+    image = image,
+    image.width = image.width,
+    image.height = image.height,
+    hide.ui = hide.ui,
+    caption = caption
   )
   
-  if (is.null(image)) {
-    deps <- append(deps, list(htmltools::htmlDependency(
-      name = "cssloaders",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      stylesheet = "css-loaders.css"
-    )))
-  }
-
-  shiny::tagList(
-    deps,
-
-    css_size_color,
-
-    shiny::div(
-      class = paste(
-        "shiny-spinner-output-container",
-        if (hide.ui) "shiny-spinner-hideui" else "",
-        if (is.null(image)) "" else "shiny-spinner-custom"
-      ),
-      shiny::div(
-        class = paste(
-          "load-container",
-          "shiny-spinner-hidden",
-          if (is.null(image)) paste0("load",type)
-        ),
-        if (is.null(image))
-          shiny::div(id = id, class = "loader", (if (type == 0) "" else "Loading..."))
-        else
-          shiny::tags$img(id = id, src = image, alt = "Loading...", width = image.width, height = image.height),
-        if (!is.null(caption) && type != 1)
-          shiny::div(id = paste0(id, "_caption"), class = "shiny-spinner-custom", caption)
-      ),
-      proxy_element,
-      ui_element
-    )
-  )
-}
-
-get_proxy_element <- function(ui_element, proxy.height, hide.ui) {
-  if (!hide.ui) {
-    return(shiny::tagList())
-  }
-  
-  if (is.null(proxy.height)) {
-    if (!grepl("height:\\s*\\d", ui_element)) {
-      proxy.height <- "400px"
-    }
-  } else {
-    if (is.numeric(proxy.height)) {
-      proxy.height <- paste0(proxy.height, "px")
-    }
-  }
-  
-  if (is.null(proxy.height)) {
-    proxy_element <- shiny::tagList()
-  } else {
-    proxy_element <- shiny::div(style=glue::glue("height:{proxy.height}"),
-                                class="shiny-spinner-placeholder")
-  }
-}
-
-add_style <- function(x) {
-  shiny::tags$head(
-    shiny::tags$style(
-      shiny::HTML(
-        x
-      )
-    )
-  )
 }

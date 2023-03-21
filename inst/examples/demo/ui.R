@@ -21,7 +21,7 @@ fluidPage(
     tags$meta(property = "og:url", content = share$url),
     tags$meta(property = "og:image", content = share$image),
     tags$meta(property = "og:description", content = share$description),
-    
+
     # Twitter summary cards
     tags$meta(name = "twitter:card", content = "summary_large_image"),
     tags$meta(name = "twitter:site", content = paste0("@", share$twitter_user)),
@@ -30,9 +30,9 @@ fluidPage(
     tags$meta(name = "twitter:description", content = share$description),
     tags$meta(name = "twitter:image", content = share$image)
   ),
-  
+
   shinydisconnect::disconnectMessage2(),
-  
+
   div(
     id = "header",
     div(id = "pagetitle",
@@ -40,28 +40,34 @@ fluidPage(
     ),
     div(id = "subtitle",
         "Add loading animations to a Shiny output while it's recalculating"),
-    div(id = "subsubtitle",	
-        "Maintained by",	
-        tags$a(href = "https://deanattali.com/", "Dean Attali"),	
-        HTML("&bull;"),	
-        "Code",	
-        tags$a(href = "https://github.com/daattali/shinycssloaders", "on GitHub"),	
-        HTML("&bull;"),	
-        tags$a(href = "https://github.com/sponsors/daattali", "Support my work"), "❤"	
+    div(id = "subsubtitle",
+        "Maintained by",
+        tags$a(href = "https://deanattali.com/", "Dean Attali"),
+        HTML("&bull;"),
+        "Code",
+        tags$a(href = "https://github.com/daattali/shinycssloaders", "on GitHub"),
+        HTML("&bull;"),
+        tags$a(href = "https://github.com/sponsors/daattali", "Support my work"), "❤"
     )
   ),
-  
+
   fluidRow(
     column(
       3,
       id = "params",
+      selectInput("spinner_type", NULL,
+                  c("Spinner on plot output" = "output", "Spinner on entire page" = "page")),
+      conditionalPanel(
+        "input.spinner_type == 'page'",
+        colourpicker::colourInput("bg", "Background", "#222222DD", showColour = "background", allowTransparent = TRUE),
+      ),
       selectInput("type", "Spinner type",
                   c("<Custom image>" = "custom", "0 (no spinner)" = "0", 1:8), 1),
       conditionalPanel(
         "input.type == 'custom'",
         textInput(
           "image",
-          div("Image URL", 
+          div("Image URL",
               helpText("Only publicly available URLs are supported in this demo, but you can also use local images in your own apps.")
           ),
           "https://github.com/daattali/shinycssloaders/blob/master/inst/img/custom.gif?raw=true"
@@ -80,8 +86,15 @@ fluidPage(
         colourpicker::colourInput("col", "Color", "#0275D8", showColour = "background"),
         sliderInput("size", "Size", min = 0.5, max = 5, step = 0.5, value = 1)
       ),
-      numericInput("time", "Seconds to show spinner", 1.5),
-      actionButton("update", "Update", class = "btn-primary btn-lg"),
+      sliderInput("time", "Seconds to show spinner", 0, 3, 1, 0.5),
+      conditionalPanel(
+        "input.spinner_type == 'output'",
+        actionButton("update", "Update Plot", class = "btn-primary btn-lg")
+      ),
+      conditionalPanel(
+        "input.spinner_type == 'page'",
+        actionButton("show", "Show Spinner", class = "btn-primary btn-lg")
+      )
     ),
     column(
       6,

@@ -1,7 +1,7 @@
 server <- function(input, output, session) {
   plotnum <- reactiveVal(0)
-  
-  output$show_example <- renderUI({
+
+  spinner_params <- reactive({
     if (input$type == "custom") {
       params <- list(
         ui_element = plotOutput(paste0("example", plotnum())),
@@ -18,14 +18,15 @@ server <- function(input, output, session) {
         color.background = "#fafafa"
       )
     }
-    do.call(shinycssloaders::withSpinner, params)
+
+    params
   })
-  
+
+  output$show_example <- renderUI({
+    do.call(shinycssloaders::withSpinner, spinner_params())
+  })
+
   observeEvent(input$update, ignoreNULL = FALSE, {
-    if (input$time > 5) {
-      shinyjs::alert("In order to not block my server for too long, please use a time of no more than 5 seconds")
-      return()
-    }
     plotnum(plotnum() + 1)
     output[[paste0("example", plotnum())]] <- renderPlot({
       bg <- par(bg = "#fafafa")
@@ -35,5 +36,18 @@ server <- function(input, output, session) {
       plot(runif(10), main = "Random Plot")
       bg <- par(bg = bg)
     })
+  })
+
+  observeEvent(input$show, {
+    params <- spinner_params()
+    params$ui_element <- NULL
+    params$background <- input$bg
+    ui <- do.call(shinycssloaders::pageSpinner, params)
+    insertUI("body", "afterBegin", immediate = TRUE, ui = ui)
+    showPageSpinner(Sys.sleep(input$time))
+
+    # Remove the fullpage spinner so that it won't interfere with the next ones
+    removeUI("#shinycssloaders-global-spinner", immediate = TRUE)
+    shinyjs::runjs('$("head > style").last().remove()')
   })
 }
