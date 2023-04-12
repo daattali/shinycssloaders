@@ -23,7 +23,7 @@
   display: none;
 }
 
-.shiny-spinner-custom {
+.shiny-spinner-image, .shiny-spinner-caption {
   text-align: center;
 }
 

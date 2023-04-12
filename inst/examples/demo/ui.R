@@ -62,7 +62,7 @@ fluidPage(
         colourpicker::colourInput("bg", "Background", "#222222DD", showColour = "background", allowTransparent = TRUE),
       ),
       selectInput("type", "Spinner type",
-                  c("<Custom image>" = "custom", "0 (no spinner)" = "0", 1:8), 1),
+                  c("<Custom image>" = "custom", "0 (no spinner)" = "0", 1:8), 8),
       conditionalPanel(
         "input.type == 'custom'",
         textInput(
@@ -85,6 +85,10 @@ fluidPage(
         "input.type != 'custom'",
         colourpicker::colourInput("col", "Color", "#0275D8", showColour = "background"),
         sliderInput("size", "Size", min = 0.5, max = 5, step = 0.5, value = 1)
+      ),
+      conditionalPanel(
+        "input.type != '1'",
+        textInput("caption", "Caption", "")
       ),
       sliderInput("time", "Seconds to show spinner", 0, 3, 1, 0.5),
       conditionalPanel(

@@ -29,6 +29,8 @@
 #' size of the image is used. Ignored if not using `image`.
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
+#' @param caption Caption to display below the spinner or image (text or HTML). The caption's font color is determined
+#' by the `color` parameter. Ignored if `type` is 1.
 #' @seealso [showSpinner()], [hideSpinner()], [pageSpinner()]
 #' @examples
 #' if (interactive()) {
@@ -61,7 +63,8 @@ withSpinner <- function(
   image = getOption("spinner.image"),
   image.width = getOption("spinner.image.width"),
   image.height = getOption("spinner.image.height"),
-  hide.ui = getOption("spinner.hide.ui", default = TRUE)
+  hide.ui = getOption("spinner.hide.ui", default = TRUE),
+  caption = getOption("spinner.caption")
 ) {
 
   if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
@@ -81,6 +84,8 @@ withSpinner <- function(
     image = image,
     image.width = image.width,
     image.height = image.height,
-    hide.ui = hide.ui
+    hide.ui = hide.ui,
+    caption = caption
   )
+
 }

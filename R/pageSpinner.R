@@ -61,7 +61,8 @@ pageSpinner <- function(
   custom.css = FALSE,
   image = NULL,
   image.width = NULL,
-  image.height = NULL
+  image.height = NULL,
+  caption = NULL
 ) {
   shiny::div(
     id = "shinycssloaders-global-spinner",
@@ -76,6 +77,7 @@ pageSpinner <- function(
       image = image,
       image.width = image.width,
       image.height = image.height,
+      caption = caption,
       id = "spinner-shinycssloaders-global-spinner",
       ui_element = NULL,
       proxy.height = NULL,
