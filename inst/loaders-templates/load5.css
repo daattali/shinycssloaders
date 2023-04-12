@@ -2,7 +2,7 @@
   -webkit-animation: load5-{{id}} 1.1s infinite ease;
   animation: load5-{{id}} 1.1s infinite ease;
 }
-#{{id}}_caption {
+#{{id}}__caption {
   color: {{color}};
 }
 

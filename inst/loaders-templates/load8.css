@@ -4,6 +4,6 @@
   border-bottom: 1.1em solid {{color.alpha2}};
   border-left: 1.1em solid {{color}};
 }
-#{{id}}_caption {
+#{{id}}__caption {
   color: {{color}};
 }

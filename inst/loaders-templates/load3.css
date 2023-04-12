@@ -5,7 +5,7 @@
   background: -ms-linear-gradient(left, {{color}} 10%, {{color.alpha0}} 42%);
   background: linear-gradient(to right, {{color}} 10%, {{color.alpha0}} 42%);
 }
-#{{id}}_caption {
+#{{id}}__caption {
   color: {{color}};
 }
 #{{id}}:before {

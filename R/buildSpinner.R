@@ -12,7 +12,7 @@ buildSpinner <- function(
     image.width,
     image.height,
     hide.ui,
-    caption = NULL
+    caption
 ) {
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
@@ -65,7 +65,7 @@ buildSpinner <- function(
 
   if (!is.null(caption)) {
     caption <- shiny::div(
-      id = paste0(id, "_caption"),
+      id = paste0(id, "__caption"),
       class = "shiny-spinner-custom",
       caption
     )

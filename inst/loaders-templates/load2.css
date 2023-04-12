@@ -1,7 +1,4 @@
-#{{id}} {
-  color: {{color}};
-}
-#{{id}}_caption {
+#{{id}}, #{{id}}__caption {
   color: {{color}};
 }
 #{{id}}:before, #{{id}}:after {
