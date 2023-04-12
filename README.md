@@ -148,6 +148,10 @@ Any Shiny output that uses `withSpinner()` will automatically show a spinner whi
 
 You can also use `pageSpinner()` to create a full-page spinner that will cover the entire page rather than a single Shiny output. Full-page spinners can only be triggered manually, using `showPageSpinner()`/`hidePageSpinner()`.
 
+### Add a message
+
+Use the `caption` parameter to add a custom message under the spinner. The message can either be plain text or even any Shiny UI code.
+
 ### Setting spinner parameters globally
 
 If you want all the spinners in your app (except the full-page spinner) to share some of the options, instead of specifying them in each call to `withSpinner()`, you can set them globally using R options. For example, if you want all spinners to be of a certain type and color, you can set `options(spinner.type = 5, spinner.color = "#0dc5c1")`.

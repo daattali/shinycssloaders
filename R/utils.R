@@ -22,6 +22,9 @@ get_proxy_element <- function(ui_element, proxy.height, hide.ui) {
 }
 
 add_style <- function(x) {
+  if (x == "") {
+    return(NULL)
+  }
   shiny::tags$head(
     shiny::tags$style(
       shiny::HTML(

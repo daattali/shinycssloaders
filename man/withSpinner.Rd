@@ -55,7 +55,8 @@ size of the image is used. Ignored if not using \code{image}.}
 \item{hide.ui}{By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of the previous output UI.}
 
-\item{caption}{Caption to display below the spinner or image (text or HTML). Ignored if \code{type} is 1.}
+\item{caption}{Caption to display below the spinner or image (text or HTML). The caption's font color is determined
+by the \code{color} parameter. Ignored if \code{type} is 1.}
 }
 \description{
 Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner

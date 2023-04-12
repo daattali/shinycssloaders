@@ -44,7 +44,9 @@ size of the image is used. Ignored if not using \code{image}.}
 
 \item{image.height}{The height for the custom image spinner, in pixels. If not provided, then the original
 size of the image is used. Ignored if not using \code{image}.}
-\item{caption}{Caption to display below the spinner or image (text or HTML). Ignored if \code{type} is 1.}
+
+\item{caption}{Caption to display below the spinner or image (text or HTML). The caption's font color is determined
+by the \code{color} parameter. Ignored if \code{type} is 1.}
 }
 \description{
 This function must be called in a Shiny app's UI to create a full-page spinner. The spinner
