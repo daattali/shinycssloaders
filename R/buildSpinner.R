@@ -11,12 +11,11 @@ buildSpinner <- function(
     image,
     image.width,
     image.height,
-    hide.ui = FALSE,
+    hide.ui,
     caption = NULL
 ) {
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
-  page_spinner <- !output_spinner
 
   if (!type %in% 0:8) {
     stop("`type` must be an integer from 0 to 8", call. = FALSE)
@@ -76,7 +75,6 @@ buildSpinner <- function(
     proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
   } else {
     proxy_element <- NULL
-    ui_element <- NULL
   }
 
   deps <- list(
