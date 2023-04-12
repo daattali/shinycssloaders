@@ -19,11 +19,15 @@ server <- function(input, output, session) {
       )
     }
 
+    if (nzchar(input$caption)) {
+      params$caption <- input$caption
+    }
+
     params
   })
 
   output$show_example <- renderUI({
-    do.call(shinycssloaders::withSpinner, spinner_params())
+    suppressWarnings(do.call(shinycssloaders::withSpinner, spinner_params()))
   })
 
   observeEvent(input$update, ignoreNULL = FALSE, {
@@ -42,7 +46,7 @@ server <- function(input, output, session) {
     params <- spinner_params()
     params$ui_element <- NULL
     params$background <- input$bg
-    ui <- do.call(shinycssloaders::pageSpinner, params)
+    ui <- suppressWarnings(do.call(shinycssloaders::pageSpinner, params))
     insertUI("body", "afterBegin", immediate = TRUE, ui = ui)
     showPageSpinner(Sys.sleep(input$time))
 
