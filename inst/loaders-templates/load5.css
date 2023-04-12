@@ -2,9 +2,6 @@
   -webkit-animation: load5-{{id}} 1.1s infinite ease;
   animation: load5-{{id}} 1.1s infinite ease;
 }
-#{{id}}__caption {
-  color: {{color}};
-}
 
 @-webkit-keyframes load5-{{id}} {
   0%,

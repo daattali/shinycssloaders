@@ -60,6 +60,9 @@ buildSpinner <- function(
     # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
     size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
     base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size}px; }}"))
+    if (!is.null(caption)) {
+      base_css <- paste(base_css, glue::glue("#{id}__caption {{ color: {color}; }}"))
+    }
     css_size_color <- add_style(base_css)
   }
 
