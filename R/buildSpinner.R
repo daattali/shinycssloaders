@@ -17,14 +17,17 @@ buildSpinner <- function(
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
 
+  if (!is.null(image)) {
+    type <- 0
+  }
   if (!type %in% 0:8) {
-    stop("`type` must be an integer from 0 to 8", call. = FALSE)
+    stop("shinycssloaders: `type` must be an integer between 0 and 8.")
   }
   if (grepl("rgb", color, fixed = TRUE)) {
-    stop("Color should be given in hex format")
+    stop("shinycssloaders: `color` should be given in hex format (#XXXXXX).")
   }
   if (is.character(custom.css)) {
-    stop("It looks like you provided a string to 'custom.css', but it needs to be either `TRUE` or `FALSE`. ",
+    stop("shinycssloaders: It looks like you provided a string to `custom.css`, but it needs to be either `TRUE` or `FALSE`. ",
          "The actual CSS needs to added to the app's UI.")
   }
 
@@ -43,7 +46,7 @@ buildSpinner <- function(
 
   if (add_default_style) {
     if (type %in% c(2, 3) && is.null(color.background)) {
-      stop("For spinner types 2 & 3 you need to specify manually a background color.")
+      stop("shinycssloaders: For spinner types 2 & 3 you need to specify `color.background`.")
     }
 
     color.rgb <- paste(grDevices::col2rgb(color), collapse = ",")
@@ -58,8 +61,8 @@ buildSpinner <- function(
     }
 
     # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
-    size <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
-    base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size}px; }}"))
+    size_px <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
+    base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size_px}px; }}"))
     if (!is.null(caption)) {
       base_css <- paste(base_css, glue::glue("#{id}__caption {{ color: {color}; }}"))
     }
