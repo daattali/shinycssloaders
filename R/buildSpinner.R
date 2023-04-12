@@ -29,7 +29,7 @@ buildSpinner <- function(
   }
 
   if (type == 1 && !is.null(caption)) {
-    warning("Captions are not supported for spinner type 1")
+    warning("shinycssloaders: `caption` is not supported for spinner type 1")
     caption <- NULL
   }
 
@@ -66,7 +66,7 @@ buildSpinner <- function(
   if (!is.null(caption)) {
     caption <- shiny::div(
       id = paste0(id, "__caption"),
-      class = "shiny-spinner-custom",
+      class = "shiny-spinner-caption",
       caption
     )
   }
@@ -103,7 +103,7 @@ buildSpinner <- function(
     parent_cls <- paste(parent_cls, "shiny-spinner-hideui")
   }
   if (!is.null(image)) {
-    parent_cls <- paste(parent_cls, "shiny-spinner-custom")
+    parent_cls <- paste(parent_cls, "shiny-spinner-image")
   }
 
   child_cls <- "load-container"

@@ -13,7 +13,8 @@ pageSpinner(
   custom.css = FALSE,
   image = NULL,
   image.width = NULL,
-  image.height = NULL
+  image.height = NULL,
+  caption = NULL
 )
 }
 \arguments{
@@ -42,6 +43,7 @@ size of the image is used. Ignored if not using \code{image}.}
 
 \item{image.height}{The height for the custom image spinner, in pixels. If not provided, then the original
 size of the image is used. Ignored if not using \code{image}.}
+\item{caption}{Caption to display below the spinner or image (text or HTML). Ignored if \code{type} is 1.}
 }
 \description{
 This function must be called in a Shiny app's UI to create a full-page spinner. The spinner

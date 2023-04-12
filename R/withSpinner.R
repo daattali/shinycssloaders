@@ -28,7 +28,7 @@
 #' size of the image is used. Ignored if not using `image`.
 #' @param hide.ui By default, while an output is recalculating, the output UI is hidden and the spinner is visible instead.
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
-#' @param caption Caption to display below the spinner or image. Ignored if `type` is 1.
+#' @param caption Caption to display below the spinner or image (text or HTML). Ignored if `type` is 1.
 #' @seealso [showSpinner()], [hideSpinner()], [pageSpinner()]
 #' @examples
 #' if (interactive()) {
