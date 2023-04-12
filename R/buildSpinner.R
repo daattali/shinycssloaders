@@ -11,7 +11,7 @@ buildSpinner <- function(
     image,
     image.width,
     image.height,
-    hide.ui = FALSE
+    hide.ui
 ) {
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
@@ -62,7 +62,6 @@ buildSpinner <- function(
     proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
   } else {
     proxy_element <- NULL
-    ui_element <- NULL
   }
 
   deps <- list(

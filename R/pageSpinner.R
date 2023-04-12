@@ -76,7 +76,10 @@ pageSpinner <- function(
       image = image,
       image.width = image.width,
       image.height = image.height,
-      id = "spinner-shinycssloaders-global-spinner"
+      id = "spinner-shinycssloaders-global-spinner",
+      ui_element = NULL,
+      proxy.height = NULL,
+      hide.ui = FALSE
     )
   )
 }
