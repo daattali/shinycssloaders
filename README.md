@@ -150,7 +150,7 @@ You can also use `pageSpinner()` to create a full-page spinner that will cover t
 
 ### Add a message
 
-Use the `caption` parameter to add a custom message under the spinner. The message can either be plain text or even any Shiny UI code.
+Use the `caption` parameter to add a custom message under the spinner. The message can either be plain text (`"Please wait"`) or HTML (`div(strong("Loading"), br(), em("Please wait"))`).
 
 ### Setting spinner parameters globally
 
