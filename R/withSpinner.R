@@ -22,6 +22,7 @@
 #' for outputs with undefined height. Ignored if `hide.ui` is set to `FALSE`.
 #' @param id The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.
 #' @param image The path or URL of the image to use if you want to use a custom image instead of a built-in spinner.
+#' If `image` is provided, then `type` is ignored.
 #' @param image.height The height for the custom image spinner, in pixels. If not provided, then the original
 #' size of the image is used. Ignored if not using `image`.
 #' @param image.width The width for the custom image spinner, in pixels. If not provided, then the original

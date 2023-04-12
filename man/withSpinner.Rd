@@ -42,7 +42,8 @@ for outputs with undefined height. Ignored if \code{hide.ui} is set to \code{FAL
 
 \item{id}{The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.}
 
-\item{image}{The path or URL of the image to use if you want to use a custom image instead of a built-in spinner.}
+\item{image}{The path or URL of the image to use if you want to use a custom image instead of a built-in spinner.
+If \code{image} is provided, then \code{type} is ignored.}
 
 \item{image.width}{The width for the custom image spinner, in pixels. If not provided, then the original
 size of the image is used. Ignored if not using \code{image}.}
