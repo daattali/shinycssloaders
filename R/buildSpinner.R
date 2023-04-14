@@ -107,9 +107,6 @@ buildSpinner <- function(
   if (hide.ui) {
     parent_cls <- paste(parent_cls, "shiny-spinner-hideui")
   }
-  if (!is.null(image)) {
-    parent_cls <- paste(parent_cls, "shiny-spinner-image")
-  }
 
   child_cls <- "load-container"
   if (output_spinner) {

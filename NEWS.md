@@ -5,6 +5,7 @@
 - Add support for setting global options for most parameters (#78)
 - Fix page sometimes wobbling because of hidden spinner (#54)
 - Fix bug where `shiny::tagList()` would throw an error (#73)
+- Fix bug where using an image spinner would cause the Shiny output to be centered (#79)
 - Add more informative error messages (#69)
 - Replace `addResourcePath()` with `htmlDependency()` which is more robust (#75)
 - Add `caption` argument to allow showing a message under the spinner (#28)
