@@ -143,7 +143,15 @@ NULL
 
 #' @export
 #' @rdname showHidePage
-showPageSpinner <- function(expr) {
+showPageSpinner <- function(expr, ...) {
+  # TODO only insert dependencies once
+  insertUI(
+    "head", "beforeEnd", immediate = TRUE, ui = getDependencies()
+  )
+  insertUI(
+    "body", "beforeEnd", immediate = TRUE, ui = pageSpinner(...)
+  )
+
   session <- getSession()
   session$sendCustomMessage("shinycssloaders.show_page_spinner", list())
 
@@ -162,5 +170,7 @@ showPageSpinner <- function(expr) {
 hidePageSpinner <- function() {
   session <- getSession()
   session$sendCustomMessage("shinycssloaders.hide_page_spinner", list())
+  removeUI("#shinycssloaders-global-spinner")
+  removeUI(".global-spinner-css")
   invisible(NULL)
 }

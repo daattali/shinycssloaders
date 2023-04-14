@@ -66,7 +66,7 @@ buildSpinner <- function(
     base_css <- paste(base_css, glue::glue("#{id}__caption {{ color: {color}; }}"))
   }
 
-  css_rules <- add_style(base_css)
+  css_rules <- add_style(base_css, if (!output_spinner) "global-spinner-css")
 
   if (!is.null(caption)) {
     caption <- shiny::div(
@@ -80,27 +80,6 @@ buildSpinner <- function(
     proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
   } else {
     proxy_element <- NULL
-  }
-
-  deps <- list(
-    htmltools::htmlDependency(
-      name = "shinycssloaders-binding",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      script = "spinner.js",
-      stylesheet = "spinner.css"
-    )
-  )
-
-  if (is.null(image)) {
-    deps <- append(deps, list(htmltools::htmlDependency(
-      name = "cssloaders",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      stylesheet = "css-loaders.css"
-    )))
   }
 
   parent_cls <- "shiny-spinner-output-container"
@@ -128,9 +107,9 @@ buildSpinner <- function(
   }
 
   shiny::tagList(
-    deps,
     css_rules,
     shiny::div(
+      `data-spinner-id` = id,
       class = parent_cls,
       shiny::div(
         class = child_cls,

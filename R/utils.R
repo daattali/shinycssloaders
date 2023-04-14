@@ -21,12 +21,13 @@ get_proxy_element <- function(ui_element, proxy.height, hide.ui) {
   }
 }
 
-add_style <- function(x) {
+add_style <- function(x, class = NULL) {
   if (x == "") {
     return(NULL)
   }
   shiny::tags$head(
     shiny::tags$style(
+      class = class,
       shiny::HTML(
         x
       )
@@ -43,4 +44,24 @@ getSession <- function() {
   }
 
   session
+}
+
+getDependencies <- function() {
+  list(
+    htmltools::htmlDependency(
+      name = "shinycssloaders-binding",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      script = "spinner.js",
+      stylesheet = "spinner.css"
+    ),
+    htmltools::htmlDependency(
+      name = "cssloaders",
+      version = as.character(utils::packageVersion("shinycssloaders")),
+      package = "shinycssloaders",
+      src = "assets",
+      stylesheet = "css-loaders.css"
+    )
+  )
 }
