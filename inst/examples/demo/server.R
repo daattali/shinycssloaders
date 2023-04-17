@@ -46,12 +46,8 @@ server <- function(input, output, session) {
     params <- spinner_params()
     params$ui_element <- NULL
     params$background <- input$bg
-    ui <- suppressWarnings(do.call(shinycssloaders::pageSpinner, params))
-    insertUI("body", "afterBegin", immediate = TRUE, ui = ui)
-    showPageSpinner(Sys.sleep(input$time))
-
-    # Remove the fullpage spinner so that it won't interfere with the next ones
-    removeUI("#shinycssloaders-global-spinner", immediate = TRUE)
-    shinyjs::runjs('$("head > style").last().remove()')
+    suppressWarnings(do.call(shinycssloaders::showPageSpinner, params))
+    Sys.sleep(input$time)
+    hidePageSpinner()
   })
 }
