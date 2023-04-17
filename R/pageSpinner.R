@@ -1,99 +1,15 @@
-#' Add a full-page spinner that covers the entire page
+#' Show (and hide) a full-page spinner that covers the entire page
 #'
-#' This function must be called in a Shiny app's UI to create a full-page spinner. The spinner
-#' will be centered on the page. In the server, you can call [showPageSpinner()] and [hidePageSpinner()]
-#' to show/hide this spinner.
-#' @inheritParams withSpinner
-#' @param background Background color for the spinner. You can use semi-transparent colours
-#' in order to have the Shiny app visible in the background, eg. `"#222222AA"` or `"rgba(150, 20, 70, 0.8)"`.
-#' @examples
-#' if (interactive()) {
-#'   library(shiny)
-#'
-#'   #--- Example 1: Using showPageSpinner/hidePageSpinner ---
-#'
-#'   ui <- fluidPage(
-#'     pageSpinner(),
-#'     actionButton("go", "Go"),
-#'     plotOutput("plot")
-#'   )
-#'   server <- function(input, output) {
-#'     observeEvent(input$go, {
-#'       showPageSpinner()
-#'       Sys.sleep(1)
-#'       hidePageSpinner()
-#'     })
-#'     output$plot <- renderPlot({
-#'      plot(runif(10))
-#'     })
-#'   }
-#'   shinyApp(ui, server)
-#'
-#'   #--- Example 2: Using showPageSpinner with expr ---
-#'
-#'   some_slow_function <- function() {
-#'     Sys.sleep(1)
-#'   }
-#'
-#'   ui <- fluidPage(
-#'     pageSpinner(),
-#'     actionButton("go", "Go"),
-#'     plotOutput("plot")
-#'   )
-#'   server <- function(input, output) {
-#'     observeEvent(input$go, {
-#'       showPageSpinner({ some_slow_function() })
-#'     })
-#'     output$plot <- renderPlot({
-#'      plot(runif(10))
-#'     })
-#'   }
-#'   shinyApp(ui, server)
-#' }
-#' @seealso [showPageSpinner()], [hidePageSpinner()], [withSpinner()]
-#' @export
-pageSpinner <- function(
-  type = 8,
-  background = "#FFFFFF",
-  color = "#222222",
-  size = 1,
-  color.background = NULL,
-  custom.css = FALSE,
-  image = NULL,
-  image.width = NULL,
-  image.height = NULL,
-  caption = NULL
-) {
-  shiny::div(
-    id = "shinycssloaders-global-spinner",
-    style = paste("background:", background),
-    buildSpinner(
-      spinner_type = "page",
-      type = type,
-      color = color,
-      size = size,
-      color.background = color.background,
-      custom.css = custom.css,
-      image = image,
-      image.width = image.width,
-      image.height = image.height,
-      caption = caption,
-      id = "spinner-shinycssloaders-global-spinner",
-      ui_element = NULL,
-      proxy.height = NULL,
-      hide.ui = FALSE
-    )
-  )
-}
-
-#' Show/hide a full-page spinner
-#'
-#' Use these functions to show or hide the full-page spinner. The spinner must first be
-#' created in the Shiny app's UI using [pageSpinner()].
+#' Use these functions to show and hide a full-page spinner.
 #' @param expr (optional) An R expression to run while showing the spinner. The
-#' spinner will automatically get hidden when this expression completes.
+#' spinner will automatically get hidden when this expression completes. If not provided,
+#' you must explicitly end the spinner with a call to `hidePageSpinner()`.
+#' @param background Background color for the spinner. You can use semi-transparent colours
+#' in order to have the Shiny app visible in the background, eg. `"#FFFFFFD0"` or
+#' `"rgba(0, 0, 0, 0.7)"`.
+#' @inheritParams withSpinner
 #' @return If `expr` is provided, the result of `expr` is returned. Otherwise, `NULL`.
-#' @seealso [pageSpinner()]
+#' @seealso [withSpinner()], [showSpinner()], [hideSpinner()]
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -101,7 +17,6 @@ pageSpinner <- function(
 #'   #--- Example 1: Using showPageSpinner/hidePageSpinner ---
 #'
 #'   ui <- fluidPage(
-#'     pageSpinner(),
 #'     actionButton("go", "Go"),
 #'     plotOutput("plot")
 #'   )
@@ -124,7 +39,6 @@ pageSpinner <- function(
 #'   }
 #'
 #'   ui <- fluidPage(
-#'     pageSpinner(),
 #'     actionButton("go", "Go"),
 #'     plotOutput("plot")
 #'   )
@@ -143,9 +57,50 @@ NULL
 
 #' @export
 #' @rdname showHidePage
-showPageSpinner <- function(expr) {
+showPageSpinner <- function(
+    expr,
+    background = "#FFFFFF",
+    type = 8,
+    color = "#222222",
+    size = 1,
+    color.background = NULL,
+    custom.css = FALSE,
+    id = NULL,
+    image = NULL,
+    image.width = NULL,
+    image.height = NULL,
+    caption = NULL
+) {
+
   session <- getSession()
-  session$sendCustomMessage("shinycssloaders.show_page_spinner", list())
+  if (is.null(session$userData$.shinycssloaders_added) || !session$userData$.shinycssloaders_added) {
+    shiny::insertUI("head", "beforeEnd", immediate = TRUE, ui = getDependencies())
+    session$userData$.shinycssloaders_added <- TRUE
+  }
+
+  spinner <- buildSpinner(
+    spinner_type = "page",
+    type = type,
+    color = color,
+    size = size,
+    color.background = color.background,
+    custom.css = custom.css,
+    id = id,
+    image = image,
+    image.width = image.width,
+    image.height = image.height,
+    caption = caption,
+    ui_element = NULL,
+    proxy.height = NULL,
+    hide.ui = FALSE
+  )
+
+  spinner_container <- shiny::div(
+    id = "shinycssloaders-global-spinner",
+    style = paste("background:", background),
+    spinner
+  )
+  shiny::insertUI("body", "beforeEnd", immediate = TRUE, ui = spinner_container)
 
   if (missing(expr)) {
     value <- invisible(NULL)
@@ -160,7 +115,7 @@ showPageSpinner <- function(expr) {
 #' @export
 #' @rdname showHidePage
 hidePageSpinner <- function() {
-  session <- getSession()
-  session$sendCustomMessage("shinycssloaders.hide_page_spinner", list())
+  removeUI("#shinycssloaders-global-spinner", immediate = TRUE)
+  removeUI(".global-spinner-css", immediate = TRUE)
   invisible(NULL)
 }

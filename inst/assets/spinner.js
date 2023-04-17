@@ -84,12 +84,4 @@ Shiny.addCustomMessageHandler('shinycssloaders.hide_spinner', function(params) {
   update_spinner(params.id);
 });
 
-/* Show/hide full page spinner */
-Shiny.addCustomMessageHandler('shinycssloaders.show_page_spinner', function(params) {
-  $('#shinycssloaders-global-spinner').show();
-});
-Shiny.addCustomMessageHandler('shinycssloaders.hide_page_spinner', function(params) {
-  $('#shinycssloaders-global-spinner').hide();
-});
-
 }());

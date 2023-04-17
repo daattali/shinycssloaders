@@ -4,22 +4,68 @@
 \alias{showHidePage}
 \alias{showPageSpinner}
 \alias{hidePageSpinner}
-\title{Show/hide a full-page spinner}
+\title{Show (and hide) a full-page spinner that covers the entire page}
 \usage{
-showPageSpinner(expr)
+showPageSpinner(
+  expr,
+  background = "#FFFFFF",
+  type = 8,
+  color = "#222222",
+  size = 1,
+  color.background = NULL,
+  custom.css = FALSE,
+  id = NULL,
+  image = NULL,
+  image.width = NULL,
+  image.height = NULL,
+  caption = NULL
+)
 
 hidePageSpinner()
 }
 \arguments{
 \item{expr}{(optional) An R expression to run while showing the spinner. The
-spinner will automatically get hidden when this expression completes.}
+spinner will automatically get hidden when this expression completes. If not provided,
+you must explicitly end the spinner with a call to \code{hidePageSpinner()}.}
+
+\item{background}{Background color for the spinner. You can use semi-transparent colours
+in order to have the Shiny app visible in the background, eg. \code{"#FFFFFFD0"} or
+\code{"rgba(0, 0, 0, 0.7)"}.}
+
+\item{type}{The type of spinner to use. Valid values are integers between 0-8 (0 means no spinner). Check out
+\url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
+You can also use your own custom image using the \code{image} parameter.}
+
+\item{color}{The color of the spinner in hex format. Ignored if \code{image} is used.}
+
+\item{size}{The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large).
+Ignored if \code{image} is used.}
+
+\item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner.
+Ignored if \code{image} is used.}
+
+\item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
+Ignored if \code{image} is used.}
+
+\item{id}{The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.}
+
+\item{image}{The path or URL of the image to use if you want to use a custom image instead of a built-in spinner.
+If \code{image} is provided, then \code{type} is ignored.}
+
+\item{image.width}{The width for the custom image spinner, in pixels. If not provided, then the original
+size of the image is used. Ignored if not using \code{image}.}
+
+\item{image.height}{The height for the custom image spinner, in pixels. If not provided, then the original
+size of the image is used. Ignored if not using \code{image}.}
+
+\item{caption}{Caption to display below the spinner or image (text or HTML). The caption's font color is determined
+by the \code{color} parameter. Ignored if \code{type} is 1.}
 }
 \value{
 If \code{expr} is provided, the result of \code{expr} is returned. Otherwise, \code{NULL}.
 }
 \description{
-Use these functions to show or hide the full-page spinner. The spinner must first be
-created in the Shiny app's UI using \code{\link[=pageSpinner]{pageSpinner()}}.
+Use these functions to show and hide a full-page spinner.
 }
 \examples{
 if (interactive()) {
@@ -28,7 +74,6 @@ if (interactive()) {
   #--- Example 1: Using showPageSpinner/hidePageSpinner ---
 
   ui <- fluidPage(
-    pageSpinner(),
     actionButton("go", "Go"),
     plotOutput("plot")
   )
@@ -51,7 +96,6 @@ if (interactive()) {
   }
 
   ui <- fluidPage(
-    pageSpinner(),
     actionButton("go", "Go"),
     plotOutput("plot")
   )
@@ -67,5 +111,5 @@ if (interactive()) {
 }
 }
 \seealso{
-\code{\link[=pageSpinner]{pageSpinner()}}
+\code{\link[=withSpinner]{withSpinner()}}, \code{\link[=showSpinner]{showSpinner()}}, \code{\link[=hideSpinner]{hideSpinner()}}
 }

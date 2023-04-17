@@ -16,7 +16,7 @@
 
 When a Shiny output (such as a plot, table, map, etc.) is recalculating, it remains visible but gets greyed out. Using {shinycssloaders}, you can add a loading animation ("spinner") to outputs instead of greying them out. By wrapping a Shiny output in `withSpinner()`, a spinner will automatically appear while the output is recalculating. You can also manually trigger a spinner using `showSpinner()`.
 
-In addition to showing spinners on outputs, you can also use `pageSpinner()` to show a full-page spinner that covers the entire page.
+In addition to showing spinners on outputs, you can also use `showPageSpinner()` to show a full-page spinner that covers the entire page.
 
 You can choose from one of 8 built-in animation types, and customize the colour/size. You can also use your own image instead of the built-in animations. See the [demo Shiny app](https://daattali.com/shiny/shinycssloaders-demo) online for examples.
 
@@ -94,7 +94,6 @@ Using a full-page spinner:
 library(shiny)
 
 ui <- fluidPage(
-    pageSpinner(),
     actionButton("go", "Go"),
     plotOutput("plot")
 )
@@ -146,7 +145,7 @@ Any Shiny output that uses `withSpinner()` will automatically show a spinner whi
 
 ### Full-page spinner
 
-You can also use `pageSpinner()` to create a full-page spinner that will cover the entire page rather than a single Shiny output. Full-page spinners can only be triggered manually, using `showPageSpinner()`/`hidePageSpinner()`.
+You can also use `showPageSpinner()` to show a full-page spinner that will cover the entire page rather than a single Shiny output. Full page spinners support the same parameters as regular spinners, and can be removed with `hidePageSpinner()`.
 
 ### Add a message
 

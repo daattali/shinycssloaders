@@ -35,38 +35,11 @@ buildSpinner <- function(
     caption <- NULL
   }
 
-  # each spinner will have a unique id to allow separate sizing
   if (is.null(id)) {
     id <- paste0("spinner-", digest::digest(ui_element))
   }
 
-  base_css <- ""
-  add_default_style <- (is.null(image) && !custom.css && type != 0)
-  if (add_default_style) {
-    if (type %in% c(2, 3) && is.null(color.background)) {
-      stop("shinycssloaders: For spinner types 2 & 3 you need to specify `color.background`.")
-    }
-
-    color.rgb <- paste(grDevices::col2rgb(color), collapse = ",")
-    color.alpha0 <- sprintf("rgba(%s, 0)", color.rgb)
-    color.alpha2 <- sprintf("rgba(%s, 0.2)", color.rgb)
-
-    css_file <- system.file(glue::glue("loaders-templates/load{type}.css"), package="shinycssloaders")
-    if (file.exists(css_file)) {
-      base_css <- paste(readLines(css_file), collapse = " ")
-      base_css <- glue::glue(base_css, .open = "{{", .close = "}}")
-    }
-
-    # get default font-size from css, and cut it by 25%, as for outputs we usually need something smaller
-    size_px <- round(c(11, 11, 10, 20, 25, 90, 10, 10)[type] * size * 0.75)
-    base_css <- paste(base_css, glue::glue("#{id} {{ font-size: {size_px}px; }}"))
-  }
-
-  if (!is.null(caption)) {
-    base_css <- paste(base_css, glue::glue("#{id}__caption {{ color: {color}; }}"))
-  }
-
-  css_rules <- add_style(base_css)
+  css_rules_tag <- get_spinner_css_tag(type, color, size, color.background, custom.css, id, image, caption, output_spinner)
 
   if (!is.null(caption)) {
     caption <- shiny::div(
@@ -80,27 +53,6 @@ buildSpinner <- function(
     proxy_element <- get_proxy_element(ui_element, proxy.height, hide.ui)
   } else {
     proxy_element <- NULL
-  }
-
-  deps <- list(
-    htmltools::htmlDependency(
-      name = "shinycssloaders-binding",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      script = "spinner.js",
-      stylesheet = "spinner.css"
-    )
-  )
-
-  if (is.null(image)) {
-    deps <- append(deps, list(htmltools::htmlDependency(
-      name = "cssloaders",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      stylesheet = "css-loaders.css"
-    )))
   }
 
   parent_cls <- "shiny-spinner-output-container"
@@ -124,18 +76,16 @@ buildSpinner <- function(
                                   width = image.width, height = image.height)
   }
 
-  shiny::tagList(
-    deps,
-    css_rules,
+  shiny::div(
+    css_rules_tag,
+    `data-spinner-id` = id,
+    class = parent_cls,
     shiny::div(
-      class = parent_cls,
-      shiny::div(
-        class = child_cls,
-        spinner_el,
-        caption
-      ),
-      proxy_element,
-      ui_element
-    )
+      class = child_cls,
+      spinner_el,
+      caption
+    ),
+    proxy_element,
+    ui_element
   )
 }

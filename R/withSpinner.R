@@ -2,7 +2,7 @@
 #'
 #' Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner
 #' using [showSpinner()] and [hideSpinner()].\cr\cr
-#' Use [pageSpinner()] to show a spinner on the entire page instead of individual outputs.\cr\cr
+#' Use [showPageSpinner()] to show a spinner on the entire page instead of individual outputs.\cr\cr
 #' Most parameters can be set globally in order to use a default setting for all spinners in your Shiny app.
 #' This can be done by setting an R option with the parameter's name prepended by `"spinner."`. For example, to set all spinners
 #' to type=5 and color=#0dc5c1 by default, use `options(spinner.type = 5, spinner.color = "#0dc5c1")`. The following parameters
@@ -31,7 +31,7 @@
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
 #' @param caption Caption to display below the spinner or image (text or HTML). The caption's font color is determined
 #' by the `color` parameter. Ignored if `type` is 1.
-#' @seealso [showSpinner()], [hideSpinner()], [pageSpinner()]
+#' @seealso [showSpinner()], [hideSpinner()], [showPageSpinner()]
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -71,7 +71,7 @@ withSpinner <- function(
     stop("`ui_element` must be a Shiny tag", call. = FALSE)
   }
 
-  buildSpinner(
+  spinner <- buildSpinner(
     spinner_type = "output",
     ui_element = ui_element,
     type = type,
@@ -88,4 +88,5 @@ withSpinner <- function(
     caption = caption
   )
 
+  htmltools::attachDependencies(spinner, getDependencies())
 }

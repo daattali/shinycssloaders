@@ -34,7 +34,6 @@
   right: 0;
   bottom: 0;
   z-index: 100000000;
-  display: none;
 }
 
 #shinycssloaders-global-spinner .shiny-spinner-output-container {
