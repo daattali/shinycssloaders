@@ -61,11 +61,11 @@ by the \code{color} parameter. Ignored if \code{type} is 1.}
 \description{
 Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner
 using \code{\link[=showSpinner]{showSpinner()}} and \code{\link[=hideSpinner]{hideSpinner()}}.\cr\cr
-Use \code{\link[=showPageSpinner]{showPageSpinner()}} to show a spinner on the entire page instead of individual outputs.\cr\cr
 Most parameters can be set globally in order to use a default setting for all spinners in your Shiny app.
 This can be done by setting an R option with the parameter's name prepended by \code{"spinner."}. For example, to set all spinners
 to type=5 and color=#0dc5c1 by default, use \code{options(spinner.type = 5, spinner.color = "#0dc5c1")}. The following parameters
-cannot be set globally: \code{ui_element}, \code{id}.
+cannot be set globally: \code{ui_element}, \code{id}.\cr\cr
+Use \code{\link[=showPageSpinner]{showPageSpinner()}} to show a spinner on the entire page instead of individual outputs.
 }
 \examples{
 if (interactive()) {

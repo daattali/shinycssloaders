@@ -1,6 +1,10 @@
 #' Show (and hide) a full-page spinner that covers the entire page
 #'
-#' Use these functions to show and hide a full-page spinner.
+#' Use these functions to show and hide a full-page spinner.\cr\cr
+#' All parameters (except `expr`) can be set globally in order to use a default setting for all
+#' full-page spinner in your Shiny app. This can be done by setting an R option with the parameter's
+#' name prepended by `"page.spinner."`. For example, to set all page spinners to type=5 and
+#' color=#0dc5c1 by default, use `options(page.spinner.type = 5, page.spinner.color = "#0dc5c1")`.
 #' @param expr (optional) An R expression to run while showing the spinner. The
 #' spinner will automatically get hidden when this expression completes. If not provided,
 #' you must explicitly end the spinner with a call to `hidePageSpinner()`.
@@ -59,17 +63,17 @@ NULL
 #' @rdname showHidePage
 showPageSpinner <- function(
     expr,
-    background = "#FFFFFF",
-    type = 8,
-    color = "#222222",
-    size = 1,
-    color.background = NULL,
-    custom.css = FALSE,
-    id = NULL,
-    image = NULL,
-    image.width = NULL,
-    image.height = NULL,
-    caption = NULL
+    background = getOption("page.spinner.background", default = "#FFFFFF"),
+    type = getOption("page.spinner.type", default = 8),
+    color = getOption("page.spinner.color", default = "#222222"),
+    size = getOption("page.spinner.size", default = 1),
+    color.background = getOption("page.spinner.color.background"),
+    custom.css = getOption("page.spinner.custom.css", default = FALSE),
+    id = getOption("page.spinner.id"),
+    image = getOption("page.spinner.image"),
+    image.width = getOption("page.spinner.image.width"),
+    image.height = getOption("page.spinner.image.height"),
+    caption = getOption("page.spinner.caption")
 ) {
 
   session <- getSession()

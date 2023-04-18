@@ -2,11 +2,11 @@
 #'
 #' Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner
 #' using [showSpinner()] and [hideSpinner()].\cr\cr
-#' Use [showPageSpinner()] to show a spinner on the entire page instead of individual outputs.\cr\cr
 #' Most parameters can be set globally in order to use a default setting for all spinners in your Shiny app.
 #' This can be done by setting an R option with the parameter's name prepended by `"spinner."`. For example, to set all spinners
 #' to type=5 and color=#0dc5c1 by default, use `options(spinner.type = 5, spinner.color = "#0dc5c1")`. The following parameters
-#' cannot be set globally: `ui_element`, `id`.
+#' cannot be set globally: `ui_element`, `id`.\cr\cr
+#' Use [showPageSpinner()] to show a spinner on the entire page instead of individual outputs.
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
 #' @param type The type of spinner to use. Valid values are integers between 0-8 (0 means no spinner). Check out
 #' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.

@@ -155,7 +155,7 @@ Use the `caption` parameter to add a custom message under the spinner. The messa
 
 ### Setting spinner parameters globally
 
-If you want all the spinners in your app (except the full-page spinner) to share some of the options, instead of specifying them in each call to `withSpinner()`, you can set them globally using R options. For example, if you want all spinners to be of a certain type and color, you can set `options(spinner.type = 5, spinner.color = "#0dc5c1")`.
+If you want all the spinners in your app to share some of the options, instead of specifying them in each call to `withSpinner()`, you can set them globally using R options. For example, if you want all spinners to be of a certain type and color, you can set `options(spinner.type = 5, spinner.color = "#0dc5c1")`. Similarly, for full-page spinners you can use `page.spinner.type`, `page.spinner.color`, etc to set default parameters instead of setting them in `showPageSpinner()`.
 
 ### Showing a spinner on top of the output
 
