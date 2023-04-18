@@ -2,6 +2,7 @@
 
 - Add `showSpinner()` and `hideSpinner()` that allow you to manually trigger the spinner (#56)
 - Add support for full-page spinner that covers the entire page using `showPageSpinner()` and `hidePageSpinner()` (#42)
+- Add support for Rmarkdown documents (#8)
 - Add support for setting global options for most parameters (#78)
 - Fix page sometimes wobbling because of hidden spinner (#54)
 - Fix bug where `shiny::tagList()` would throw an error (#73)

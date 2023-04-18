@@ -1,6 +1,6 @@
 Package: shinycssloaders
 Title: Add Loading Animations to a 'shiny' Output While It's Recalculating
-Version: 1.0.0.9007
+Version: 1.0.0.9008
 Authors@R: c(
     person("Dean","Attali",email="daattali@gmail.com",role=c("aut","cre"),
         comment = c("Maintainer/developer of shinycssloaders since 2019", ORCID="0000-0002-5645-3493")),
@@ -25,6 +25,7 @@ Imports:
     htmltools (>= 0.3.5),
     shiny
 Suggests:
+    knitr,
     shinydisconnect,
     shinyjs
 RoxygenNote: 7.2.3

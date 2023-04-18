@@ -9,6 +9,26 @@ getSession <- function() {
   session
 }
 
+# insert content into the <head> tag of the document if this is a proper
+# Shiny app, but if it's inside an interactive Rmarkdown document then don't
+# use <head> as it won't work
+insertHead <- function(...) {
+  if (requireNamespace("knitr", quietly = TRUE)) {
+    runtime <- knitr::opts_knit$get("rmarkdown.runtime")
+    if (!is.null(runtime) && runtime == "shiny") {
+      # we're inside an Rmd document
+      shiny::tagList(...)
+    } else {
+      # we're in a shiny app
+      shiny::tags$head(...)
+    }
+  } else {
+    # we're in a shiny app
+    shiny::tags$head(...)
+  }
+
+}
+
 getDependencies <- function() {
   list(
     htmltools::htmlDependency(
@@ -81,7 +101,7 @@ get_spinner_css_tag <- function(type, color, size, color.background, custom.css,
 
   css_rules_tag <- NULL
   if (nzchar(base_css)) {
-    css_rules_tag <- shiny::tags$head(shiny::tags$style(
+    css_rules_tag <- insertHead(shiny::tags$style(
       class = if (!output_spinner) "global-spinner-css",
       shiny::HTML(base_css)
     ))

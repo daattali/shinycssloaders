@@ -110,6 +110,8 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
+You can also use {shinycssloaders} in Rmarkdown documents, as long as they use `runtime: shiny`.
+
 <h2 id="install">Installation</h2>
 
 **For most users:** To install the stable CRAN version:
