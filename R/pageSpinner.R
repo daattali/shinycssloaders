@@ -65,7 +65,7 @@ showPageSpinner <- function(
     expr,
     background = getOption("page.spinner.background", default = "#FFFFFF"),
     type = getOption("page.spinner.type", default = 8),
-    color = getOption("page.spinner.color", default = "#222222"),
+    color = getOption("page.spinner.color", default = "#0275D8"),
     size = getOption("page.spinner.size", default = 1),
     color.background = getOption("page.spinner.color.background"),
     custom.css = getOption("page.spinner.custom.css", default = FALSE),
