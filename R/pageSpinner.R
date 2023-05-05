@@ -63,7 +63,7 @@ NULL
 #' @rdname showHidePage
 showPageSpinner <- function(
     expr,
-    background = getOption("page.spinner.background", default = "#FFFFFF"),
+    background = getOption("page.spinner.background", default = "#FFFFFFCC"),
     type = getOption("page.spinner.type", default = 8),
     color = getOption("page.spinner.color", default = "#0275D8"),
     size = getOption("page.spinner.size", default = 1),
