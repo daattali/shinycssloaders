@@ -1,6 +1,6 @@
 /* This file is a concatenation of all the CSS files in the css-loaders project */
 
-/* Import this if you are using modernizr (recommended) 
+/* Import this if you are using modernizr (recommended)
 It means that loaders will fallback to a text state of simply saying "Loading..." in older browsers
 */
 .no-cssanimations .load-container .loader {
@@ -35,7 +35,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 .load1 .loader {
   color: #ffffff;
   text-indent: -9999em;
-  margin: 88px auto;
+  margin: 2em auto;
   position: relative;
   font-size: 11px;
   -webkit-transform: translateZ(0);
@@ -92,7 +92,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   color: #ffffff;
   font-size: 11px;
   text-indent: -99999em;
-  margin: 55px auto;
+  margin: 1em auto;
   position: relative;
   width: 10em;
   height: 10em;
@@ -153,7 +153,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 
 .load3 .loader {
   font-size: 10px;
-  margin: 50px auto;
+  margin: 1em auto;
   text-indent: -9999em;
   width: 11em;
   height: 11em;
@@ -218,7 +218,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 .load4 .loader {
   color: #ffffff;
   font-size: 20px;
-  margin: 100px auto;
+  margin: 4em auto;
   width: 1em;
   height: 1em;
   border-radius: 50%;
@@ -286,7 +286,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 
 .load5 .loader {
-  margin: 100px auto;
+  margin: 3em auto;
   font-size: 25px;
   width: 1em;
   height: 1em;
@@ -362,7 +362,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  margin: 72px auto;
+  margin: 0.5em auto;
   position: relative;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
@@ -437,7 +437,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 .load7 .loader {
   color: #ffffff;
   font-size: 10px;
-  margin: 80px auto;
+  margin: 0.5em auto 5.5em;
   position: relative;
   text-indent: -9999em;
   -webkit-transform: translateZ(0);
@@ -488,7 +488,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   height: 10em;
 }
 .load8 .loader {
-  margin: 60px auto;
+  margin: 1em auto;
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
