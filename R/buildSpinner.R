@@ -30,10 +30,6 @@ buildSpinner <- function(
     stop("shinycssloaders: It looks like you provided a string to `custom.css`, but it needs to be either `TRUE` or `FALSE`. ",
          "The actual CSS needs to added to the app's UI.")
   }
-  if (type == 1 && !is.null(caption)) {
-    warning("shinycssloaders: `caption` is not supported for spinner type 1")
-    caption <- NULL
-  }
 
   if (is.null(id)) {
     id <- paste0("spinner-", digest::digest(ui_element))

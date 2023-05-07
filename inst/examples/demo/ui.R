@@ -86,10 +86,7 @@ fluidPage(
         colourpicker::colourInput("col", "Color", "#0275D8", showColour = "background"),
         sliderInput("size", "Size", min = 0.5, max = 5, step = 0.5, value = 1)
       ),
-      conditionalPanel(
-        "input.type != '1'",
-        textInput("caption", "Caption", "")
-      ),
+      textInput("caption", "Caption", ""),
       sliderInput("time", "Seconds to show spinner", 0, 3, 1, 0.5),
       conditionalPanel(
         "input.spinner_type == 'output'",
