@@ -96,7 +96,7 @@ get_spinner_css_tag <- function(type, color, size, color.background, custom.css,
   }
 
   if (!is.null(caption)) {
-    base_css <- paste(base_css, glue::glue("#{id}__caption {{ color: {color}; }}"))
+    base_css <- paste(base_css, glue::glue("#{id}__caption {{ color: {color}; font-size: {size}em; }}"))
   }
 
   css_rules_tag <- NULL
