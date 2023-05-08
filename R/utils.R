@@ -38,13 +38,6 @@ getDependencies <- function() {
       src = "assets",
       script = "spinner.js",
       stylesheet = "spinner.css"
-    ),
-    htmltools::htmlDependency(
-      name = "cssloaders",
-      version = as.character(utils::packageVersion("shinycssloaders")),
-      package = "shinycssloaders",
-      src = "assets",
-      stylesheet = "css-loaders.css"
     )
   )
 }
