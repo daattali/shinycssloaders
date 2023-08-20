@@ -14,7 +14,7 @@ Description: When a 'Shiny' output (such as a plot, table, map, etc.) is recalcu
     a full-page spinner to cover the entire page.
     See the demo online at <https://daattali.com/shiny/shinycssloaders-demo/>.
 License: MIT + file LICENSE
-URL: https://github.com/daattali/shinycssloaders
+URL: https://github.com/daattali/shinycssloaders, https://daattali.com/shiny/shinycssloaders-demo/
 BugReports: https://github.com/daattali/shinycssloaders/issues
 Depends:
     R (>= 3.1)
