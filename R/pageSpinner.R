@@ -99,6 +99,8 @@ showPageSpinner <- function(
     hide.ui = FALSE
   )
 
+  hidePageSpinner()
+
   spinner_container <- shiny::div(
     id = "shinycssloaders-global-spinner",
     style = paste("background:", background),
