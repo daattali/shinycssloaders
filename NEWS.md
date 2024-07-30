@@ -1,15 +1,15 @@
-# Unreleased version
+# shinycssloaders 1.1.0 (2024-07-30)
 
 - Add `showSpinner()` and `hideSpinner()` that allow you to manually trigger the spinner (#56)
 - Add support for full-page spinner that covers the entire page using `showPageSpinner()` and `hidePageSpinner()` (#42)
 - Add support for Rmarkdown documents (#8)
 - Add support for setting global options for most parameters (#78)
+- Add `caption` argument to allow showing a message under the spinner (#28)
 - Fix page sometimes wobbling because of hidden spinner (#54)
 - Fix bug where `shiny::tagList()` would throw an error (#73)
 - Fix bug where using an image spinner would cause the Shiny output to be centered (#79)
 - Add more informative error messages (#69)
 - Replace `addResourcePath()` with `htmlDependency()` which is more robust (#75)
-- Add `caption` argument to allow showing a message under the spinner (#28)
 
 # shinycssloaders 1.0.0 (2020-07-28)
 
