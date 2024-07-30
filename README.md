@@ -18,7 +18,7 @@ When a Shiny output (such as a plot, table, map, etc.) is recalculating, it rema
 
 In addition to showing spinners on outputs, you can also use `showPageSpinner()` to show a full-page spinner that covers the entire page.
 
-You can choose from one of 8 built-in animation types, and customize the colour/size. You can also use your own image instead of the built-in animations. See the [demo Shiny app](https://daattali.com/shiny/shinycssloaders-demo) online for examples.
+You can choose from one of 8 built-in animation types, and customize the colour/size. You can also use your own image instead of the built-in animations. See the [demo Shiny app](https://daattali.com/shiny/shinycssloaders-demo/) online for examples.
 
 **Need Shiny help? [I'm available for consulting](https://attalitech.com/).**<br/>
 **If you find {shinycssloaders} useful, please consider [supporting my work](https://github.com/sponsors/daattali)! ❤**
@@ -26,9 +26,6 @@ You can choose from one of 8 built-in animation types, and customize the colour/
 <p align="center">
   <a style="display: inline-block;" href="https://github.com/sponsors/daattali">
     <img height="35" src="https://i.imgur.com/034B8vq.png" />
-  </a>
-  <a style="display: inline-block;" href="https://paypal.me/daattali">
-    <img height="35" src="https://camo.githubusercontent.com/0e9e5cac101f7093336b4589c380ab5dcfdcbab0/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e40312e302e302f646973742f627574746f6e2e737667" />
   </a>
 </p>
 
