@@ -121,7 +121,7 @@ showPageSpinner <- function(
 #' @export
 #' @rdname showHidePage
 hidePageSpinner <- function() {
-  removeUI("#shinycssloaders-global-spinner", immediate = TRUE)
-  removeUI(".global-spinner-css", immediate = TRUE)
+  shiny::removeUI("#shinycssloaders-global-spinner", immediate = TRUE)
+  shiny::removeUI(".global-spinner-css", immediate = TRUE)
   invisible(NULL)
 }

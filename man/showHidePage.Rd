@@ -33,7 +33,7 @@ in order to have the Shiny app visible in the background, eg. \code{"#FFFFFFD0"}
 \code{"rgba(0, 0, 0, 0.7)"}.}
 
 \item{type}{The type of spinner to use. Valid values are integers between 0-8 (0 means no spinner). Check out
-\url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
+\url{https://daattali.com/shiny/shinycssloaders-demo/} to see the different types of spinners.
 You can also use your own custom image using the \code{image} parameter.}
 
 \item{color}{The color of the spinner in hex format. Ignored if \code{image} is used.}

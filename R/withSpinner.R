@@ -9,7 +9,7 @@
 #' Use [showPageSpinner()] to show a spinner on the entire page instead of individual outputs.
 #' @param ui_element A UI element that should be wrapped with a spinner when the corresponding output is being calculated.
 #' @param type The type of spinner to use. Valid values are integers between 0-8 (0 means no spinner). Check out
-#' \url{https://daattali.com/shiny/shinycssloaders-demo} to see the different types of spinners.
+#' \url{https://daattali.com/shiny/shinycssloaders-demo/} to see the different types of spinners.
 #' You can also use your own custom image using the `image` parameter.
 #' @param color The color of the spinner in hex format. Ignored if `image` is used.
 #' @param size The size of the spinner, relative to its default size (default is 1, a size of 2 means twice as large).
