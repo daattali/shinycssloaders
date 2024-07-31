@@ -8,7 +8,7 @@
     <img src="https://github.com/daattali/shinycssloaders/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check" />
   </a> 
   <a href="https://cran.r-project.org/package=shinycssloaders">
-    <img src="http://www.r-pkg.org/badges/version/shinycssloaders" alt="CRAN version" />
+    <img src="https://www.r-pkg.org/badges/version/shinycssloaders" alt="CRAN version" />
   </a>
 </p>
 
