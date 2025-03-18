@@ -48,6 +48,6 @@ server <- function(input, output, session) {
     params$background <- input$bg
     suppressWarnings(do.call(shinycssloaders::showPageSpinner, params))
     Sys.sleep(input$time)
-    hidePageSpinner()
+    shinycssloaders::hidePageSpinner()
   })
 }
