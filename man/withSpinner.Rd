@@ -17,7 +17,8 @@ withSpinner(
   image.width = getOption("spinner.image.width"),
   image.height = getOption("spinner.image.height"),
   hide.ui = getOption("spinner.hide.ui", default = TRUE),
-  caption = getOption("spinner.caption")
+  caption = getOption("spinner.caption"),
+  width = getOption("spinner.width")
 )
 }
 \arguments{
@@ -38,7 +39,7 @@ Ignored if \code{image} is used.}
 \item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
 Ignored if \code{image} is used.}
 
-\item{proxy.height}{If the output UI doesn't specify the output height, you can set a proxy height. It defaults to "400px"
+\item{proxy.height}{If the output UI doesn't specify the output height, you can set a proxy height. For example, \code{textOutput()} usually needs this parameter. It defaults to "400px"
 for outputs with undefined height. Ignored if \code{hide.ui} is set to \code{FALSE}.}
 
 \item{id}{The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.}
@@ -57,6 +58,10 @@ Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of t
 
 \item{caption}{Caption to display below the spinner or image (text or HTML). The caption's font color is determined
 by the \code{color} parameter. Ignored if \code{type} is 1.}
+
+\item{width}{The width of the spinner, in pixels. This is only needed in rare cases when the spinner
+is not appearing on the screen due to it having no inherent width (for example, when the output is inside
+a CSS flexbox without a specified width). Do not use this parameter if the spinner already works.}
 }
 \description{
 Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner

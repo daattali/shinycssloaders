@@ -65,7 +65,7 @@ get_proxy_element <- function(ui_element, proxy.height, hide.ui) {
   }
 }
 
-get_spinner_css_tag <- function(type, color, size, color.background, custom.css, id, image, caption, output_spinner) {
+get_spinner_css_tag <- function(type, color, size, color.background, custom.css, id, image, caption, width, output_spinner) {
   base_css <- ""
   add_default_style <- (is.null(image) && !custom.css && type != 0)
   if (add_default_style) {
@@ -92,6 +92,10 @@ get_spinner_css_tag <- function(type, color, size, color.background, custom.css,
     base_css <- paste(base_css, glue::glue("#{id}__caption {{ color: {color}; font-size: {size + 0.5}em; }}"))
   }
 
+  if (!is.null(width)) {
+    base_css <- paste(base_css, glue::glue('[data-spinner-id="{id}"] {{ min-width: {width}px; }}'))
+  }
+
   css_rules_tag <- NULL
   if (nzchar(base_css)) {
     css_rules_tag <- insertHead(shiny::tags$style(
@@ -99,5 +103,6 @@ get_spinner_css_tag <- function(type, color, size, color.background, custom.css,
       shiny::HTML(base_css)
     ))
   }
+
   css_rules_tag
 }

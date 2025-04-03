@@ -12,7 +12,8 @@ buildSpinner <- function(
     image.width,
     image.height,
     hide.ui,
-    caption
+    caption,
+    width = NULL
 ) {
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
@@ -35,7 +36,8 @@ buildSpinner <- function(
     id <- paste0("spinner-", digest::digest(ui_element))
   }
 
-  css_rules_tag <- get_spinner_css_tag(type, color, size, color.background, custom.css, id, image, caption, output_spinner)
+  css_rules_tag <- get_spinner_css_tag(type, color, size, color.background, custom.css, id,
+                                       image, caption, width, output_spinner)
 
   if (!is.null(caption)) {
     caption <- shiny::div(

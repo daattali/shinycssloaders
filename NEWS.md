@@ -1,3 +1,7 @@
+# Unreleased version
+
+- Add `width` argument that can be used in rare cases where the spinner has no inherent width (#85)
+
 # shinycssloaders 1.1.0 (2024-07-30)
 
 - Add `showSpinner()` and `hideSpinner()` that allow you to manually trigger the spinner (#56)
