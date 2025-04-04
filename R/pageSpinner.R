@@ -96,7 +96,9 @@ showPageSpinner <- function(
     caption = caption,
     ui_element = NULL,
     proxy.height = NULL,
-    hide.ui = FALSE
+    hide.ui = FALSE,
+    delay = 0,
+    width = NULL
   )
 
   hidePageSpinner()

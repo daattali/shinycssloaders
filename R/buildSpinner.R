@@ -13,7 +13,8 @@ buildSpinner <- function(
     image.height,
     hide.ui,
     caption,
-    width = NULL
+    delay,
+    width
 ) {
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
@@ -77,6 +78,7 @@ buildSpinner <- function(
   shiny::div(
     css_rules_tag,
     `data-spinner-id` = id,
+    `data-spinner-delay` = if (delay == 0) NULL else delay,
     class = parent_cls,
     shiny::div(
       class = child_cls,

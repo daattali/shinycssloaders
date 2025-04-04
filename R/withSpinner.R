@@ -31,6 +31,7 @@
 #' Setting `hide.ui = FALSE` will result in the spinner showing up on top of the previous output UI.
 #' @param caption Caption to display below the spinner or image (text or HTML). The caption's font color is determined
 #' by the `color` parameter. Ignored if `type` is 1.
+#' @param delay Specify a delay (in milliseconds) before the spinner is displayed. This can be useful to avoid showing the spinner for very short loading times, for a better user experience.
 #' @param width The width of the spinner, in pixels. This is only needed in rare cases when the spinner
 #' is not appearing on the screen due to it having no inherent width (for example, when the output is inside
 #' a CSS flexbox without a specified width). Do not use this parameter if the spinner already works.
@@ -68,6 +69,7 @@ withSpinner <- function(
   image.height = getOption("spinner.image.height"),
   hide.ui = getOption("spinner.hide.ui", default = TRUE),
   caption = getOption("spinner.caption"),
+  delay = getOption("spinner.delay", default = 0),
   width = getOption("spinner.width")
 ) {
 
@@ -90,6 +92,7 @@ withSpinner <- function(
     image.height = image.height,
     hide.ui = hide.ui,
     caption = caption,
+    delay = delay,
     width = width
   )
 

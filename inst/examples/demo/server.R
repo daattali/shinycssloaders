@@ -22,6 +22,7 @@ server <- function(input, output, session) {
     if (nzchar(input$caption)) {
       params$caption <- input$caption
     }
+    params$delay <- input$delay * 1000
 
     params
   })
@@ -46,6 +47,7 @@ server <- function(input, output, session) {
     params <- spinner_params()
     params$ui_element <- NULL
     params$background <- input$bg
+    params$delay <- NULL
     suppressWarnings(do.call(shinycssloaders::showPageSpinner, params))
     Sys.sleep(input$time)
     shinycssloaders::hidePageSpinner()

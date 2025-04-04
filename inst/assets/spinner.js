@@ -1,5 +1,6 @@
 (function() {
 var output_states = {};
+let timeout_ids = {};
 
 function escapeSelector(s) {
     return s.replace(/([!"#$%&'()*+,-./:;<=>?@\[\\\]^`{|}~])/g, "\\$1");
@@ -10,18 +11,37 @@ function show_spinner(id) {
     var parent = $(selector).closest(".shiny-spinner-output-container");
     if (parent.length == 0) return;
 
-    $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
-
-    if (parent.hasClass("shiny-spinner-hideui")) {
-      $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
-      // if there is a proxy div, hide the previous output
-      $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
+    if (parent.data() && parent.data().spinnerDelay && parent.data().spinnerDelay > 0) {
+      let tid = setTimeout(() => {
+        show_spinner_logic(selector);
+      }, parent.data().spinnerDelay);
+      timeout_ids[selector] = tid;
+    } else {
+      show_spinner_logic(selector);
     }
 }
 
+let show_spinner_logic = function(selector) {
+    delete timeout_ids[selector];
+    let parent = $(selector).closest(".shiny-spinner-output-container");
+
+    $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
+
+    if (parent.hasClass("shiny-spinner-hideui")) {
+        $(selector).siblings(".load-container").siblings('.shiny-bound-output, .shiny-output-error').css('visibility', 'hidden');
+        // if there is a proxy div, hide the previous output
+        $(selector).siblings(".shiny-spinner-placeholder").siblings('.shiny-bound-output, .shiny-output-error').addClass('shiny-spinner-hidden');
+    }
+};
+
 function hide_spinner(id) {
     var selector = "#" + escapeSelector(id);
+    if (selector in timeout_ids) {
+      clearTimeout(timeout_ids[selector]);
+      delete timeout_ids[selector];
+    }
     var parent = $(selector).closest(".shiny-spinner-output-container");
+
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
     if (parent.hasClass("shiny-spinner-hideui")) {
       $(selector).siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'visible');

@@ -90,6 +90,10 @@ fluidPage(
       sliderInput("time", "Seconds to show spinner", 0, 3, 1, 0.5),
       conditionalPanel(
         "input.spinner_type == 'output'",
+        sliderInput("delay", "Delay (seconds)", 0, 3, 0, 0.25),
+      ),
+      conditionalPanel(
+        "input.spinner_type == 'output'",
         actionButton("update", "Update Plot", class = "btn-primary btn-lg")
       ),
       conditionalPanel(

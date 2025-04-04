@@ -18,6 +18,7 @@ withSpinner(
   image.height = getOption("spinner.image.height"),
   hide.ui = getOption("spinner.hide.ui", default = TRUE),
   caption = getOption("spinner.caption"),
+  delay = getOption("spinner.delay", default = 0),
   width = getOption("spinner.width")
 )
 }
@@ -58,6 +59,8 @@ Setting \code{hide.ui = FALSE} will result in the spinner showing up on top of t
 
 \item{caption}{Caption to display below the spinner or image (text or HTML). The caption's font color is determined
 by the \code{color} parameter. Ignored if \code{type} is 1.}
+
+\item{delay}{Specify a delay (in milliseconds) before the spinner is displayed. This can be useful to avoid showing the spinner for very short loading times, for a better user experience.}
 
 \item{width}{The width of the spinner, in pixels. This is only needed in rare cases when the spinner
 is not appearing on the screen due to it having no inherent width (for example, when the output is inside
