@@ -36,6 +36,10 @@
 #' is not appearing on the screen due to it having no inherent width (for example, when using
 #' `inline = TRUE` or when the output is inside a CSS flexbox without a specified width). Do not
 #' use this parameter if the spinner already works.
+#' @param fill If `TRUE`, the spinner will act as a "fillable carrier" in the `{bslib}` flexbox system. This is especially
+#' useful when placing a spinner inside a `{bslib}` [card][bslib::card()]. See the documentation on fillable containers
+#' and flexboxes in the `{bslib}` package
+#' for more information.
 #' @seealso [showSpinner()], [hideSpinner()], [showPageSpinner()]
 #' @examples
 #' if (interactive()) {
@@ -71,7 +75,8 @@ withSpinner <- function(
   caption = getOption("spinner.caption"),
   delay = getOption("spinner.delay", default = 0),
   inline = getOption("spinner.inline", default = FALSE),
-  width = getOption("spinner.width")
+  width = getOption("spinner.width"),
+  fill = getOption("spinner.fill", default = FALSE)
 ) {
 
   if (!inherits(ui_element, "shiny.tag") && !inherits(ui_element, "shiny.tag.list")) {
@@ -94,7 +99,8 @@ withSpinner <- function(
     caption = caption,
     delay = delay,
     inline = inline,
-    width = width
+    width = width,
+    fill = fill
   )
 
   htmltools::attachDependencies(spinner, getDependencies())

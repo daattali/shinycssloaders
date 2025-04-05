@@ -166,6 +166,10 @@ By default, the out-dated output gets hidden while the spinner is showing. You c
 
 A spinner will take up the full available width by default. If you'd like to place multiple spinners next to each other, or if the spinner wraps an inline output (for example, `textOutput(inline = TRUE)`) then you can use the `inline = TRUE` parameter. When using inline spinners, you will generally also want to use the `width` argument.
 
+### Support for {bslib} fillable containers
+
+When using a spinner inside {bslib} cards or other fillable containers, use the `fill = TRUE` parameter to ensure the output will behave correctly in the flexbox.
+
 <h2 id="sponsors">
 
 Sponsors 🏆

@@ -19,7 +19,8 @@ withSpinner(
   caption = getOption("spinner.caption"),
   delay = getOption("spinner.delay", default = 0),
   inline = getOption("spinner.inline", default = FALSE),
-  width = getOption("spinner.width")
+  width = getOption("spinner.width"),
+  fill = getOption("spinner.fill", default = FALSE)
 )
 }
 \arguments{
@@ -66,6 +67,11 @@ up the full width. If \code{inline = TRUE} is used, you likely also need to use 
 is not appearing on the screen due to it having no inherent width (for example, when using
 \code{inline = TRUE} or when the output is inside a CSS flexbox without a specified width). Do not
 use this parameter if the spinner already works.}
+
+\item{fill}{If \code{TRUE}, the spinner will act as a "fillable carrier" in the \code{{bslib}} flexbox system. This is especially
+useful when placing a spinner inside a \code{{bslib}} \link[bslib:card]{card}. See the documentation on fillable containers
+and flexboxes in the \code{{bslib}} package
+for more information.}
 }
 \description{
 Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner

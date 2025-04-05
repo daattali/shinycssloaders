@@ -14,7 +14,8 @@ buildSpinner <- function(
     caption,
     delay,
     inline,
-    width
+    width,
+    fill
 ) {
   spinner_type <- match.arg(spinner_type)
   output_spinner <- (spinner_type == "output")
@@ -56,6 +57,10 @@ buildSpinner <- function(
   }
   if (inline) {
     parent_cls <- paste(parent_cls, "shiny-spinner-inline")
+  }
+  if (fill) {
+    # in the future, when bslib becomes more mature, consider using bslib::as_fill_carrier() instead
+    parent_cls <- paste(parent_cls, "html-fill-item html-fill-container")
   }
 
   child_cls <- "load-container"
