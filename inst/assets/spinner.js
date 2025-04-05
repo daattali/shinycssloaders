@@ -25,6 +25,7 @@ let show_spinner_logic = function(selector) {
     delete timeout_ids[selector];
     let parent = $(selector).closest(".shiny-spinner-output-container");
 
+    parent.addClass("spinner-active");
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").removeClass('shiny-spinner-hidden');
 
     if (parent.hasClass("shiny-spinner-hideui")) {
@@ -42,6 +43,7 @@ function hide_spinner(id) {
     }
     var parent = $(selector).closest(".shiny-spinner-output-container");
 
+    parent.removeClass("spinner-active");
     $(selector).siblings(".load-container, .shiny-spinner-placeholder").addClass('shiny-spinner-hidden');
     if (parent.hasClass("shiny-spinner-hideui")) {
       $(selector).siblings(".load-container").siblings('.shiny-bound-output').css('visibility', 'visible');

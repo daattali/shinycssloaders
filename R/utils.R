@@ -93,7 +93,7 @@ get_spinner_css_tag <- function(type, color, size, color.background, id, image, 
   }
 
   if (!is.null(width)) {
-    base_css <- paste(base_css, glue::glue('[data-spinner-id="{id}"] {{ min-width: {width}px; }}'))
+    base_css <- paste(base_css, glue::glue('[data-spinner-id="{id}"].spinner-active {{ min-width: {width}px; }}'))
   }
 
   css_rules_tag <- NULL
