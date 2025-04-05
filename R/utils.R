@@ -65,9 +65,9 @@ get_proxy_element <- function(ui_element, proxy.height, hide.ui) {
   }
 }
 
-get_spinner_css_tag <- function(type, color, size, color.background, custom.css, id, image, caption, width, output_spinner) {
+get_spinner_css_tag <- function(type, color, size, color.background, id, image, caption, width, output_spinner) {
   base_css <- ""
-  add_default_style <- (is.null(image) && !custom.css && type != 0)
+  add_default_style <- (is.null(image) && type != 0)
   if (add_default_style) {
     if (type %in% c(2, 3) && is.null(color.background)) {
       stop("shinycssloaders: For spinner types 2 & 3 you need to specify `color.background`.")

@@ -10,7 +10,6 @@ withSpinner(
   color = getOption("spinner.color", default = "#0275D8"),
   size = getOption("spinner.size", default = 1),
   color.background = getOption("spinner.color.background"),
-  custom.css = getOption("spinner.custom.css", default = FALSE),
   proxy.height = getOption("spinner.proxy.height"),
   id = NULL,
   image = getOption("spinner.image"),
@@ -36,9 +35,6 @@ You can also use your own custom image using the \code{image} parameter.}
 Ignored if \code{image} is used.}
 
 \item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner.
-Ignored if \code{image} is used.}
-
-\item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
 Ignored if \code{image} is used.}
 
 \item{proxy.height}{If the output UI doesn't specify the output height, you can set a proxy height. For example, \code{textOutput()} usually needs this parameter. It defaults to "400px"

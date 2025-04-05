@@ -5,7 +5,6 @@ buildSpinner <- function(
     color,
     size,
     color.background,
-    custom.css,
     proxy.height,
     id,
     image,
@@ -29,16 +28,12 @@ buildSpinner <- function(
   if (grepl("rgb", color, fixed = TRUE)) {
     stop("shinycssloaders: `color` should be given in hex format (#XXXXXX).")
   }
-  if (is.character(custom.css)) {
-    stop("shinycssloaders: It looks like you provided a string to `custom.css`, but it needs to be either `TRUE` or `FALSE`. ",
-         "The actual CSS needs to added to the app's UI.")
-  }
 
   if (is.null(id)) {
     id <- paste0("spinner-", digest::digest(ui_element))
   }
 
-  css_rules_tag <- get_spinner_css_tag(type, color, size, color.background, custom.css, id,
+  css_rules_tag <- get_spinner_css_tag(type, color, size, color.background, id,
                                        image, caption, width, output_spinner)
 
   if (!is.null(caption)) {

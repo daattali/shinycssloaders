@@ -13,7 +13,6 @@ showPageSpinner(
   color = getOption("page.spinner.color", default = "#0275D8"),
   size = getOption("page.spinner.size", default = 1),
   color.background = getOption("page.spinner.color.background"),
-  custom.css = getOption("page.spinner.custom.css", default = FALSE),
   id = getOption("page.spinner.id"),
   image = getOption("page.spinner.image"),
   image.width = getOption("page.spinner.image.width"),
@@ -42,9 +41,6 @@ You can also use your own custom image using the \code{image} parameter.}
 Ignored if \code{image} is used.}
 
 \item{color.background}{For certain spinners (type 2-3), you will need to specify the background color of the spinner.
-Ignored if \code{image} is used.}
-
-\item{custom.css}{Set to \code{TRUE} if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
 Ignored if \code{image} is used.}
 
 \item{id}{The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.}

@@ -16,8 +16,6 @@
 #' Ignored if `image` is used.
 #' @param color.background For certain spinners (type 2-3), you will need to specify the background color of the spinner.
 #' Ignored if `image` is used.
-#' @param custom.css Set to `TRUE` if you have your own custom CSS that you defined and you don't want the automatic CSS applied to the spinner.
-#' Ignored if `image` is used.
 #' @param proxy.height If the output UI doesn't specify the output height, you can set a proxy height. For example, `textOutput()` usually needs this parameter. It defaults to "400px"
 #' for outputs with undefined height. Ignored if `hide.ui` is set to `FALSE`.
 #' @param id The HTML ID to use for the spinner. If you don't provide one, it will be generated automatically.
@@ -64,7 +62,6 @@ withSpinner <- function(
   color = getOption("spinner.color", default = "#0275D8"),
   size = getOption("spinner.size", default = 1),
   color.background = getOption("spinner.color.background"),
-  custom.css = getOption("spinner.custom.css", default = FALSE),
   proxy.height = getOption("spinner.proxy.height"),
   id = NULL,
   image = getOption("spinner.image"),
@@ -88,7 +85,6 @@ withSpinner <- function(
     color = color,
     size = size,
     color.background = color.background,
-    custom.css = custom.css,
     proxy.height = proxy.height,
     id = id,
     image = image,

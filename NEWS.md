@@ -1,5 +1,6 @@
 # Unreleased version
 
+- **BREAKING CHANGE** Remove `custom.css` argument that has almost no usage. If you still want to achieve a similar behaviour, use `type=0` 
 - Add `delay` argument to show the spinner after a short delay (#95)
 - Add `inline` argument to allow displaying spinner inline (#25)
 - Add `width` argument that can be used in rare cases where the spinner has no inherent width (#85)
