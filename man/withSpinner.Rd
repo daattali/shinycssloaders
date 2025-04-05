@@ -19,6 +19,7 @@ withSpinner(
   hide.ui = getOption("spinner.hide.ui", default = TRUE),
   caption = getOption("spinner.caption"),
   delay = getOption("spinner.delay", default = 0),
+  inline = getOption("spinner.inline", default = FALSE),
   width = getOption("spinner.width")
 )
 }
@@ -62,9 +63,13 @@ by the \code{color} parameter. Ignored if \code{type} is 1.}
 
 \item{delay}{Specify a delay (in milliseconds) before the spinner is displayed. This can be useful to avoid showing the spinner for very short loading times, for a better user experience.}
 
+\item{inline}{If \code{TRUE}, display the spinner inline rather than as a block element that takes
+up the full width. If \code{inline = TRUE} is used, you likely also need to use the \code{width} argument.}
+
 \item{width}{The width of the spinner, in pixels. This is only needed in rare cases when the spinner
-is not appearing on the screen due to it having no inherent width (for example, when the output is inside
-a CSS flexbox without a specified width). Do not use this parameter if the spinner already works.}
+is not appearing on the screen due to it having no inherent width (for example, when using
+\code{inline = TRUE} or when the output is inside a CSS flexbox without a specified width). Do not
+use this parameter if the spinner already works.}
 }
 \description{
 Add a spinner that automatically shows while an output is recalculating. You can also manually trigger the spinner

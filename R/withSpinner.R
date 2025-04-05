@@ -32,9 +32,12 @@
 #' @param caption Caption to display below the spinner or image (text or HTML). The caption's font color is determined
 #' by the `color` parameter. Ignored if `type` is 1.
 #' @param delay Specify a delay (in milliseconds) before the spinner is displayed. This can be useful to avoid showing the spinner for very short loading times, for a better user experience.
+#' @param inline If `TRUE`, display the spinner inline rather than as a block element that takes
+#' up the full width. If `inline = TRUE` is used, you likely also need to use the `width` argument.
 #' @param width The width of the spinner, in pixels. This is only needed in rare cases when the spinner
-#' is not appearing on the screen due to it having no inherent width (for example, when the output is inside
-#' a CSS flexbox without a specified width). Do not use this parameter if the spinner already works.
+#' is not appearing on the screen due to it having no inherent width (for example, when using
+#' `inline = TRUE` or when the output is inside a CSS flexbox without a specified width). Do not
+#' use this parameter if the spinner already works.
 #' @seealso [showSpinner()], [hideSpinner()], [showPageSpinner()]
 #' @examples
 #' if (interactive()) {
@@ -70,6 +73,7 @@ withSpinner <- function(
   hide.ui = getOption("spinner.hide.ui", default = TRUE),
   caption = getOption("spinner.caption"),
   delay = getOption("spinner.delay", default = 0),
+  inline = getOption("spinner.inline", default = FALSE),
   width = getOption("spinner.width")
 ) {
 
@@ -93,6 +97,7 @@ withSpinner <- function(
     hide.ui = hide.ui,
     caption = caption,
     delay = delay,
+    inline = inline,
     width = width
   )
 

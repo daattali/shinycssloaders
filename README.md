@@ -136,7 +136,7 @@ If you don't want to use any of the built-in spinners, you can also provide your
 
 ### Specifying the spinner height
 
-The spinner attempts to automatically figure out the height of the output it replaces, and to vertically center itself. For some outputs (such as tables), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this.
+The spinner attempts to automatically figure out the height of the output it replaces, and to vertically center itself. For some outputs (such as tables and text), the height is unknown, so the spinner will assume the output is 400px tall. If your output is expected to be significantly smaller or larger, you can use the `proxy.height` parameter to adjust this.
 
 ### Manually triggering the spinner
 
@@ -154,9 +154,17 @@ Use the `caption` parameter to add a custom message under the spinner. The messa
 
 If you want all the spinners in your app to share some of the options, instead of specifying them in each call to `withSpinner()`, you can set them globally using R options. For example, if you want all spinners to be of a certain type and color, you can set `options(spinner.type = 5, spinner.color = "#0dc5c1")`. Similarly, for full-page spinners you can use `page.spinner.type`, `page.spinner.color`, etc to set default parameters instead of setting them in `showPageSpinner()`.
 
+### Delaying the spinner appearance
+
+If an output gets calculated very fast, the spinner may appear to "blink" because it's only visible for a very short moment. By using the `delay` argument, a spinner will wait a specified number of milliseconds before appearing, which can result in better user experience.
+
 ### Showing a spinner on top of the output
 
 By default, the out-dated output gets hidden while the spinner is showing. You can change this behaviour to have the spinner appear on top of the old output using the `hide.ui = FALSE` parameter.
+
+### Displaying a spinner inline
+
+A spinner will take up the full available width by default. If you'd like to place multiple spinners next to each other, or if the spinner wraps an inline output (for example, `textOutput(inline = TRUE)`) then you can use the `inline = TRUE` parameter. When using inline spinners, you will generally also want to use the `width` argument.
 
 <h2 id="sponsors">
 

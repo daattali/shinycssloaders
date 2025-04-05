@@ -98,6 +98,7 @@ showPageSpinner <- function(
     proxy.height = NULL,
     hide.ui = FALSE,
     delay = 0,
+    inline = FALSE,
     width = NULL
   )
 

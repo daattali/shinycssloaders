@@ -23,6 +23,10 @@
   display: none;
 }
 
+.shiny-spinner-inline {
+  display: inline-block;
+}
+
 .shiny-spinner-output-container .load-container {
   text-align: center;
 }

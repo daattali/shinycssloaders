@@ -1,6 +1,7 @@
 # Unreleased version
 
 - Add `delay` argument to show the spinner after a short delay (#95)
+- Add `inline` argument to allow displaying spinner inline (#25)
 - Add `width` argument that can be used in rare cases where the spinner has no inherent width (#85)
 
 # shinycssloaders 1.1.0 (2024-07-30)

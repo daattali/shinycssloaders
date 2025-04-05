@@ -14,6 +14,7 @@ buildSpinner <- function(
     hide.ui,
     caption,
     delay,
+    inline,
     width
 ) {
   spinner_type <- match.arg(spinner_type)
@@ -57,6 +58,9 @@ buildSpinner <- function(
   parent_cls <- "shiny-spinner-output-container"
   if (hide.ui) {
     parent_cls <- paste(parent_cls, "shiny-spinner-hideui")
+  }
+  if (inline) {
+    parent_cls <- paste(parent_cls, "shiny-spinner-inline")
   }
 
   child_cls <- "load-container"
