@@ -93,7 +93,7 @@ Shiny.addCustomMessageHandler('shinycssloaders.show_spinner', function(params) {
 });
 
 /* When new value or error comes in, hide spinner container (if any) & show the output */
-$(document).on('shiny:value shiny: error', function(event) {
+$(document).on('shiny:value shiny:error', function(event) {
   var id = event.target.id;
   if (id === undefined) {
     return;
