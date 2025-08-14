@@ -5,6 +5,7 @@
 - Add `fill` argument to support {bslib} cards and fillable containers (#76)
 - Add `inline` argument to allow displaying spinner inline (#25)
 - Add `width` argument that can be used in rare cases where the spinner has no inherent width (#85)
+- Added manual tests for most of the supported features
 
 # shinycssloaders 1.1.0 (2024-07-30)
 
